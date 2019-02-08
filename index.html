@@ -51,18 +51,12 @@
       border-radius: 5px;
   }
   .legend i {
-    z-index: 1000;
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    padding: 6px 8px;
-    font: 14px Arial, Helvetica, sans-serif;
-    background: white;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+      width: 18px;
+      height: 16px;
+      float: left;
+      margin-right: 8px;
+      opacity: 0.7;
   }
-
    </style>
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
@@ -72,7 +66,7 @@
 <body>
 <!-- Our web map and content will go here -->
 <div id="map"></div>
-<div class='info'><h1>Oregon Geographic Regions and Number of State Parks</h1><div class='update'>Hover over a region</div></div>
+<div class='info'><h1>Oregon Geographic Regions</h1><div class='update'>Hover over a region</div></div>
 <div class='legend'></div>
 <script type="text/javascript">
 // 1. Create a map object.
@@ -84,7 +78,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
 
 // 2. Create the chorepleth map with interactive functions.
     // determine the number of classes and their respective break values.
-var grades = [0, 10, 20, 50, 100, 200, 500, 1000];
+var grades = [0, 5, 10, 15, 20, 25, 30];
 
 //Colors to hove in Region
 var colors = chroma.scale('Accent').colors(grades.length);
@@ -102,8 +96,8 @@ function style(feature) {
         opacity: 1,
         color: 'white',
         dashArray: '3',
-        fillOpacity: 0.1,
-        fillColor: getColor(feature.properties.LEVEL3)
+        fillOpacity: .3,
+        fillColor: getColor(feature.properties.COUNTS)
     };
 }
 
@@ -116,13 +110,13 @@ function style(feature) {
         weight: 8,
         opacity: 0.8,
         color: '#e3e3e3',
-        fillColor: '#1ce3d7',
-        fillOpacity: 0.2
+        fillColor: '#1be325',
+        fillOpacity: 0.1
     });
     // bring the layer to the front.
     layer.bringToFront();
     // select the update class, and update the contet with the input value.
-    $(".update").html('<b>' + layer.feature.properties.LEVEL3_NAM+ '</b>   '+ layer.feature.properties.COUNTS );
+    $(".update").html('<b>' + layer.feature.properties.LEVEL3_NAM+ '</b>   '+ ' State Parks ' + layer.feature.properties.COUNTS );
 }
 
 function zoomToFeature(e) {
@@ -136,9 +130,11 @@ function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         click: zoomToFeature,
-        mouseout: resetHighlight
+        mouseout: resetHighlight,
     });
 }
+
+
 
 geojson = L.geoJson.ajax("assets/regionalcounts.geojson", {
   style: style,
@@ -151,6 +147,16 @@ geojson = L.geoJson.ajax("assets/regionalcounts.geojson", {
     map.attributionControl.addAttribution('Oregon Regions &copy; <a href="https://oregonexplorer.info/">Oregon Explorer</a> | This map is made by <a href="https://loweas.github.io/resume">Ashley Lowe</a>');
 
 
+    states = L.geoJson.ajax("assets/statepark1.geojson", {
+        style: style
+    }).addTo(map);
+
+    var labels = [];
+for (var i = 0; i < grades.length - 1; i++) {
+    labels.push('<i style="background:' + colors[i] + '"></i> ' + grades[i] + ' - ' + grades[i + 1]);
+}
+labels.push('<i style="background:' + colors[grades.length - 1] + '"></i> ' + grades[grades.length - 1] + ' +');
+$(".legend").html(labels.join('<br>'));
 </script>
 </body>
 </html>
