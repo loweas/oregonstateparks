@@ -25,7 +25,7 @@ This map will be a illustrate the choice set of the Representative Recreational 
 ### Emerging Visitation Trend
 Visitation to parks in the United States have been relatively steady between the late 1990s to early 2000s.  Starting in 2014, these parks experienced consecutive years of record breaking visitation with an average increase of about 10\% each year.
 
-<img src= "../oregonstateparks/img/NationalOregon.J.jpg"
+<img src= "./img/NationalOregon.J.jpg"
 />
 
 It is clear visitation is on the rise, though it is not uniformly distributed thoughtout each park. Some parks are seeing large spikes while others are fairly stable.  Many journalists have attributed the growing crowds to the ``selfie" and social media photo-sharing apps, especially Instagram. Much of the previous research has focused on how social media data can be used to predict visitation numbers. I intend to examine if social media content (e.g. viral photos) of a given park can explain the shift in demand.
