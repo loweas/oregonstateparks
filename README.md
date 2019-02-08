@@ -1,5 +1,8 @@
 # Oregon State Parks and Social Media Influence
-This map will be a illustrate the choice set of the Representative Recreational User and the emerging information set on public lands available through social media platforms that allow users to share and organize their content. The emperical setting for representing this will be Oregon State Parks. 
+This map will be a illustrate the choice set of the Representative Recreational User and the emerging information set on public lands available through social media platforms that allow users to share and organize their content. The emperical setting for representing this will be Oregon State Parks.
+
+<img src= "../oregonstateparks/img/qgisstate.jpeg"
+/>
 
 ### Interations
 1. Click a Region of Interest
