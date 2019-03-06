@@ -1,162 +1,237 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Oregon Parks within each Region</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <style>
-    html { height:100%;}
-  body {
-      height:100%;
-      padding: 0;
-      margin: 0;
-  }
-  #map {
-      width: 100%;
-      height: 100%;
-  }
-  .info {
-      z-index: 1000;
-      position: absolute;
-      right: 20px;
-      top: 20px;
-      padding: 6px 8px;
-      font: 14px Arial, Helvetica, sans-serif;
-      text-align: right;
-      background: white;
-      background: rgba(255, 255, 255, 0.8);
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      border-radius: 5px;
-  }
-  .info h1 {
-      font-size: 16px;
-      margin: 0 0 5px;
-      color: #777777;
-  }
+  <title>Oregon State Parks</title>
 
-  /*legend panel*/
-  .legend {
-      z-index: 1000;
-      position: absolute;
-      right: 20px;
-      bottom: 20px;
-      padding: 6px 8px;
-      font: 14px Arial, Helvetica, sans-serif;
-      background: white;
-      background: rgba(255, 255, 255, 0.8);
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      border-radius: 5px;
-  }
-  .legend i {
-      width: 18px;
-      height: 16px;
-      float: left;
-      margin-right: 8px;
-      opacity: 0.7;
-  }
-   </style>
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.3.4/chroma.min.js"></script>
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/download.ico" type="image/x-icon">
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/grayscale.css" rel="stylesheet">
+
 </head>
-<body>
-<!-- Our web map and content will go here -->
-<div id="map"></div>
-<div class='info'><h1>Oregon Geographic Regions</h1><div class='update'>Hover over a region</div></div>
-<div class='legend'></div>
-<script type="text/javascript">
-// 1. Create a map object.
 
+<body id="page-top">
 
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="#page-top">Public Lands and Social Media</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="interactive.html">Iteractive Map</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#signup">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-var map = L.map('map').setView([43.966944, -120.568616], 7);
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}@2X').addTo(map);
+  <!-- Header -->
+  <header class="masthead">
+    <div class="container d-flex h-100 align-items-center">
+      <div class="mx-auto text-center">
+        <h1 class="mx-auto my-0 text-uppercase">#OregonStatePark</h1>
+        <h2 class="text-white-50 mx-auto mt-2 mb-5">A look into how social media is shifting demand .</h2>
+        <a href="#about" class="btn btn-primary js-scroll-trigger">Get Started</a>
+      </div>
+    </div>
+  </header>
 
-// 2. Create the chorepleth map with interactive functions.
-    // determine the number of classes and their respective break values.
-var grades = [0, 5, 10, 15, 20, 25, 30];
+  <!-- About Section -->
+  <section id="about" class="about-section text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2 class="text-white mb-4">Visitation to Oregon Parks is following a national Trend</h2>
+          <p class="text-white-50">The role of social media and the effect on consumer behavior is an emerging field of study. Apps, such as Instagram, expose individuals to new areas with ease,  providing location data via hashtags, geolocation markers and visual indicators. The information is instantaneous and can provide current climate, air and park quality, along with many different photos capturing the natural beauty. The rise in visitation in parks in the United States coincides with the proliferation of social media. I intend to examine if social media content can explain the shift in demand.</p>
+        </div>
+      </div>
+      <img src="img/NationalOregon.jpg" class="img-fluid" alt="">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2 class="text-white mb-4"> </br>  </br> Considering Different Social Media Platforms</h2>
+          <p class="text-white-50"> Google's popularity score over a simular time period conincides with one possibility for this increase, Instagram.  </p>
+        </div>
+      </div>
+      <img src="img/poptrend.jpg" class="img-fluid" alt="">
+    </div>
+  </section>
 
-//Colors to hove in Region
-var colors = chroma.scale('Accent').colors(grades.length);
+  <!-- Projects Section -->
+  <section id="projects" class="projects-section bg-light">
+    <div class="container">
 
-function getColor(d) {
-    for (var i = 0; i < grades.length - 1; i++) {
-        if ( d > grades[i] && d < grades[i+1] ) return colors[i];
-    }
-    if (d > grades[grades.length - 1]) return colors[grades.length];
-}
+      <!-- Featured Project Row -->
+      <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+        <div class="col-xl-8 col-lg-7">
+          <img class="img-fluid mb-3 mb-lg-0" src="img/smithinsta.jpeg" alt="">
+        </div>
+        <div class="col-xl-4 col-lg-5">
+          <div class="featured-text text-center text-lg-left">
+            <h4>Instagram Hashtags</h4>
+            <p class="text-black-50 mb-0">Hashtags allow individuals to organize and share photos with other users with ease, providing free access to location information that was previously time consuming to gather.</p>
+          </div>
+        </div>
+      </div>
 
-function style(feature) {
-    return {
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: .3,
-        fillColor: getColor(feature.properties.COUNTS)
-    };
-}
+      <!-- Project One Row -->
+      <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+        <div class="col-lg-6">
+    <iframe width="530" height="320" src="https://www.youtube.com/embed/J5k0mebef6c?playlist=J5k0mebef6c&loop=1"></iframe>
+        </div>
+        <div class="col-lg-6">
+          <div class="bg-black text-center h-100 project">
+            <div class="d-flex h-100">
+              <div class="project-text w-100 my-auto text-center text-lg-left">
+                <h4 class="text-white">Visitation Growth</h4>
+                <p class="mb-0 text-white-50">A visiual timelapse of increase to certain parks within Oregon. Most of the current growth is being experienced at the coast though other parks scattered throughout the Oregon area are experiencing increases as well</p>
+                <hr class="d-none d-lg-block mb-0 ml-0">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  var geojson = null;
+      <!-- Project Two Row -->
+      <div class="row justify-content-center no-gutters">
+        <div class="col-lg-6">
+          <img class="img-fluid" src="img/demo-image-02.jpg" alt="">
+        </div>
+        <div class="col-lg-6 order-lg-first">
+          <div class="bg-black text-center h-100 project">
+            <div class="d-flex h-100">
+              <div class="project-text w-100 my-auto text-center text-lg-right">
+                <h4 class="text-white">Mountains</h4>
+                <p class="mb-0 text-white-50">Another example of a project with its respective description. These sections work well responsively as well, try this theme on a small screen!</p>
+                <hr class="d-none d-lg-block mb-0 mr-0">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  function highlightFeature(e) {
-    // e indicates the current event
-    var layer = e.target; //the target capture the object which the event associates with
-    layer.setStyle({
-        weight: 8,
-        opacity: 0.8,
-        color: '#e3e3e3',
-        fillColor: '#1be325',
-        fillOpacity: 0.1
-    });
-    // bring the layer to the front.
-    layer.bringToFront();
-    // select the update class, and update the contet with the input value.
-    $(".update").html('<b>' + layer.feature.properties.LEVEL3_NAM+ '</b>   '+ ' State Parks ' + layer.feature.properties.COUNTS );
-}
+    </div>
+  </section>
 
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-}
-function resetHighlight(e) {
-    geojson.resetStyle(e.target);
-    $(".update").html("Hover over a Region");
-}
-function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        click: zoomToFeature,
-        mouseout: resetHighlight,
-    });
-}
+  <!-- Signup Section -->
+  <section id="signup" class="signup-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-lg-8 mx-auto text-center">
 
+          <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+          <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
 
+          <form class="form-inline d-flex">
+            <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address...">
+            <button type="submit" class="btn btn-primary mx-auto">Subscribe</button>
+          </form>
 
-geojson = L.geoJson.ajax("assets/regionalcounts.json", {
-  style: style,
-      onEachFeature: onEachFeature
-  }).addTo(map);
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Contact Section -->
+  <section class="contact-section bg-black">
+    <div class="container">
 
+      <div class="row">
 
-    // 5. create the credits
-    map.attributionControl.addAttribution('Oregon Regions &copy; <a href="https://oregonexplorer.info/">Oregon Explorer</a> | This map is made by <a href="https://loweas.github.io/resume">Ashley Lowe</a>');
+        <div class="col-md-4 mb-3 mb-md-0">
+          <div class="card py-4 h-100">
+            <div class="card-body text-center">
+              <i class="fas fa-map-marked-alt text-primary mb-2"></i>
+              <h4 class="text-uppercase m-0">Address</h4>
+              <hr class="my-4">
+              <div class="small text-black-50">213 Ballard Extension Hall Corvallis, OR 97331</div>
+            </div>
+          </div>
+        </div>
 
+        <div class="col-md-4 mb-3 mb-md-0">
+          <div class="card py-4 h-100">
+            <div class="card-body text-center">
+              <i class="fas fa-envelope text-primary mb-2"></i>
+              <h4 class="text-uppercase m-0">Email</h4>
+              <hr class="my-4">
+              <div class="small text-black-50">
+                <a href="#">loweas@oregonstate.edu</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
-    states = L.geoJson.ajax("assets/statepark1.geojson", {
-        style: style
-    }).addTo(map);
+        <div class="col-md-4 mb-3 mb-md-0">
+          <div class="card py-4 h-100">
+            <div class="card-body text-center">
+              <i class="fas fa-school-alt text-primary mb-2"></i>
+              <h4 class="text-uppercase m-0">Applied Economics</h4>
+              <hr class="my-4">
+              <div class="small text-black-50">Oregon State University</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    var labels = [];
-for (var i = 0; i < grades.length - 1; i++) {
-    labels.push('<i style="background:' + colors[i] + '"></i> ' + grades[i] + ' - ' + grades[i + 1]);
-}
-labels.push('<i style="background:' + colors[grades.length - 1] + '"></i> ' + grades[grades.length - 1] + ' +');
-$(".legend").html(labels.join('<br>'));
-</script>
+      <div class="social d-flex justify-content-center">
+        <a href="https://www.instagram.com/iguana_lowe/" class="mx-2">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/DJalowe8" class="mx-2">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://github.com/loweas" class="mx-2">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black small text-center text-white-50">
+    <div class="container">
+      Copyright &copy; Ashley Lowe 2019
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/grayscale.min.js"></script>
+
 </body>
+
 </html>
