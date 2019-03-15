@@ -20,11 +20,23 @@
 
   <!-- Custom styles for this template -->
   <link href="css/grayscale.css" rel="stylesheet">
+  <script type="text/javascript" src="js/instafeed.min.js"></script>
 
+  <script src="js/instafeed.min.js"></script>
+  <script type="text/javascript">
+    var feed = new Instafeed({
+      get: 'user',
+      userId: '848263568', // Ex: 1374300081
+      accessToken: '848263568.1677ed0.f0e26e50e8f94cf19cb22f8d89a770ec',
+      limit: 16
+    });
+    feed.run();
+  </script>
 </head>
 
-<body id="page-top">
 
+<body id="page-top">
+<!---lets see-->
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
@@ -72,7 +84,7 @@
           <p class="text-white-50">The role of social media and the effect on consumer behavior is an emerging field of study. Apps, such as Instagram, expose individuals to new areas with ease,  providing location data via hashtags, geolocation markers and visual indicators. The information is instantaneous and can provide current climate, air and park quality, along with many different photos capturing the natural beauty. The rise in visitation in parks in the United States coincides with the proliferation of social media. I intend to examine if social media content can explain the shift in demand.</p>
         </div>
       </div>
-      <img src="img/NationalOregon.jpg" class="img-fluid" alt="">
+      <img src="img/Slide1.jpeg" class="img-fluid" alt="">
       <div class="row">
         <div class="col-lg-8 mx-auto">
           <h2 class="text-white mb-4"> </br>  </br> Considering Different Social Media Platforms</h2>
@@ -140,12 +152,14 @@
   </section>
 
   <!-- Signup Section -->
+
+
   <section id="signup" class="signup-section">
     <div class="container">
       <div class="row">
-        <div class="col-md-10 col-lg-8 mx-auto text-center">
+        <div class="col-md-10 col-lg-8 mx-auto text-center" >
 
-          <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+          <i class="far fa-paper-plane fa-2x mb-2 text-white" ></i>
           <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
 
           <form class="form-inline d-flex">
@@ -156,13 +170,14 @@
         </div>
       </div>
     </div>
+
   </section>
 
   <!-- Contact Section -->
   <section class="contact-section bg-black">
-    <div class="container">
+    <div  class="container">
 
-      <div class="row">
+      <div  class="row">
 
         <div class="col-md-4 mb-3 mb-md-0">
           <div class="card py-4 h-100">
@@ -213,13 +228,16 @@
       </div>
 
     </div>
+
   </section>
 
   <!-- Footer -->
   <footer class="bg-black small text-center text-white-50">
+    <div id="instafeed"></div>
     <div class="container">
       Copyright &copy; Ashley Lowe 2019
     </div>
+
   </footer>
 
   <!-- Bootstrap core JavaScript -->
