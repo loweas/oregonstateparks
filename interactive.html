@@ -365,6 +365,8 @@ for (i = 1; i < 11; i++) {
                case 'Coastal Range': return {color: "#ffae00"};
                case 'Valley Range':   return {color: "#00ff21"};
              }
+
+
            },
 
 
@@ -446,7 +448,7 @@ var outdoorLayer = L.tileLayer('https://api.mapbox.com/styles/v1/loweas/cjtgc6no
         var layers = {
             parks:{layer: parks},
             parks_color: {layer: parks_color},
-            regionalcounts: {layer: regionalcounts},
+            regionalcounts: {layer: regionalcounts, legend: ' <i style="background: orange; opacity: 0.5"></i><p><b>Coastal Region</b></p> <i style="background: green; opacity: 0.5"></i><p><b>Valley</b></p>'},
             outdoorLayer: {layer: outdoorLayer},
             parks_coast: {layer: parks_coast},
             parks_valley: {layer: parks_valley},
@@ -461,7 +463,7 @@ var outdoorLayer = L.tileLayer('https://api.mapbox.com/styles/v1/loweas/cjtgc6no
         scene2: {lat: 44.5, lng: -126.5, zoom: 7.399, name: 'Coastal', layers: [layers.outdoorLayer, layers.parks_coast]},
         scene3: {lat: 45.23, lng: -122.9, zoom: 9, name: 'Valley', layers: [layers.outdoorLayer, layers.parks_valley]},
         scene4: {lat: 43.5, lng: -123.5, zoom: 8, name: 'Mountains', layers: [layers.outdoorLayer, layers.parks_mountain]},
-        scene5: {lat: 44, lng: -123.5, zoom: 7, name: 'Video', layers: [layers.towers_circle2, layers.darkLayer]}
+        scene5: {lat: 44, lng: -123.5, zoom: 7, name: 'Video', layers: []}
     };
 
 
