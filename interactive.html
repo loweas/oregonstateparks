@@ -39,10 +39,12 @@
     <!--story map plugin-->
     <script src="dist/storymap.2.4.js"></script>
 
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
 
     <style>
-
-
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
 
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
@@ -437,9 +439,10 @@ for (i = 1; i < 11; i++) {
 
 
 
-var outdoorLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {
-            id: 'mapbox.outdoors', detectRetina: true
+var outdoorLayer = L.tileLayer('https://api.mapbox.com/styles/v1/loweas/outdoor/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibG93ZWFzIiwiYSI6ImNqczlhMzJqMjE1dDM0NG12dHBxam1lZjIifQ.Ox8goYypCr_cJCoDPgHTsQ', {
+             detectRetina: true
         });
+
         var layers = {
             parks:{layer: parks},
             parks_color: {layer: parks_color},
