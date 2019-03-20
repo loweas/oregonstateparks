@@ -130,7 +130,30 @@
     background: #ddd;
     color: black;
   }
-
+  .info {
+      padding: 6px 8px;
+      font: 14px/16px Verdana, Geneva, sans-serif;
+      background: white;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 5px;
+  }
+  .info h4 {
+      font-family: Verdana, Geneva, sans-serif;
+      margin: 0 0 5px;
+      color: #065581;
+  }
+  .legend {
+      line-height: 18px;
+      color: #555;
+  }
+  .legend i {
+      width: 18px;
+      height: 18px;
+      float: left;
+      margin-right: 8px;
+      opacity: 0.7;
+  }
 
   </style>
   <body>
@@ -173,6 +196,12 @@
               <h2>Oregon State Parks</h2>
               <h4>Park Artivities</h4>
                 <p>There are 195 state parks in Oreogn with varies activities avaiable and main attractions.</p>
+                  <p> <i class="fas fa-hiking marker-icon-1"></i> Hiking </p>
+              <p>  <i class="fas fa-campground marker-icon-3"></i>  Campground </p>
+                <p><i class="fas fa-umbrella-beach marker-icon-5"></i>Beach Access</p>
+                <p><i class="fas fa-fish marker-icon-4"></i>Fishing </p>
+              <p>  <i class="fas fa-tree marker-icon-8"></i>Park </p>
+
                 <h4>Regions</h4>
                   <p>The parks can be grouped into 3 regions, the Valley, Coastal and Mountain(Eastern Oregon).</p>
                   <h4>Growth</h4>
@@ -180,6 +209,7 @@
                     <h4>Hover Over</h4>
                     <p>Hover over each region to see how many parks are located within.</p>
                     <p>Hover over each park to see park information and if it has a hashtag.</p>
+
 
               </section>
             <section data-scene="scene2"><h2>Coastal Parks</h2>
@@ -303,7 +333,9 @@
         <div class="col-sm-6 col-md-4 storymap-map"></div>
     </div>
 </div>
+
 <script type="text/javascript">
+
 var parks = L.geoJson.ajax('assets/timeseries.geojson',
     {
 
@@ -370,16 +402,24 @@ for (i = 1; i < 11; i++) {
            },
 
 
-
-
         });
+var legend = L.control({position: 'bottomright'});
+
+        legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend');
+
+            div.innerHTML +=
+            '<img src="legend.png" alt="legend" width="134" height="147">';
+
+        return div;
+        };
 
         var parks_coast = L.geoJson.ajax('assets/timeseries.geojson', {
           pointToLayer: function (feature, latlng) {
           if (feature.properties.Location == "Yaquina Bay State Recreation Site"){
           return L.marker(latlng, {icon: L.divIcon({ html: '<i class="fas fa-umbrella-beach fa-2x"></i>', className: 'marker-icon-5' })});
         }else if (feature.properties.Location == "Harris Beach State Park") {
-                    return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-campground fa-2x"></i>', className: 'marker-icon-3'})});
+                    return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-campground fa-2x"></i>', className: 'marker-icon-2'})});
                 } else if (feature.properties.Location == "Sunset Bay State Park") {
                             return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-umbrella-beach fa-2x"></i>',className: ' marker-icon-5'})});
                         }
@@ -439,6 +479,14 @@ for (i = 1; i < 11; i++) {
                 }
         });
 
+        // legend in HTML
+
+var coast = '<i  style="background: #ffae00; opacity: 0.5"></i><p><b>Coastal Range</b></p>' + '<i style="background: #00ff21; opacity: 0.5"></i><p><b>Valley Range</b></p> '+ '<i style="background: blue; opacity: 0.5"></i><p><b>Mountain Range</b></p>';
+var coastal = '<i class="fas fa-campground marker-icon-2"></i><p><b>Campground</b></p>' + '<i class="fas fa-hiking marker-icon-1"></i><p><b>Hiking</b></p>' + '<i class="fas fa-umbrella-beach marker-icon-5"></i><p><b>Beach Access</b></p>';
+var valley = '<i class="fas fa-campground marker-icon-2"></i><p><b>Campground</b></p>' + '<i class="fas fa-hiking marker-icon-1"></i><p><b>Hiking</b></p>' + '<i class="fas fa-umbrella-beach marker-icon-5"></i><p><b>Beach Access</b></p>'+ '<i class="fas fa-camera marker-icon-3"></i><p><b>Viewpoint</b></p>' ;
+var mountain = '<i class="fas fa-campground marker-icon-2"></i><p><b>Campground</b></p>' + '<i class="fas fa-hiking marker-icon-1"></i><p><b>Hiking</b></p>' + '<i class="fas fa-umbrella-beach marker-icon-5"></i><p><b>Beach Access</b></p>'+ '<i class="fas fa-camera marker-icon-3"></i><p><b>Viewpoint</b></p>' + '<i class="fas fa-swimmer marker-icon-9"></i><p><b>Swimming</b></p>';
+
+
 
 
 var outdoorLayer = L.tileLayer('https://api.mapbox.com/styles/v1/loweas/cjtgc6noh6nyj1fma3jmh6wzf/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibG93ZWFzIiwiYSI6ImNqczlhMzJqMjE1dDM0NG12dHBxam1lZjIifQ.Ox8goYypCr_cJCoDPgHTsQ', {
@@ -448,11 +496,11 @@ var outdoorLayer = L.tileLayer('https://api.mapbox.com/styles/v1/loweas/cjtgc6no
         var layers = {
             parks:{layer: parks},
             parks_color: {layer: parks_color},
-            regionalcounts: {layer: regionalcounts, legend: ' <i style="background: orange; opacity: 0.5"></i><p><b>Coastal Region</b></p> <i style="background: green; opacity: 0.5"></i><p><b>Valley</b></p>'},
+            regionalcounts: {layer: regionalcounts, legend: coast},
             outdoorLayer: {layer: outdoorLayer},
-            parks_coast: {layer: parks_coast},
-            parks_valley: {layer: parks_valley},
-            parks_mountain:{layer: parks_mountain}
+            parks_coast: {layer: parks_coast, legend: coastal},
+            parks_valley: {layer: parks_valley, legend: valley},
+            parks_mountain:{layer: parks_mountain, legend: mountain}
 
         };
 

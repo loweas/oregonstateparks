@@ -268,14 +268,16 @@ video {
 .storymap-legend {
     position: fixed;
     line-height: 16px;
-    width: 100px;
+    width: 200px;
     z-index: 1000;
     right: 20px;
-    top: 30px;
+    top: 50px;
     display: none;
     color: #333333;
     font-family: Varela, Round;
-    padding: 6px 8px;
+
+    padding: 10px 10px;
+
     background: rgba(255, 255, 255, 0.5);
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
     border-radius: 2px;
@@ -286,6 +288,7 @@ video {
     height: 16px;
     float: left;
     margin-right: 8px;
+
     opacity: 1;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
