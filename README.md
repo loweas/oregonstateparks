@@ -3,6 +3,13 @@ This map will be a illustrate the choice set of the Representative Recreational 
 
 Link https://loweas.github.io/oregonstateparks/
 
+##Acknowledgement
+  * Used a bootstrap template [greyscale](https://startbootstrap.com/themes/grayscale/).
+  * Got the idea from the googletrend graph from a user on [Reddit](https://www.reddit.com/r/dataisbeautiful/comments/auist1/when_each_social_media_platform_was_generating/)
+  * Scraping the data I used [instaloader](https://instaloader.github.io/basic-usage.html)
+  * CSS and JS for interactive map by [Bo Zhao](https://github.com/jakobzhao/storymap)
+
+
 
 ### Data
 
