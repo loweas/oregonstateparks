@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CLEAN MARKUP = GOOD KARMA.
+      Hi source code lover,
+
+      you're a curious person and a fast learner ;)
+      Let's make something beautiful together. Contribute on Github:
+      https://github.com/webslides/webslides
+
+      Thanks,
+      @jlantunez.
+    -->
+
+    <!-- SEO -->
+    <title>WebSlides: Making HTML presentations easy</title>
+    <meta name="description" content="WebSlides is the easiest way to make HTML presentations, portfolios, and landings. Just essential features.">
+
+    <!-- URL CANONICAL -->
+    <!-- <link rel="canonical" href="http://your-url.com/"> -->
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
+
+    <!-- CSS WebSlides -->
+    <link rel="stylesheet" type='text/css' media='all' href="static/css/webslides.css">
+
+    <!-- Optional - CSS SVG Icons (Font Awesome) -->
+    <link rel="stylesheet" type='text/css' media='all' href="static/css/svg-icons.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="css/style.css">
+    <!-- Javascript Library -->
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="static/js/webslides.min.js"></script>
+    <script src="https://unpkg.com/d3@5/dist/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.js"></script>
+
+
+    <!-- FACEBOOK -->
+
+    <!-- TWITTER -->
+
+    <!-- FAVICONS -->
+
+    <!-- Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#333333">
+
+  </head>
+  <body>
+
+    <main role= "main">
+      <article id="webslides">
+        <section class="bg-apple">
+      <video class="background-video dark" autoplay muted loop>
+          <source src="assets/smithrock.mp4" type="video/mp4">
+      </video>
+      <div class="wrap aligncenter">
+          <h1>
+              <strong>Smith Rock State Park</strong>
+          </h1>
+      </div>
+  </section>
+  <section class="bg-apple slide-top">
+    <div id="mymap"></div>
+</section>
+<!-- the second map -->
+<section class="bg-apple slide-top">
+    <div id="mymap2"></div>
+</section>
+<!-- the first chart -->
+<section class="bg-apple  slide-top">
+    <div id="mychart" >
+        <div id="chart"></div>
+        <span id="load">Load</span>
+        <span id="unload">Unload</span>
+    </div>
+</section>
+<!-- the second chart -->
+<section class="bg-apple  slide-top">
+    <div id="mychart2" >
+        <div id="chart2"></div>
+    </div>
+</section>
+</article>
+
+</main>
+
+    <script>
+    var map = L.map("mymap", {zoomControl: false, scrollWheelZoom: false}).setView([44.3682, -121.1406], 7);
+
+var map2 = L.map("mymap2", {zoomControl: false, scrollWheelZoom: false}).fitBounds([
+    [49.3, -138.5],
+    [22.8, -67.4]
+]);
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/loweas/cjv4ijme33cv51fo88tiywo86/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibG93ZWFzIiwiYSI6ImNqczlhMzJqMjE1dDM0NG12dHBxam1lZjIifQ.Ox8goYypCr_cJCoDPgHTsQ', {
+        maxZoom: 19
+    }).addTo(map);
+
+    L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}@2x.png', {
+        maxZoom: 19
+    }).addTo(map2);
+
+    ws = new WebSlides();
+    ws.el.addEventListener('ws:slide-change', function () {
+
+    crtDiv = $(".current div");
+    //Map 1 'flyto' animation location and function
+    if (crtDiv.attr("id") === "mymap") {
+        map.invalidateSize();
+        //starting location latitude and longitude
+        map.setView([45.514685, -122.987080], 7);
+        //Fly to animation  new latitude and longitude
+        map.flyTo([44.366, -121.134], 15, {animate: true, duration: 5});
+        //outline of Washington county
+    }
+
+
+    if (crtDiv.attr("id") === "mymap2") {
+
+        map2.fitBounds([
+            [45.514685, -122.987080],
+            [45.514685, -122.987080]
+        ]);
+        map2.invalidateSize();
+    }
+
+    if (crtDiv.attr("id") === "mychart2") {
+
+          Promise.all([
+            d3.csv('assets/test1.csv'),
+            d3.csv('assets/test2.csv'),
+            d3.json('assets/counties.geojson')
+          ]).then(function(datasets) {
+
+            var dataseries1 = ["t"];
+            var dataseries2 = ["q"];
+
+            datasets[0].forEach(function(d) {
+              dataseries1.push(+d["data1"]);
+              dataseries2.push(+d["data2"]);
+            });
+
+
+          var chart = c3.generate({
+              bindto: '#chart2',
+              data: {
+                columns: [
+                  dataseries1,
+                  dataseries2
+                ],
+                axes: {
+                  dataseries1: 'y2'
+                },
+                types: {
+                  t: 'bar',
+                  q: 'spline' // ADD
+                }
+              },
+              axis: {
+                y: {
+                  label: {
+                    text: 'Y Label',
+                    position: 'outer-middle'
+                  }
+                },
+                y2: {
+                  show: true,
+                  label: {
+                    text: 'Y2 Label',
+                    position: 'outer-middle'
+                  }
+                }
+              }
+          });
+
+          })
+
+    }
+
+
+});
+
+
+
+    </script>
+
+</html>
