@@ -4,92 +4,73 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CLEAN MARKUP = GOOD KARMA.
-      Hi source code lover,
-
-      you're a curious person and a fast learner ;)
-      Let's make something beautiful together. Contribute on Github:
-      https://github.com/webslides/webslides
-
-      Thanks,
-      @jlantunez.
-    -->
-
-    <!-- SEO -->
     <title>Smith Rock State Park</title>
     <meta name="description" content="A deep dive into the visitation data at Smith Rock State Park">
-
-    <!-- URL CANONICAL -->
-    <!-- <link rel="canonical" href="http://your-url.com/"> -->
-
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
-
-    <!-- CSS WebSlides -->
-    <link rel="stylesheet" type='text/css' media='all' href="static/css/webslides.css">
-
-    <!-- Optional - CSS SVG Icons (Font Awesome) -->
-    <link rel="stylesheet" type='text/css' media='all' href="static/css/svg-icons.css">
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="css/style.css">
+    <!-- CSS WebSlides -->
+    <link rel="stylesheet" type='text/css' media='all' href="css/webslides.css">
+
+    <!-- Optional - CSS SVG Icons (Font Awesome) -->
+    <link rel="stylesheet" type='text/css' media='all' href="css/svg-icons.css">
+
+    <style>
+    #info {
+  position: fixed;
+  z-index: 1000;
+  bottom: 20px;
+  right: 10px;
+  width: 768px;
+  color: #333333;
+  padding: 6px 8px;
+  background: rgba(225, 225, 225, 0.5);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+    </style>
     <!-- Javascript Library -->
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="static/js/webslides.min.js"></script>
     <script src="https://unpkg.com/d3@5/dist/d3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.js"></script>
-
-
-    <!-- FACEBOOK -->
-
-    <!-- TWITTER -->
-
-    <!-- FAVICONS -->
-
-    <!-- Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#333333">
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="js/webslides.min.js"></script>
 
   </head>
   <body>
 
-    <main role= "main">
+    <main role="main">
       <article id="webslides">
         <section class="bg-apple">
-      <video class="background-video dark" autoplay muted loop>
-          <source src="assets/smithrock.mp4" type="video/mp4">
-      </video>
-      <div class="wrap aligncenter">
-          <h1>
+          <video class="background-video dark" autoplay muted loop>
+            <source src="assets/smithrock.mp4" type="video/mp4">
+          </video>
+          <div class="wrap aligncenter">
+            <h1>
               <strong>Smith Rock State Park</strong>
-          </h1>
-      </div>
-  </section>
-  <section class="bg-apple slide-top">
-    <div id="mymap"></div>
-</section>
-<!-- the second map -->
-<section class="bg-apple slide-top">
-    <div id="mymap2"></div>
-     <div id="worduniverse"></div>
+            </h1>
+          </div>
+        </section>
+        <section class="bg-apple slide-top">
+          <div id="mymap"></div>
+        </section>
+        <!-- the second map -->
+        <section class="bg-apple slide-top">
 
-</section>
-<!-- the first chart -->
-<section class="bg-apple  slide-top">
-    <div id="mychart" >
-        <div id="chart"></div>
-        <span id="load">Load</span>
-        <span id="unload">Unload</span>
-    </div>
-</section>
-<!-- the second chart -->
-<section class="bg-apple  slide-top">
-    <div id="mychart2" >
-        <div id="chart2"></div>
-    </div>
+          <div id="mymap2" role="main">
+            <div id="info">
+              <div id="vis">
+                <button id="play-button" type="button">Play</button>
+              </div>
+              <div id="total" style="min-height: 250px"></div>
+              <hr>
+              <div id="district" style="min-height: 250px"></div>
+            </div>
+          </div>
 </section>
 </article>
 
@@ -98,18 +79,22 @@
     <script>
     var map = L.map("mymap", {zoomControl: false, scrollWheelZoom: false}).setView([44.3682, -121.1406], 7);
 
-var map2 = L.map("mymap2", {zoomControl: false, scrollWheelZoom: false}).fitBounds([
-    [49.3, -138.5],
-    [22.8, -67.4]
-]);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/loweas/cjv4ijme33cv51fo88tiywo86/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibG93ZWFzIiwiYSI6ImNqczlhMzJqMjE1dDM0NG12dHBxam1lZjIifQ.Ox8goYypCr_cJCoDPgHTsQ', {
         maxZoom: 19
     }).addTo(map);
 
-    L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}@2x.png', {
+      var map2 = L.map("mymap2", {
+      zoomControl: false,
+      scrollWheelZoom: false
+    }).setView([44.366, -121.134], 15);
+
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/loweas/cjv4ijme33cv51fo88tiywo86/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibG93ZWFzIiwiYSI6ImNqczlhMzJqMjE1dDM0NG12dHBxam1lZjIifQ.Ox8goYypCr_cJCoDPgHTsQ', {
         maxZoom: 19
-    }).addTo(map2);
+      }).addTo(map2);
+
+
 
     ws = new WebSlides();
     ws.el.addEventListener('ws:slide-change', function () {
@@ -122,71 +107,188 @@ var map2 = L.map("mymap2", {zoomControl: false, scrollWheelZoom: false}).fitBoun
         map.setView([45.514685, -122.987080], 7);
         //Fly to animation  new latitude and longitude
         map.flyTo([44.366, -121.134], 15, {animate: true, duration: 10});
-        //outline of Washington county
+        //outline of smith roack
+
     }
-
-
-    if (crtDiv.attr("id") === "mymap2") {
-
-        map2.fitBounds([
-            [45.514685, -122.987080],
-            [45.514685, -122.987080]
-        ]);
+    else if (crtDiv.attr("id") === "mymap2") {
         map2.invalidateSize();
+        // fitBounds will fit the map to the boundary of the viewport (monitor)
+        map2.setView([44.366, -121.134], 15);
+        Promise.all([
+        d3.csv('assets/smithnum.csv')
+      ]).then(function(datasets) {
+             var t = ["t"];
+             var d1 = ["Booth"];
+             var d2 = ["Prineville"];
+             var d3 = ["Lake.Owyhee"];
+             var d4 = ["Hat.Rock"];
+             var d5 = ["Ochoco"];
+             var d6 = ["Fort.Rock"];
+             var d7 = ["Joseph.Stewart"];
+             var d8 = ["Smith.Rock"];
+             var d9 = ["Tumalo"];
+             var d10 = ["Goose.Lake"];
+             var d11 = ["White.River.Falls"];
+             var d12 = ["Pilot.Butte"];
+             var d13= ["Red.Bridge"];
+             var d14= ["Sumpter"];
+             var d15= ["Clyde.Holliday"];
+             var d16= ["Minam"];
+             var d17= ["Peter.Skene"];
+             var d18= ["Battle.Mountain"];
+             var d19= ["Lapine"];
+             var d20= ["Cline.Falls"];
+             var d21= ["Deshutes.River"];
+             var d22= ["Collier"];
+             var d23= ["Valley.of.Rogue"];
+             var d24= ["Emigrant.Springs"];
+
+
+             datasets[0].forEach(function(d) {
+               t.push(new Date(d["t"]));
+               d1.push(+d["d1"]);
+               d2.push(+d["d2"]);
+               d3.push(+d["d3"]);
+               d4.push(+d["d4"]);
+               d5.push(+d["d5"]);
+               d6.push(+d["d6"]);
+               d7.push(+d["d7"]);
+               d8.push(+d["d8"]);
+               d9.push(+d["d9"]);
+               d10.push(+d["d10"]);
+               d11.push(+d["d11"]);
+               d12.push(+d["d12"]);
+               d13.push(+d["d13"]);
+               d14.push(+d["d14"]);
+               d15.push(+d["d15"]);
+               d16.push(+d["d16"]);
+               d17.push(+d["d17"]);
+               d18.push(+d["d18"]);
+               d19.push(+d["d19"]);
+               d20.push(+d["d20"]);
+               d21.push(+d["d21"]);
+               d22.push(+d["d22"]);
+               d23.push(+d["d23"]);
+               d24.push(+d["d24"]);
+
+             });
+
+             var chart = c3.generate({
+                      title: {
+                        text: 'Visitation to Smith Rock State Park'
+                      },
+                      data: {
+                          x: 't',
+                          columns: [t, d8],
+                          type: 'spline',
+                      },
+                      subchart: {
+                      show: true,
+                      size: {
+                        height: 15
+                      },
+                      onbrush: function(d) {
+                        chart2.zoom(chart.zoom());
+                      }
+                      },
+                      axis: {
+                          x: {
+                              type: 'timeseries',
+                              tick: {
+                                  format: '%Y'
+                              }
+                          },
+                          y: {
+                            label: {
+                                text: '# of Yearly Vists',
+                                position: 'outer-middle'
+                            }
+                          },
+                      },
+                      point: {
+                        r: 0,
+                        focus: {
+                          expand: {
+                            r: 2
+                          }
+                        }
+                      },
+                      zoom: {
+                        // rescale: true,+
+                        enabled: true,
+                        type: "scroll",
+                        onzoom: function(d) {
+                          chart2.zoom(chart.zoom());
+                          // step();
+                        }
+                      },
+                      stanford: {
+                      scaleMin: 1,
+                      scaleMax: 10000,
+                      scaleFormat: 'pow10',
+                      padding: {
+                          top: 15,
+                          right: 0,
+                          bottom: 0,
+                          left: 0
+                      }
+                  },
+                  });
+
+                  var chart2 = c3.generate({
+                      title: {
+                        text: 'Refugee Arrival by District (D)'
+                      },
+                      data: {
+                          x: 't',
+                          columns: [t, d1, d2, d3, d4, d5, d6,d7, d8, d9, d10, d11, d12, d13, d14, d15, d16, d17, d18, d19, d20, d21, d22, d23, d24],
+                          type: 'spline',
+                      },
+                      axis: {
+                          x: {
+                              type: 'timeseries',
+                              tick: {
+                                  format: '%Y'
+                              }
+                          },
+                          y: {
+                            tick: {
+                                format: ''
+                            },
+                            label: {
+                                text: '# of Visits',
+                                position: 'outer-middle'
+                            }
+                          },
+                      },
+                      point: {
+                        r: 0,
+                        focus: {
+                          expand: {
+                            r: 2
+                          }
+                        }
+                      },
+                      zoom: {
+                        enabled: {
+                          type: "drag"
+                        },
+                        onzoomend: function(d) {
+                          chart.zoom(chart2.zoom());
+                        }
+                      },
+                      tooltip: {
+                        linked: true
+                      },
+                        bindto: "#district"
+                  });
+
+      });
     }
 
-    if (crtDiv.attr("id") === "mychart2") {
-
-          Promise.all([
-            d3.csv('assets/test1.csv'),
-            d3.csv('assets/test2.csv'),
-            d3.json('assets/counties.geojson')
-          ]).then(function(datasets) {
-
-            var dataseries1 = ["t"];
-            var dataseries2 = ["q"];
-
-            datasets[0].forEach(function(d) {
-              dataseries1.push(+d["data1"]);
-              dataseries2.push(+d["data2"]);
-            });
 
 
-          var chart = c3.generate({
-              bindto: '#chart2',
-              data: {
-                columns: [
-                  dataseries1,
-                  dataseries2
-                ],
-                axes: {
-                  dataseries1: 'y2'
-                },
-                types: {
-                  t: 'bar',
-                  q: 'spline' // ADD
-                }
-              },
-              axis: {
-                y: {
-                  label: {
-                    text: 'Y Label',
-                    position: 'outer-middle'
-                  }
-                },
-                y2: {
-                  show: true,
-                  label: {
-                    text: 'Y2 Label',
-                    position: 'outer-middle'
-                  }
-                }
-              }
-          });
 
-          })
-
-    }
 
 
 });

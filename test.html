@@ -1,958 +1,256 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <title>Pure Water Brew</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="please add">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Benji Antolin">
+  <title>Zaatari Incoming Refugees</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.css" rel="stylesheet">
 
-    <!-- Google Fonts -->
-    <link href="css/google-fonts.css" rel="stylesheet">
+  <style>
+    html,
+    body,
+    #map {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: #fff;
+      font-family: 'Titillium Web', sans-serif;
+    }
 
-    <!-- CSS Base -->
-    <link rel="stylesheet" type='text/css' media='all' href="css/webslides.css">
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="css/leaflet.css">
-    <link rel="stylesheet" type="text/css" media="all" href="css/style.css">
-    <link rel="shortcut icon" href="img/new-logo.png">
-    <link rel="apple-touch-icon icon" sizes="192x192" href="img/new-logo.png">
+    #info {
+      position: fixed;
+      z-index: 1000;
+      bottom: 20px;
+      width: 768px;
+      color: #333333;
+      padding: 6px 8px;
+      background: rgba(225, 225, 225, 0.5);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
 
-    <!-- Android -->
-    <script src="js/starfield.js"></script>
-    <script src="js/leaflet.js"></script>
-    <script src="js/proj4.js"></script>
-    <script src="js/proj4leaflet.min.js"></script>
-    <script src="js/leaflet.ajax.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/chroma.min.js"></script>
-    <script src="js/webslides.min.js"></script>
-    <script src="js/Leaflet.SwoopyArrow-customized.js"></script>
-    <script src="assets/data/kits.js"></script>
-    <script src="assets/data/media.js"></script>
-    <script src="assets/data/lake.js"></script>
+
+  </style>
+
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+
+  <script src="https://unpkg.com/d3@5/dist/d3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 </head>
 
 <body>
-<!--Navigation Bar -->
-<header role="banner">
-    <nav role="navigation">
-        <span class="logo"><a href="index.html" title="Pure Water Brew"> Pure Water Brew</a></span>
-        <ul>
-            <li>
-                <a href="javascript:window.ws = new WebSlides({ autoslide: 10000 });" title="English">
-                    Autoplay
-                </a>
-            </li>
 
-            <li>
-                <a href="index.html" title="English">
-                    EN
-                </a>
-            </li>
-            <li>
-                <a>|</a>
-            </li>
-            <li>
-                <a href="index_cn.html" title="中文">
-                    中文
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<!--end of navigation bar-->
-
-<main role="main">
-    <article id="webslides">
-        <!--Scenes:
-        <!--1.Landing Page-->
-        <!--2.Intro map flying from Singapore to Oregon-->
-        <!--3.WA county urbanization video-->
-        <!--4.New normal Video-->
-        <!--6.CLIMAX: Nature's silent call for water action-->
-        <!--7.Industry and research-->
-        <!--8.Window of discourse-->
-        <!--9.Verbiage WORDUNIVERSE 1-->
-        <!--10.ART + Beer, I think yes-->
-        <!--11.Marketing outreach box-->
-        <!--12.Sending the message-->
-        <!--13.Media Conversation growth timeline-->
-        <!--14.Bill-->
-        <!--15.Verbiage What We Learned * WORDUNIVERSE 2*-->
-        <!--16.Partnership-->
-        <!--17.DEQ. Spark-->
-        <!--18.Beer Happy (Brewer and WEFTEC FOOTAGE)-->
-        <!--19.Final thoughts- Andy Quote-->
-        <!--20.Closing-->
-
-
-        <!--1.Landing Page-->
-        <section class="bg-apple">
-            <video class="background-video dark" autoplay muted loop>
-                <source src="assets/open-pics.mp4" type="video/mp4">
-            </video>
-            <div class="wrap aligncenter">
-                <h1>
-                    <strong>Changing Conversations · Changing Minds</strong>
-                </h1>
-                <p class="text-symbols"></p>
-                <p><a href="https://twitter.com/cleanwaternews?lang=en"
-                      title="Diane Taniguchi-Dennis, Clean Water Services"></a>
-                    <!--<img class="avatar-64 img-thumbnail" src="img/taniguchi-dennis.jpg" alt="Diane Taniguchi-Dennis, Clean Water Services"></a> -->
-                </p>
-            </div>
-        </section>
-
-        <!--2.Intro map flying from Singapore to Oregon-->
-        <section class="bg-apple slide-top">
-            <div id="mymap"></div>
-        </section>
-
-        <!--3.WA county urbanization video-->
-        <section class="bg-apple slide-top">
-            <video class="background-video" autoplay muted loop>
-                <source src="assets/intro.mp4" type="video/mp4">
-            </video>
-        </section>
-
-        <!--4.New Normal Video-->
-        <section class="fullscreen bg-apple">
-            <video class="background-video dark" autoplay muted loop>
-                <source src="assets/innovate.mp4" type="video/mp4">
-            </video>
-            <div class="wrap"><h1>Preparing for the New Normal</h1></div>
-        </section>
-
-        <!-- 5.Hagg lake data and image-->
-        <section class="fullscreen bg-apple">
-            <div class="card-60">
-                <!-- end figure-->
-                <div class="flex-content">
-                    <h5 class="content-center">Water Supplies in an Uncertain Climate</h5>
-                    <p></p>
-                    <img class="img-thumbnail" src="assets/cws-hagg-data.png">
-
-                </div>
-                <figure>
-                    <img class="wrap" src="assets/hagg_lake.jpg">
-                </figure>
-            </div>
-        </section>
-
-
-        <!--6.CLIMAX: Nature's Silent call for water action-->
-        <section class="bg-apple">
-            <div class="wrap">
-
-                <div class="grid vertical-align">
-                    <div class="column">
-                        <ul class="wrap size-50">
-                            <li>
-                                <div>
-                                    <p class="text-subtitle">Heeding Nature's Silent Call</p>
-                                    <h3>Innovating with Water Reuse</h3>
-                                    <br>
-                                    <p>The Virginia Rail and American Bittern <br><i>Photos taken at Fernhill Natural
-                                        Treatment System</i></p>
-                                </div>
-                            </li>
-                            <li>
-                        </ul>
-                    </div>
-                    <div class="column">
-                        <figure>
-                            <div class="embed">
-                                <video autoplay loop muted poster="">
-                                    <source src="assets/birds.mp4" type="video/mp4">
-                                </video>
-                            </div>
-
-                        </figure>
-
-                    </div>
-                </div>
-                <!-- .end card-50 -->
-            </div>
-            <!-- .end .wrap -->
-        </section>
-
-        <!--7.Industry and research-->
-
-        <section class="bg-apple">
-            <!--<div class="wrap"><h2>Industry</h2></div>-->
-            <div class="wrap">
-
-                <div class="grid vertical-align">
-                    <div class="column">
-                        <ul class="wrap size-60">
-                            <img class="img-thumbnail img-responsive" src="img/research-doc.png">
-                        </ul>
-                    </div>
-                    <!--Paul Slovic image and info-->
-                    <div class="column">
-                        <p><strong><img class="img-thumbnail" width="200px" src="img/slovic.png" alt="Paul Slovic">
-                            Paul Slovic, Ph.D.</strong>
-                        </p>
-
-                        <p>A founder and president of Decision Research and Professor of Psychology at the University of
-                            Oregon.</p>
-                        <!--Linda Macpherson image and info-->
-                        <p><strong><img class="img-thumbnail" width="200px" src="img/mcpherson.png"
-                                        alt="Linda MacPherson">
-                            Linda Macpherson, MPA</strong>
-                        </p>
-                        <p>Founder · Managing Member · New Water ReSources, LLC.</p>
-                    </div>
-                </div>
-                <!-- .end card-50 -->
-            </div>
-            <!-- .end .wrap -->
-        </section>
-
-
-        <!--8. Window of discourse-->
-        <section class="bg-apple">
-            <div class="wrap">
-                <h2 class="alignleft">Window of Discourse</h2>
-                <p class="flexblock alignleft"> From &nbsp; <strong>"The Overton Window"</strong> &nbsp; written by <i>
-                    &nbsp; Joseph P. Overton</i></p>
-                <!--start of window graphic-->
-                <table class="flexblock content-center size-50">
-                    <tr>
-                        <td class=" button-1">
-                            Unthinkable
-                        </td>
-                        <td class="cell"><i class="fas fa-level-down-alt fa-1x"></i></td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
-                    </tr>
-                    <tr>
-                        <td class=""></td>
-                        <td class=" button-2">
-                            Radical
-                        </td>
-                        <td class="cell"><i class="fas fa-level-down-alt fa-1x"></i></td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
-                    </tr>
-                    <tr>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=" button-3">
-                            Acceptable
-                        </td>
-                        <td class="cell"><i class="fas fa-level-down-alt fa-1x"></i></td>
-                        <td class=""></td>
-                        <td class=""></td>
-                    </tr>
-                    <tr>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class="button-4">
-                            Sensible
-                        </td>
-                        <td class="cell"><i class="fas fa-level-down-alt fa-1x"></i></td>
-                        <td class=""></td>
-                    </tr>
-                    <tr>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class="button-5">
-                            Popular
-                        </td>
-                        <td class="cell"><i class="fas fa-level-down-alt fa-1x"></i></td>
-                    </tr>
-                    <tr>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class=""></td>
-                        <td class="button-6">
-                            Good Public Policy
-                        </td>
-                    </tr>
-                </table>
-                <!--end of Window of discourse graphic-->
-                <br/> <br/> <br/> <br/>
-                <div class="wrap aligncenter">
-                    <blockquote class="text-quote">
-                        <p>Provide information that is interesting and engaging and is simple enough to understand but
-                            technical enough to trust.</p>
-                        <p><cite> Talking About Water, pp. 71</cite></p>
-                    </blockquote>
-                </div>
-            </div>
-        </section>
-
-        <!--9.Verbiage *WORDUNIVERSE 1*-->
-        <section class="bg-apple slide-top">
-            <div id="worduniverse"></div>
-            <!--Beginning of Window of discourse progression graphic:Unthinkable -->
-            <div class="wrap mind-process">
-                <button class="button-1 current-step">Unthinkable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-2">Radical</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-3">Acceptable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-4">Sensible</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-5">Popular</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-6">Good Public Policy</button>
-                <h2> Public Perception</h2>
-            </div>
-            <!--End of Window of Discourse graphic: Unthinkable-->
-        </section>
-
-
-        <!--10.ART + Beer, I think yes-->
-        <section class="bg-apple slide-top">
-            <video class="background-video dark" autoplay loop>
-                <source src="assets/i-think-yes.mp4" type="video/mp4">
-            </video>
-            <!--Beginning of Window of discourse progression graphic: Radical-->
-            <div class="wrap mind-process">
-                <button class="button-1">Unthinkable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-2 current-step">Radical</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-3">Acceptable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-4">Sensible</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-5">Popular</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-6">Good Public Policy</button>
-            </div>
-            <!--End of Window of Discourse graphic: Radical-->
-            <footer>
-                <div class="wrap">
-                    <blockquote class="text-quote"><h2><strong>Beer? I think, yes!</strong></h2>
-                    </blockquote>
-                    <br> <br> <br>
-                    <h6> Art Larrance</h6>
-                    <p> Cascade Brewing · Co-Founder and CEO</p>
-
-                    <h6>Bill Gaffi, P.E.</h6>
-                    <p> General Manager of Clean Water Services · Executive
-                        Director of the Clean Water Institute </p>
-                </div>
-            </footer>
-
-        </section>
-
-        <!--11. Marketing outreach box-->
-        <section class="bg-apple slide-top">
-            <!--<span class="background" style="background-image:url('img/kit.gif')"></span>-->
-            <video class="background-video" autoplay loop>
-                <source src="assets/box-animation.mp4" type="video/mp4">
-            </video>
-            <!--Beginning of Window of discourse progression graphic: Radical-->
-            <div class="wrap mind-process">
-                <button class="button-1">Unthinkable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-2 current-step">Radical</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-3">Acceptable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-4">Sensible</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-5">Popular</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-6">Good Public Policy</button>
-                <h2>Sharing a taste</h2>
-            </div>
-            <!--End of Window of Discourse graphic: Radical-->
-        </section>
-
-
-        <!--12.Sending the message-->
-        <section class="bg-apple slide-top">
-            <div id="mymap2"></div>
-            <!--Beginning of Window of discourse progression graphic: Acceptable-->
-            <div class="wrap mind-process">
-                <button class="button-1">Unthinkable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-2">Radical</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-3 current-step">Acceptable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-4">Sensible</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-5">Popular</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-6">Good Public Policy</button>
-                <h2>Sending the Message</h2>
-            </div>
-            <!--End of Window of Discourse graphic: Acceptable-->
-        </section>
-
-        <!--13.Media Conversation growth timeline -->
-        <section class="fullscreen bg-apple">
-            <div class="card-60">
-                <figure>
-                    <div id="mymap4"></div>
-                </figure>
-                <div class="flex-content">
-                    <!--<p class="text-subtitle">Clear Concept Verbiage</p>-->
-                    <!--<p class="text-symbols">* * * </p>-->
-                    <div id="vc" class=" content-center alignleft text-quote fadeInUp"><h2> Pure Water Brew </h2></div>
-                </div>
-            </div>
-            <!--Beginning of Window of discourse progression graphic: Acceptable-->
-            <div class="wrap mind-process mind-process-up-2">
-                <button class="button-1">Unthinkable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-2">Radical</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-3 current-step">Acceptable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-4">Sensible</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-5">Popular</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-6">Good Public Policy</button>
-                <h2>Clear Concept Verbiage</h2>
-            </div>
-            <!--End of Window of Discourse graphic: Acceptable-->
-
-        </section>
-        <!--14.Bill-->
-        <section class="bg-apple">
-            <!--background image of Bill-->
-            <span class="background-right-bottom" style="background-image:url('img/bill-can.png')"></span>
-            <!--Beginning of Window of discourse progression graphic: Sensible-->
-            <div class="wrap mind-process mind-process-up-2">
-                <button class="button-1">Unthinkable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-2">Radical</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-3">Acceptable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-4 current-step">Sensible</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-5">Popular</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-6">Good Public Policy</button>
-            </div>
-            <!--End of Window of Discourse graphic: Sensible-->
-            <!--Bill's quote-->
-            <div class="wrap">
-                <div class="content-left align-left">
-                    <blockquote class="text-quote">
-                        <p>The only thing <strong><i>remarkable</i></strong> about it is that it isn't <strong><i>remarkable</i></strong>
-                            at all.</p>
-                        <cite><strong>Bill Gaffi, P.E.</strong> · General Manager of Clean Water Services · Executive
-                            Director of the Clean Water Institute</cite>
-                    </blockquote>
-                </div>
-            </div>
-        </section>
-
-
-        <!--15.Verbiage What We Learned *WORDUNIVERSE 2*-->
-        <section class="bg-apple slide-top">
-            <!--Word Universe-->
-            <div id="worduniverse2"></div>
-            <!--Beginning of Window of discourse progression graphic: Sensible-->
-            <div class="wrap mind-process">
-                <button class="button-1">Unthinkable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-2">Radical</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-3">Acceptable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-4 current-step">Sensible</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-5">Popular</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-6">Good Public Policy</button>
-                <!--End of Window of Discourse graphic: Sensible-->
-                <h2>Words we got back </h2>
-            </div>
-        </section>
-
-        <!--16.Partnership-->
-        <!--Beer Mug Map with title -->
-        <section class="bg-apple slide-top">
-            <!--Map-->
-            <div id="mymap3"></div>
-            <!--Beginning of Window of discourse progression graphic: Popular-->
-            <div class="wrap mind-process">
-                <button class="button-1">Unthinkable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-2">Radical</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-3">Acceptable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-4">Sensible</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-5 current-step">Popular</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-6">Good Public Policy</button>
-                <!--End of Window of Discourse graphic: Popular-->
-                <h2>Expanding Partnership <span id="year_partners">2014</span>
-                </h2>
-                <p></p>
-                <img class="" src="img/brew-alliance-logo.png">
-            </div>
-            <div class="wrap fadeInUp">
-            </div>
-        </section>
-
-        <!--17.DEQ Spark-->
-        <section class="bg-apple">
-            <!--Beginning of Window of discourse progression graphic: Good Public Policy-->
-            <div class="wrap mind-process mind-process-up slide-top">
-                <button class="button-1">Unthinkable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-2">Radical</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-3">Acceptable</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-4">Sensible</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-5">Popular</button>
-                <i class="arrow-color fas fa-angle-right"></i>
-                <button class="button-6 current-step">Good Public Policy</button>
-            </div>
-            <!--End of Window of Discourse graphic: Good Public Policy-->
-            <div class="wrap">
-                <div class="grid vertical-align">
-                    <div class="column">
-                        <ul class="flexblock specs">
-                            <li>
-                                <div>
-                                    <h3>Department of Environmental Quality , State of Oregon </h3>
-                                    <q><img class="img-thumbnail" src="img/deq-logo.png">"Using recycled water will
-                                        become increasingly important in our region as demands on our water resources
-                                        increase."</q>
-                                </div>
-                            </li>
-
-                            <li>
-                                <h3>Environmental Protection Agency, United States</h3>
-                                <p><img class="img-thumbnail" src="img/epa-seal.png"/>"Pure Water Brew is an excellent
-                                    example of our ability to take water that is otherwise thought of as waste and put
-                                    it to direct positive value as a beer."</p>
-
-                                <p class="">"There is no reason in the world to judge water by its
-                                    <strong>history</strong>.We are very much focused on what’s the
-                                    <strong>quality</strong> of the water for the use to which it will be put."
-                                    <cite><strong>Ken Kopocis</strong> · EPA Deputy Administrator Office of Water (2015)</cite>
-                                </p>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--EPA interview video-->
-                    <div class="column">
-                        <figure>
-                            <div class="embed">
-                                <video autoplay loop muted poster="">
-                                    <source src="assets/epa-interview.mp4" type="video/mp4">
-                                </video>
-                            </div>
-                        </figure>
-                    </div>
-                    <!--End EPA video-->
-                </div>
-                <!-- .end card-50 -->
-            </div>
-            <!-- .end .wrap -->
-        </section>
-
-
-        <!--18.Beer Happy (Brewer and WEFTEC FOOTAGE)-->
-        <section class="bg-apple">
-            <!--VIDEO-->
-            <video class="background-video dark" autoplay muted loop>
-                <source src="assets/brewer-details2.mp4" type="video/mp4">
-            </video>
-            <div class="wrap alignleft fadeInUp">
-                <h2><strong>A Happy Experience</strong></h2>
-            </div>
-            <!-- .end .wrap -->
-        </section>
-
-        <!--19.Final thoughts- Andy Quote-->
-        <section class="bg-apple">
-            <!--VIDEO-->
-            <video class="background-video dark" autoplay muted loop>
-                <source src="assets/watershed-beauty-shots.mp4" type="video/mp4">
-            </video>
-            <!--Andy quote-->
-            <div class="wrap">
-                <div class="content-left align-left">
-                    <blockquote class="text-quote">
-                        <p>All water is reused, mother nature knows this. Now it's time we know this too.</p>
-                        <!--Andy Citation and thumbnail-->
-                        <cite> <img class="img-thumbnail avatar-64" src="img/dunyi.jpg"> <strong>Andy Duyck</strong> ·
-                            Chairman of the Board
-                            Clean Water Services</cite>
-                    </blockquote>
-                </div>
-            </div>
-            <!-- end .flex-content-->
-        </section>
-
-        <!--20.Closing-->
-        <section class="bg-apple slide-bottom">
-            <!-- background video-->
-            <video class="background-video dark" autoplay muted loop>
-                <source src="assets/beer-invite.mp4" type="video/mp4">
-            </video>
-            <!--contact info-->
-            <div class="wrap fadeInUp">
-                <div class="content-right">
-                    <h3>
-                        <strong>Questions?</strong>
-                        <a target="_blank" title="Share on Twitter"
-                           href="https://twitter.com/intent/tweet?text=share%20the%20story%20from%20CWS"><i
-                                class="fab fa-twitter"></i></a>
-
-                        <small><a href="https://twitter.com/CleanWaterNews">@CleanWaterNews</a></small>
-                    </h3>
-                    <!--Created By-->
-                    <h3>
-                        <span style="font-weight: bold; font-size: 20px; color: #c6c6c6; text-align: center;">Created by</span>
-                        <a target="_blank" title="Oregon State University"
-                           href="https://oregonstate.edu/">
-                            <img class="s-logo" src="img/osu-logo.png">
-                        </a>
-                        <span style="font-size: 50px; color: #c6c6c6; text-align: center;"> | </span>
-                        <a target="_blank" title="The Geoviz Lab at Oregon State University"
-                           href="http://geoviz.ceoas.oregonstate.edu">
-                            <img class="s-logo" src="img/geoviz-logo.png">
-                        </a>
-                    </h3>
-                </div>
-            </div>
-        </section>
-    </article>
-</main>
-
-<footer>
-    <div class="wrap">
-
+  <div id="info">
+    <div id="vis">
+      <button id="play-button" type="button">Play</button>
     </div>
-</footer>
+    <div id="total" style="min-height: 250px"></div>
+    <hr>
+    <div id="district" style="min-height: 250px"></div>
+  </div>
+  <div id="map" role="main"></div>
 
-<script>
-
-    mollweide = new L.Proj.CRS('ESRI:54009',
-        '+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m no_defs',
-        {
-            resolutions: [43690, 32768, 16384, 8192, 4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1]
-        }
-    );
-
-    var map = L.map("mymap", {zoomControl: false, scrollWheelZoom: false}).setView([1.290270, 103.851959], 8);
-
-    var map2 = L.map("mymap2", {zoomControl: false, scrollWheelZoom: false}).fitBounds([
-        [49.3, -138.5],
-        [22.8, -67.4]
-    ]);
-    var map3 = L.map("mymap3", {zoomControl: false, scrollWheelZoom: false}).fitBounds([
-        [49.3, -138.5],
-        [22.8, -67.4]
-    ]);
-
-
-    var map4 = L.map('mymap4', {
-        zoomControl: false, scrollWheelZoom: false,
-        crs: mollweide,  // 19. assign the custom crs to the crs option. change the zoom levels due to the change of projection.
-        center: [0, 0],
-        zoom: 1,
-        maxZoom: 1,
-        minZoom: 1,
-        detectRetina: true
+  <script>
+    //1. Create a map object.
+    // RequestDat
+    var mymap = L.map('map', {
+      center: [32.293, 36.3125],
+      zoom: 15,
+      maxZoom: 16,
+      minZoom: 11
     });
+    // 2. Add a base map.
+    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png').addTo(mymap);
 
-//to change the color scales of the conversation bubbles or beer mugs
-    var colors = chroma.scale("YlOrRd").mode('lab').colors(5);
-    var bcolors = chroma.scale("YlOrRd").mode('lab').colors(10);
-    var rcolors = chroma.scale("set1").mode('lab').colors(40);
-
-
-    for (i = 0; i < 5; i++) {
-        $('head').append($("<style> .marker-color-" + (i + 1).toString() + " { color: " + colors[i] + "; font-size: 30px; opacity: 0.8;text-shadow: 0 0 3px #ffffff;} </style>"));
-    }
-
-    for (i = 0; i < 6; i++) {
-        $('head').append($("<style> .button-" + (i + 1).toString() + " { background-color: " + chroma(bcolors[i]).alpha(0.5).css() + "!important;} </style>"));
-    }
-
-
-    for (i = 0; i < 5; i++) {
-        $('head').append($("<style> .comment-color-" + (i).toString() + " { color: " + colors[i] + "; font-size: 15px; opacity: 0.5;} </style>"));
-    }
-
-
-    L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png', {
-        maxZoom: 19
-    }).addTo(map);
-
-
-    L.tileLayer('assets/dark/{z}/{x}/{y}.png', {
-        maxZoom: 5,
-        tms: true,
-    }).addTo(map2);
-
-
-    L.tileLayer('assets/dark/{z}/{x}/{y}.png', {
-        maxZoom: 5,
-        tms: true,
-    }).addTo(map3);
+    Promise.all([
+    d3.csv('assets/smithnum.csv')
+  ]).then(function(datasets) {
+    var t = ["t"];
+    var d1 = ["Booth"];
+    var d2 = ["Prineville"];
+    var d3 = ["Lake.Owyhee"];
+    var d4 = ["Hat.Rock"];
+    var d5 = ["Ochoco"];
+    var d6 = ["Fort.Rock"];
+    var d7 = ["Joseph.Stewart"];
+    var d8 = ["Smith.Rock"];
+    var d9 = ["Tumalo"];
+    var d10 = ["Goose.Lake"];
+    var d11 = ["White.River.Falls"];
+    var d12 = ["Pilot.Butte"];
+    var d13= ["Red.Bridge"];
+    var d14= ["Sumpter"];
+    var d15= ["Clyde.Holliday"];
+    var d16= ["Minam"];
+    var d17= ["Peter.Skene"];
+    var d18= ["Battle.Mountain"];
+    var d19= ["Lapine"];
+    var d20= ["Cline.Falls"];
+    var d21= ["Deshutes.River"];
+    var d22= ["Collier"];
+    var d23= ["Valley.of.Rogue"];
+    var d24= ["Emigrant.Springs"];
 
 
-    var swiiIcon = L.icon({
-        iconUrl: 'img/siww_logo.png',
-        iconSize: [247, 81], // size of the icon
-        iconAnchor: [80, 25]// point from which the popup should open relative to the iconAnchor
-    });
 
-    var cwiIcon = L.icon({
-        iconUrl: 'img/cws-logo-black.png',
-        iconSize: [318, 76], // size of the icon
-        iconAnchor: [160, 45]// point from which the popup should open relative to the iconAnchor
-    });
+                   datasets[0].forEach(function(d) {
+                     t.push(new Date(d["t"]));
+                     d1.push(++d["d1"]);
+                     d2.push(++d["d2"]);
+                     d3.push(++d["d3"]);
+                     d4.push(+d["d4"]);
+                     d5.push(+d["d5"]);
+                     d6.push(+d["d6"]);
+                     d7.push(+d["d7"]);
+                     d8.push(+d["d8"]);
+                     d9.push(+d["d9"]);
+                     d10.push(+d["d10"]);
+                     d11.push(+d["d11"]);
+                     d12.push(+d["d12"]);
+                     d13.push(+d["d13"]);
+                     d14.push(+d["d14"]);
+                     d15.push(+d["d15"]);
+                     d16.push(+d["d16"]);
+                     d17.push(+d["d17"]);
+                     d18.push(+d["d18"]);
+                     d19.push(+d["d19"]);
+                     d20.push(+d["d20"]);
+                     d21.push(+d["d21"]);
+                     d22.push(+d["d22"]);
+                     d23.push(+d["d23"]);
+                     d24.push(+d["d24"]);
 
-    var pwbIcon = L.icon({
-        iconUrl: 'img/new-logo.png',
-        iconSize: [65.4, 39], // size of the icon
-        iconAnchor: [20, 20]// point from which the popup should open relative to the iconAnchor
-    });
+                   });
 
-    var pwbbaseIcon = L.icon({
-        iconUrl: 'img/new-logo.png',
-        iconSize: [87.2, 52], // size of the icon
-        iconAnchor: [20, 20]// point from which the popup should open relative to the iconAnchor
-    });
-    L.marker([45.514685, -122.987080], {icon: cwiIcon}).addTo(map);
-    L.marker([1.290270, 103.851959], {icon: swiiIcon}).addTo(map);
-
-    L.marker([45.505374, -122.978524], {icon: pwbbaseIcon}).addTo(map2);
-
-    var layergroup2 = L.layerGroup().addTo(map2);
-
-    var layergroup4 = L.layerGroup().addTo(map4);
-
-    $(".leaflet-control").hide();
-
-//icons of beer mugs popup on their geolocation based on year of partnership
-    L.geoJson.ajax("assets/data/pwb-partners.geojson", {
-        pointToLayer: function (feature, latlng) {
-            var id = 0;
-            if (feature.properties.year === 2014) {
-                id = 0;
-            }
-            else if (feature.properties.year === 2015) {
-                id = 1;
-            }
-            else if (feature.properties.year === 2016) {
-                id = 2;
-            }
-            else if (feature.properties.year === 2017) {
-                id = 3;
-            }
-            else {
-                id = 4;
-            }
-            return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-beer marker-color-' + (id + 1).toString()})});
+    var chart = c3.generate({
+        title: {
+          text: 'Refugee Arrival (2012/7-2014/12)'
+        },
+        data: {
+            x: 't',
+            columns: [t,d8],
+            type: 'spline',
+        },
+        subchart: {
+        show: true,
+        size: {
+          height: 15
+        },
+        onbrush: function(d) {
+          chart2.zoom(chart.zoom());
         }
-    }).addTo(map3);
-    //data for Map 4: Ocean location
-    L.geoJson.ajax("assets/data/oceans.geojson", {
-        style: {
-            fillColor: '#c5fffa',
-            fillOpacity: 0.2,
-            weight: 0,
-            opacity: 0.1,
-            color: '#7dfffa'
-        }
-
-    }).addTo(map4);
-
-    //data for Map 4: Lakes location
-    L.geoJson.ajax("assets/data/earth-lakes-10km.geojson", {
-        style: {
-            fillColor: '#c5fffa',
-            fillOpacity: 0.2,
-            weight: 0,
-            opacity: 0.1,
-            color: '#7dfffa'
-        }
-
-    }).addTo(map4);
-    //data for Map 4: Earth Rivers location
-    L.geoJson.ajax("assets/data/earth-rivers-10km.geojson", {
-        style: {
-            fillColor: '#c5fffa',
-            fillOpacity: 0.2,
-            weight: 1,
-            opacity: 0.1,
-            color: '#7dfffa'
-        }
-
-    }).addTo(map4);
-
-
-    ws = new WebSlides();
-    ws.el.addEventListener('ws:slide-change', function () {
-
-        crtDiv = $(".current div");
-        // if ($(".current").has("[class*='leaflet']").length) {
-
-        //Map 1 'flyto' animation location and function
-        if (crtDiv.attr("id") === "mymap") {
-            map.invalidateSize();
-            //starting location latitude and longitude
-            map.setView([1.290270, 103.851959], 9);
-            //Fly to animation  new latitude and longitude
-            <!--get geojson to come up at earlier zoom level)-->
-            map.flyTo([45.514685, -122.987080], 10, {animate: true, duration: 23});
-            //outline of Washington county
-            L.geoJson.ajax("assets/data/washington.geojson", {
-                style: {
-                    fillColor: '#b4b4b4',
-                    fillOpacity: 0.4,
-                    weight: 3,
-                    opacity: 0.6,
-                    color: '#000000',
-                    dashArray: '10'
+        },
+        axis: {
+            x: {
+                type: 'timeseries',
+                tick: {
+                    format: '%Y'
                 }
-            }).addTo(map);
-        }
-
-
-        if (crtDiv.attr("id") === "mymap2") {
-
-            map2.fitBounds([
-                [49.3, -138.5],
-                [22.8, -67.4]
-            ]);
-            map2.invalidateSize();
-            layergroup2.clearLayers();
-
-            for (let i = 0; i < kits.features.length; i++) {
-
-                setTimeout(function () {
-                    lng = kits.features[i].geometry.coordinates[0];
-                    lat = kits.features[i].geometry.coordinates[1];
-
-                    layergroup2.addLayer(L.swoopyArrow([45.505374, -122.978524], [lat, lng], {
-                        labelFontSize: 12,
-                        iconAnchor: [20, 10],
-                        iconSize: [30, 16],
-                        //color: '#fff20f',
-                        color: rcolors[i],
-                        opacity: 0.7,
-                        weight: '3'
-                    }));
-                    layergroup2.addLayer(L.marker([lat, lng], {icon: pwbIcon}));
-
-                }, 400 * i);
+            },
+            y: {
+              label: {
+                  text: '# of Refugees',
+                  position: 'outer-middle'
+              }
+            },
+        },
+        point: {
+          r: 0,
+          focus: {
+            expand: {
+              r: 2
             }
-            layergroup2.addTo(map2);
+          }
+        },
+        zoom: {
+          // rescale: true,+
+          enabled: true,
+          type: "scroll",
+          onzoom: function(d) {
+            chart2.zoom(chart.zoom());
+            // step();
+          }
+        },
+        stanford: {
+        scaleMin: 1,
+        scaleMax: 10000,
+        scaleFormat: 'pow10',
+        padding: {
+            top: 15,
+            right: 0,
+            bottom: 0,
+            left: 0
         }
+    },
+          bindto: "#total"
+    });
 
-
-        if (crtDiv.attr("id") === "mymap3") {
-
-            map3.fitBounds([
-                [49.3, -138.5],
-                [22.8, -67.4]
-            ]);
-
-            map3.invalidateSize();
-            for (let i = 0; i < 5; i++) {
-
-                $(".marker-color-" + (i + 1).toString()).hide();
-                $("#year_partners").text((i + 2014).toString());
+    var chart2 = c3.generate({
+        title: {
+          text: 'Refugee Arrival by District (D)'
+        },
+        data: {
+            x: 't',
+            columns: [t, d1, d2, d3, d4, d5, d6,d7, d8, d9, d10, d11, d12, d13, d14, d15, d16, d17, d18, d19, d20, d21, d22, d23, d24],
+            type: 'spline',
+        },
+        axis: {
+            x: {
+                type: 'timeseries',
+                tick: {
+                    format: '%Y'
+                }
+            },
+            y: {
+              tick: {
+                  format: ''
+              },
+              label: {
+                  text: '# of Refugees',
+                  position: 'outer-middle'
+              }
+            },
+        },
+        point: {
+          r: 0,
+          focus: {
+            expand: {
+              r: 2
             }
-
-            for (let i = 0; i < 5; i++) {
-
-                setTimeout(function () {
-                    $(".marker-color-" + (i + 1).toString()).show();
-
-                    $("#year_partners").text((i + 2014).toString());
-
-                }, 1500 * i);
-
-            }
-
-        }
-
-
-        if (crtDiv.hasClass("mind-process")) {
-            $(".mind-process")
-                .hide()
-                .show();
-        }
+          }
+        },
+        zoom: {
+          enabled: {
+            type: "drag"
+          },
+          onzoomend: function(d) {
+            chart.zoom(chart2.zoom());
+          }
+        },
+        tooltip: {
+          linked: true
+        },
+          bindto: "#district"
+    });
 
 
-        if (crtDiv.find("figure div").attr("id") === "mymap4") {
-            map4.setView([0, 0], 1);
-            map4.invalidateSize();
-
-            layergroup4.clearLayers();
-
-            for (let i = 0; i < media.features.length; i++) {
-
-                setTimeout(function () {
-                    lng = media.features[i].geometry.coordinates[0];
-                    lat = media.features[i].geometry.coordinates[1];
-
-
-                    layergroup4.addLayer(L.marker([lat, lng], {icon: L.divIcon({className: 'fas fa-comments comment-color-' + (i % 3).toString()})}));
-
-                }, 200 * i);
-            }
-            layergroup4.addTo(map4);
-
-
-            var verbiage = ["Quality, not history", "Water purification", "Proven technology", "Sewage to brewage", "Solve water shortages",
-                "Purification technique", "High purity water system", "Most pure water on the planet", "beyond drinking water standards",
-                "Innovative solutions to water reuse", "All water we drink has at one point been consumed – and will be consumed again", "Pure Water Brew"];
-
-
-            for (let i = 0; i < verbiage.length; i++) {
-
-                setTimeout(function () {
-                    $("#vc")
-                        .empty()
-                        .append('<h2>  ' + verbiage[i] + ' </h2>');
-                }, 3000 * i);
-            }
-        }
-
-
-        if (crtDiv.attr("id") === "worduniverse") {
-            $("#worduniverse")
-                .empty()
-                .append('<canvas id="canvas2d"></canvas>');
-            new StarField('worduniverse').render(40, 3);
-        }
-
-        if (crtDiv.attr("id") === "worduniverse2") {
-            $("#worduniverse2")
-                .empty()
-                .append('<canvas id="canvas2d"></canvas>');
-            new StarField('worduniverse2').render(20, 3);
-        }
 
 
     });
 
-</script> <!-- Autoslide? window.ws = new WebSlides({ autoslide: 8000 }); -->
+
+L.control.scale({position: 'bottomright'}).addTo(mymap);
+  $(".leaflet-control-attribution").hide();
+</script>
 </body>
 </html>
