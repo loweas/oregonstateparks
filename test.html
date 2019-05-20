@@ -34,8 +34,6 @@
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
       border-radius: 5px;
     }
-
-
   </style>
 
   <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
@@ -54,9 +52,9 @@
     <div id="vis">
       <button id="play-button" type="button">Play</button>
     </div>
-    <div id="total" style="min-height: 250px"></div>
+    <div id="chart" style="min-height: 250px"></div>
     <hr>
-    <div id="district" style="min-height: 250px"></div>
+    <div id="chart2" style="min-height: 250px"></div>
   </div>
   <div id="map" role="main"></div>
 
@@ -71,98 +69,98 @@
     });
     // 2. Add a base map.
     L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png').addTo(mymap);
-
     Promise.all([
-    d3.csv('assets/smithnum.csv')
-  ]).then(function(datasets) {
-    var t = ["t"];
-    var d1 = ["Booth"];
-    var d2 = ["Prineville"];
-    var d3 = ["Lake.Owyhee"];
-    var d4 = ["Hat.Rock"];
-    var d5 = ["Ochoco"];
-    var d6 = ["Fort.Rock"];
-    var d7 = ["Joseph.Stewart"];
-    var d8 = ["Smith.Rock"];
-    var d9 = ["Tumalo"];
-    var d10 = ["Goose.Lake"];
-    var d11 = ["White.River.Falls"];
-    var d12 = ["Pilot.Butte"];
-    var d13= ["Red.Bridge"];
-    var d14= ["Sumpter"];
-    var d15= ["Clyde.Holliday"];
-    var d16= ["Minam"];
-    var d17= ["Peter.Skene"];
-    var d18= ["Battle.Mountain"];
-    var d19= ["Lapine"];
-    var d20= ["Cline.Falls"];
-    var d21= ["Deshutes.River"];
-    var d22= ["Collier"];
-    var d23= ["Valley.of.Rogue"];
-    var d24= ["Emigrant.Springs"];
+      d3.csv('assets/smithnum.csv')
+    ]).then(function(datasets) {
+      var t = ["t"];
+      var Booth = ["Booth"];
+      var Prineville = ["Prineville"];
+      var LakeOwyhee = ["LakeOwyhee"];
+      var HatRock = ["HatRock"];
+      var Ochoco = ["Ochoco"];
+      var FortRock = ["FortRock"];
+      var JosephStewart = ["JosephStewart"];
+      var SmithRock = ["SmithRock"];
+      var Tumalo = ["Tumalo"];
+      var GooseLake = ["GooseLake"];
+      var WhiteRiverFalls = ["WhiteRiverFalls"];
+      var PilotButte = ["PilotButte"];
+      var RedBridge = ["RedBridge"];
+      var Sumpter = ["Sumpter"];
+      var ClydeHolliday = ["ClydeHolliday"];
+      var Minam = ["Minam"];
+      var PeterSkene = ["PeterSkene"];
+      var BattleMountain = ["BattleMountain"];
+      var Lapine = ["Lapine"];
+      var ClineFalls = ["ClineFalls"];
+      var DeshutesRiver = ["DeshutesRiver"];
+      var Collier = ["Collier"];
+      var ValleyofRogue = ["ValleyofRogue"];
+      var EmigrantSprings = ["EmigrantSprings"];
 
 
 
-                   datasets[0].forEach(function(d) {
-                     t.push(new Date(d["t"]));
-                     d1.push(++d["d1"]);
-                     d2.push(++d["d2"]);
-                     d3.push(++d["d3"]);
-                     d4.push(+d["d4"]);
-                     d5.push(+d["d5"]);
-                     d6.push(+d["d6"]);
-                     d7.push(+d["d7"]);
-                     d8.push(+d["d8"]);
-                     d9.push(+d["d9"]);
-                     d10.push(+d["d10"]);
-                     d11.push(+d["d11"]);
-                     d12.push(+d["d12"]);
-                     d13.push(+d["d13"]);
-                     d14.push(+d["d14"]);
-                     d15.push(+d["d15"]);
-                     d16.push(+d["d16"]);
-                     d17.push(+d["d17"]);
-                     d18.push(+d["d18"]);
-                     d19.push(+d["d19"]);
-                     d20.push(+d["d20"]);
-                     d21.push(+d["d21"]);
-                     d22.push(+d["d22"]);
-                     d23.push(+d["d23"]);
-                     d24.push(+d["d24"]);
+      datasets[0].forEach(function(d) {
+        t.push(new Date(d["t"]));
+        Booth.push(+d["Booth"]);
+        Prineville.push(+d["Prineville"]);
+        LakeOwyhee.push(+d["LakeOwyhee"]);
+        HatRock.push(+d["HatRock"]);
+        Ochoco.push(+d["Ochoco"]);
+        FortRock.push(+d["FortRock"]);
+        JosephStewart.push(+d["JosephStewart"]);
+        SmithRock.push(+d["SmithRock"]);
+        Tumalo.push(+d["Tumalo"]);
+        GooseLake.push(+d["GooseLake"]);
+        WhiteRiverFalls.push(+d["WhiteRiverFalls"]);
+        PilotButte.push(+d["PilotButte"]);
+        RedBridge.push(+d["RedBridge"]);
+        Sumpter.push(+d["Sumpter"]);
+        ClydeHolliday.push(+d["ClydeHolliday"]);
+        Minam.push(+d["Minam"]);
+        PeterSkene.push(+d["PeterSkene"]);
+        BattleMountain.push(+d["BattleMountain"]);
+        Lapine.push(+d["Lapine"]);
+        ClineFalls.push(+d["ClineFalls"]);
+        DeshutesRiver.push(+d["DeshutesRiver"]);
+        Collier.push(+d["Collier"]);
+        ValleyofRogue.push(+d["ValleyofRogue"]);
+        EmigrantSprings.push(+d["EmigrantSprings"]);
 
-                   });
+      });
 
-    var chart = c3.generate({
+      var chart = c3.generate({
+        bindto: "#chart",
         title: {
-          text: 'Refugee Arrival (2012/7-2014/12)'
+          text: 'Visitation to Smith Rock State Park'
         },
         data: {
-            x: 't',
-            columns: [t,d8],
-            type: 'spline',
+          x: 't',
+          columns: [t, SmithRock],
+          type: 'spline',
         },
         subchart: {
-        show: true,
-        size: {
-          height: 15
-        },
-        onbrush: function(d) {
-          chart2.zoom(chart.zoom());
-        }
+          show: true,
+          size: {
+            height: 15
+          },
+          onbrush: function(d) {
+            chart2.zoom(chart.zoom());
+          }
         },
         axis: {
-            x: {
-                type: 'timeseries',
-                tick: {
-                    format: '%Y'
-                }
-            },
-            y: {
-              label: {
-                  text: '# of Refugees',
-                  position: 'outer-middle'
-              }
-            },
+          x: {
+            type: 'timeseries',
+            tick: {
+              format: '%Y'
+            }
+          },
+          y: {
+            label: {
+              text: '# of Yearly Vists',
+              position: 'outer-middle'
+            }
+          },
         },
         point: {
           r: 0,
@@ -182,44 +180,47 @@
           }
         },
         stanford: {
-        scaleMin: 1,
-        scaleMax: 10000,
-        scaleFormat: 'pow10',
-        padding: {
+          scaleMin: 1,
+          scaleMax: 10000,
+          scaleFormat: 'pow10',
+          padding: {
             top: 15,
             right: 0,
             bottom: 0,
             left: 0
-        }
-    },
-          bindto: "#total"
-    });
+          }
 
-    var chart2 = c3.generate({
+        },
+      });
+
+      var chart2 = c3.generate({
+        bindto: "#chart2",
         title: {
-          text: 'Refugee Arrival by District (D)'
+          text: 'Regional Visitation in the Mountains'
         },
         data: {
-            x: 't',
-            columns: [t, d1, d2, d3, d4, d5, d6,d7, d8, d9, d10, d11, d12, d13, d14, d15, d16, d17, d18, d19, d20, d21, d22, d23, d24],
-            type: 'spline',
+          x: 't',
+          columns: [t, Booth, Prineville, LakeOwyhee, HatRock, Ochoco, FortRock, JosephStewart, SmithRock, Tumalo, GooseLake, WhiteRiverFalls, PilotButte, RedBridge, Sumpter, ClydeHolliday, Minam, PeterSkene, BattleMountain, Lapine,
+            ClineFalls, DeshutesRiver, Collier, ValleyofRogue, EmigrantSprings
+          ],
+          type: 'spline',
         },
         axis: {
-            x: {
-                type: 'timeseries',
-                tick: {
-                    format: '%Y'
-                }
+          x: {
+            type: 'timeseries',
+            tick: {
+              format: '%Y'
+            }
+          },
+          y: {
+            tick: {
+              format: ''
             },
-            y: {
-              tick: {
-                  format: ''
-              },
-              label: {
-                  text: '# of Refugees',
-                  position: 'outer-middle'
-              }
-            },
+            label: {
+              text: '# of Visits',
+              position: 'outer-middle'
+            }
+          },
         },
         point: {
           r: 0,
@@ -240,17 +241,12 @@
         tooltip: {
           linked: true
         },
-          bindto: "#district"
-    });
-
+      });
 
 
 
     });
-
-
-L.control.scale({position: 'bottomright'}).addTo(mymap);
-  $(".leaflet-control-attribution").hide();
-</script>
+  </script>
 </body>
+
 </html>
