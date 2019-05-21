@@ -51,6 +51,7 @@
         margin-right: 8px;
         opacity: 0.7;
     }
+
   </style>
   <!-- Javascript Library -->
 
@@ -77,8 +78,34 @@
         </h1>
       </div>
     </section>
-    <section class="bg-apple">
-      <div id="mymap2"></div>
+    <section class="fullscreen">
+      <div class="card-50">
+        <figure id="mymap2"></figure>
+       <div class="flex-content" style="background: white">
+         <h3>Table of Contents</h3>
+           <hr>
+             <div class="toc">
+               <ol>
+                 <li>
+                   <a href="#" title="Go to Learning to see">
+                   <span class="chapter">Vistation in the Mountains</span>
+                   <span class="toc-page">03</span>
+                   </a>
+                 </li>
+                 <li><a href="#" title="Go to What is Design?"><span class="chapter">Visitation in the Valley</span>
+                   <span class="toc-page">05</span></a>
+                 </li>
+                 <li>
+                   <a href="#" title="Go to What is Beauty?"><span class="chapter">Visitation in the Coast</span>
+                   <span class="toc-page">06</span></a>
+                 </li>
+                 </ol>
+               </div>
+
+      </div>
+       </div>
+
+
     </section>
     <section class="bg-black">
       <video class="background-video" autoplay muted loop>
@@ -91,14 +118,12 @@
       </div>
     </section>
     <section class="bg-apple slide-top">
+
       <div id="mymap"></div>
-      <div class="wrap">
-        <div class="content-left">
           <div id="info">
             <div id="chart"></div>
             <div id="chart2"></div>
-          </div>
-        </div>
+
       </div>
     </section>
     <section class="bg-apple slide-top">
@@ -108,6 +133,17 @@
           <div id="info">
             <div id="chartvalley"></div>
             <div id="chart2valley"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="bg-apple slide-top">
+      <div id="mycoast"></div>
+      <div class="wrap">
+        <div class="content-left">
+          <div id="info">
+            <div id="chartcoast"></div>
+            <div id="chart2coast"></div>
           </div>
         </div>
       </div>
@@ -137,6 +173,77 @@
       maxZoom: 19
     }).addTo(map2);
 
+    L.geoJson.ajax('assets/region31.geojson', {
+
+      onEachFeature: function(feature, layer) {
+        layer.bindTooltip(feature.properties.LEVEL3_NAM + "</br> Number of Parks : " + feature.properties.NUMPOINTS, {
+          sticky: true,
+          className: "feature-tooltip"
+        });
+
+      },
+      style: function(feature) {
+        switch (feature.properties.LEVEL3_NAM) {
+          case 'Coastal Range':
+            return {
+              color: "#ffae00",
+              opacity: 0.5
+            };
+          case 'Valley Range':
+            return {
+              color: "#00ff21",
+              opacity: 0.5,
+            };
+        }
+
+
+      },
+
+
+    }).addTo(map2);
+
+
+    L.geoJson.ajax('assets/timeseries.geojson',
+        {
+
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip(feature.properties.Location, {
+                    className: 'feature-label',
+                    permanent: false,
+                    direction: 'center'
+                });
+            },
+
+        }).addTo(map2);
+
+        var colors = chroma.scale('Dark2').mode('lch').colors(10);
+        for (i = 1; i < 11; i++) {
+            $('html > head').append($("<style> .marker-icon-" + i.toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
+        }
+
+        L.geoJson.ajax('assets/timeseries.geojson', {
+          pointToLayer: function (feature, latlng) {
+          if (feature.properties.Camping == "1"){
+          return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-campground marker-icon-3' })});
+        }else if (feature.properties.BeachAccess == "1") {
+                    return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-umbrella-beach marker-icon-5'})});
+                } else if (feature.properties.Hiking == "1") {
+                            return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-hiking marker-icon-1'})});
+                        }
+                else if (feature.properties.Fishing == "1") {
+                    return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-fish marker-icon-4'})});
+                } else if (feature.properties.Swimming == "1") {
+                    return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-swim marker-icon-6'})});
+                } else {
+                    return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-tree marker-icon-8'})});
+                }
+            },
+                onEachFeature: function (feature, layer) {
+                    layer.bindTooltip(feature.properties.Location + "</br>"+feature.properties.hashtag, {sticky: true, className: "feature-tooltip"});
+                }
+        }).addTo(map2);
+
+
 
     var myvalley = L.map("myvalley", {
       zoomControl: false,
@@ -160,54 +267,10 @@
       if (crtDiv.attr("id") === "mymap2") {
 
         //starting location latitude and longitude
-        map2.setView([45.514685, -122.987080], 7);
+        map2.setView([45.514685, -122.987080], 6.5);
         //Fly to animation  new latitude and longitude
-        map2.flyTo([44.366, -121.134], 7.5, {
-          animate: true,
-          duration: 10
-        });
-        L.geoJson.ajax('assets/region31.geojson', {
-
-          onEachFeature: function(feature, layer) {
-            layer.bindTooltip(feature.properties.LEVEL3_NAM + "</br> Number of Parks : " + feature.properties.NUMPOINTS, {
-              sticky: true,
-              className: "feature-tooltip"
-            });
-
-          },
-          style: function(feature) {
-            switch (feature.properties.LEVEL3_NAM) {
-              case 'Coastal Range':
-                return {
-                  color: "#ffae00",
-                  opacity: 0.5
-                };
-              case 'Valley Range':
-                return {
-                  color: "#00ff21",
-                  opacity: 0.5,
-                };
-            }
 
 
-          },
-
-
-        }).addTo(map2);
-
-
-        L.geoJson.ajax('assets/timeseries.geojson',
-            {
-
-                onEachFeature: function (feature, layer) {
-                    layer.bindTooltip(feature.properties.Location, {
-                        className: 'feature-label',
-                        permanent: false,
-                        direction: 'center'
-                    });
-                },
-
-            }).addTo(map2);
 
 
 
@@ -215,7 +278,7 @@
         // Checks if the map container size changed and updates the map if so
         map.invalidateSize();
 
-        map.setView([44.366, -121.128], 15);
+        map.setView([44.366, -118.128], 7);
         Promise.all([
           d3.csv('assets/smithnum.csv')
         ]).then(function(datasets) {
@@ -561,6 +624,184 @@
               },
               onzoomend: function(d) {
                 chartvalley.zoom(chart2valley.zoom());
+              }
+            },
+            tooltip: {
+              linked: true
+            },
+          });
+
+        });
+
+      } else if (crtDiv.attr("id") === "mycoast") {
+        // Checks if the map container size changed and updates the map if so
+        map.invalidateSize();
+
+        map.setView([44.366, -121.128], 8);
+        Promise.all([
+          d3.csv('assets/coast.csv')
+        ]).then(function(data) {
+          var t = ["t"];
+          var NahalemBay = ["NahalemBay"];
+          var Umpqua = ["Umpqua"];
+          var WilliamTugman = ["WilliamTugman"];
+          var Washburne = ["Washburne"];
+          var SaddleMountain = ["SaddleMountain"];
+          var SunsetBay = ["SunsetBay"];
+          var SmeltSand = ["SmeltSand"];
+          var CapeSebastian = ["CapeSebastian"];
+          var PistolRiver = ["PistolRiver"];
+          var Tolovana = ["Tolovana"];
+          var OswaldWest = ["OswaldWest"];
+          var BeverlyBeach = ["BeverlyBeach"];
+          var Neskowin = ["Neskowin"];
+          var HarrisBeach = ["HarrisBeach"];
+          var FortStevens = ["FortStevens"];
+          var CapeMeares = ["CapeMeares"];
+          var FogartyCreek = ["FogartyCreek"];
+          var HectaHead = ["HectaHead"];
+          var SouthBeach = ["SouthBeach"];
+          var GeiselMonument = ["GeiselMonument"];
+          var Bullards = ["Bullards"];
+          var Yachates = ["Yachates"];
+
+
+
+
+          data[0].forEach(function(d) {
+            t.push(new Date(d["t"]));
+            NahalemBay.push(+d["NahalemBay"]);
+            Umpqua.push(+d["Umpqua"]);
+            WilliamTugman.push(+d["WilliamTugman"]);
+            Washburne.push(+d["Washburne"]);
+            SaddleMountain.push(+d["SaddleMountain"]);
+            SunsetBay.push(+d["SunsetBay"]);
+            SmeltSand.push(+d["SmeltSand"]);
+            CapeSebastian.push(+d["CapeSebastian"]);
+            PistolRiver.push(+d["PistolRiver"]);
+            Tolovana.push(+d["Tolovana"]);
+            OswaldWest.push(+d["OswaldWest"]);
+            BeverlyBeach.push(+d["BeverlyBeach"]);
+            Neskowin.push(+d["Neskowin"]);
+            HarrisBeach.push(+d["HarrisBeach"]);
+            FortStevens.push(+d["FortStevens"]);
+            CapeMeares.push(+d["CapeMeares"]);
+            FogartyCreek.push(+d["FogartyCreek"]);
+            HectaHead.push(+d["HectaHead"]);
+            SouthBeach.push(+d["SouthBeach"]);
+            GeiselMonument.push(+d["GeiselMonument"]);
+            Bullards.push(+d["Bullards"]);
+            Yachates.push(+d["Yachates"]);
+
+
+          });
+
+          var chartcoast = c3.generate({
+            bindto: "#chartcoast",
+            title: {
+              text: 'Visitation to Beverly Beach'
+            },
+            data: {
+              x: 't',
+              columns: [t, BeverlyBeach],
+              type: 'spline',
+            },
+            subchart: {
+              show: true,
+              size: {
+                height: 15
+              },
+              onbrush: function(d) {
+                chart2coast.zoom(chartcoast.zoom());
+              }
+            },
+            axis: {
+              x: {
+                type: 'timeseries',
+                tick: {
+                  format: '%Y'
+                }
+              },
+              y: {
+                label: {
+                  text: '# of Yearly Vists',
+                  position: 'outer-middle'
+                }
+              },
+            },
+            point: {
+              r: 0,
+              focus: {
+                expand: {
+                  r: 2
+                }
+              }
+            },
+            zoom: {
+              // rescale: true,+
+              enabled: true,
+              type: "scroll",
+              onzoom: function(d) {
+                chart2coast.zoom(chartcoast.zoom());
+                // step();
+              }
+            },
+            stanford: {
+              scaleMin: 1,
+              scaleMax: 10000,
+              scaleFormat: 'pow10',
+              padding: {
+                top: 15,
+                right: 0,
+                bottom: 0,
+                left: 0
+              }
+
+            },
+          });
+
+          var chart2coast = c3.generate({
+            bindto: "#chart2coast",
+            title: {
+              text: 'Regional Visitation in the Coast'
+            },
+            data: {
+              x: 't',
+              columns: [t, NahalemBay,Umpqua,WilliamTugman,Washburne,SaddleMountain,SunsetBay,SmeltSand,CapeSebastian,PistolRiver,Tolovana,OswaldWest,BeverlyBeach,Neskowin,HarrisBeach,FortStevens,CapeMeares,FogartyCreek,HectaHead,SouthBeach,GeiselMonument,Bullards,Yachates
+              ],
+              type: 'spline',
+            },
+            axis: {
+              x: {
+                type: 'timeseries',
+                tick: {
+                  format: '%Y'
+                }
+              },
+              y: {
+                tick: {
+                  format: ''
+                },
+                label: {
+                  text: '# of Visits',
+                  position: 'outer-middle'
+                }
+              },
+            },
+            point: {
+              r: 0,
+              focus: {
+                expand: {
+                  r: 2
+                }
+              }
+            },
+            zoom: {
+              enabled: {
+                type: "drag"
+              },
+              onzoomend: function(d) {
+                chartcoast.zoom(chart2coast.zoom());
               }
             },
             tooltip: {
