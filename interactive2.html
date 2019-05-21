@@ -27,6 +27,30 @@
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
       border-radius: 5px;
     }
+    .info {
+        padding: 6px 8px;
+        font: 14px/16px Verdana, Geneva, sans-serif;
+        background: white;
+        background: rgba(255,255,255,0.8);
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        border-radius: 5px;
+    }
+    .info h4 {
+        font-family: Verdana, Geneva, sans-serif;
+        margin: 0 0 5px;
+        color: #065581;
+    }
+    .legend {
+        line-height: 18px;
+        color: #555;
+    }
+    .legend i {
+        width: 18px;
+        height: 18px;
+        float: left;
+        margin-right: 8px;
+        opacity: 0.7;
+    }
   </style>
   <!-- Javascript Library -->
 
@@ -45,16 +69,26 @@
   <article id="webslides">
     <section class="bg-black">
       <video class="background-video" autoplay muted loop>
-        <source src="assets/smithrock.mp4" type="video/mp4">
+        <source src="assets/OPRD.mp4" type="video/mp4">
       </video>
       <div class="wrap aligncenter">
         <h1>
-          <strong>Smith Rock State Park</strong>
+          <strong>Oregon State Parks Visitation Trends</strong>
         </h1>
       </div>
     </section>
     <section class="bg-apple">
       <div id="mymap2"></div>
+    </section>
+    <section class="bg-black">
+      <video class="background-video" autoplay muted loop>
+        <source src="assets/smithrock.mp4" type="video/mp4">
+      </video>
+      <div class="wrap aligncenter">
+        <h1>
+          <strong>Visitation Trends in the Mountains</strong>
+        </h1>
+      </div>
     </section>
     <section class="bg-apple slide-top">
       <div id="mymap"></div>
@@ -67,8 +101,16 @@
         </div>
       </div>
     </section>
-    <section class="bg-apple">
-      <div id="myoregon"></div>
+    <section class="bg-apple slide-top">
+      <div id="myvalley"></div>
+      <div class="wrap">
+        <div class="content-left">
+          <div id="info">
+            <div id="chartvalley"></div>
+            <div id="chart2valley"></div>
+          </div>
+        </div>
+      </div>
     </section>
   </article>
   <script>
@@ -95,16 +137,21 @@
       maxZoom: 19
     }).addTo(map2);
 
-    var oregon = L.map("myoregon", {
+
+    var myvalley = L.map("myvalley", {
       zoomControl: false,
       scrollWheelZoom: false
     }).setView([44.3682, -121.1406], 7);
-
-
     L.tileLayer('https://api.mapbox.com/styles/v1/loweas/cjv4ijme33cv51fo88tiywo86/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibG93ZWFzIiwiYSI6ImNqczlhMzJqMjE1dDM0NG12dHBxam1lZjIifQ.Ox8goYypCr_cJCoDPgHTsQ', {
       maxZoom: 19
-    }).addTo(oregon);
+    }).addTo(myvalley);
 
+
+
+    var colors = chroma.scale('Dark2').mode('lch').colors(10);
+    for (i = 1; i < 11; i++) {
+        $('html > head').append($("<style> .marker-icon-" + i.toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
+    }
 
     // bind a function to the slide change event of web slides
     ws.el.addEventListener('ws:slide-change', function() {
@@ -158,7 +205,8 @@
                         permanent: false,
                         direction: 'center'
                     });
-                }
+                },
+
             }).addTo(map2);
 
 
@@ -344,10 +392,183 @@
 
         });
 
-      } else if (crtDiv.attr("id") === "myoregon") {
-        oregon.invalidateSize();
-        //starting location latitude and longitude
-        oregon.setView([45.514685, -122.987080], 7);
+      } else if (crtDiv.attr("id") === "myvalley") {
+        // Checks if the map container size changed and updates the map if so
+        map.invalidateSize();
+
+        map.setView([44.366, -121.128], 8);
+        Promise.all([
+          d3.csv('assets/valley.csv')
+        ]).then(function(data) {
+          var t = ["t"];
+          var BanksVernonia = ["BanksVernonia"];
+          var BaldPeaks = ["BaldPeaks"];
+          var NorthSantiam = ["NorthSantiam"];
+          var Mayer = ["Mayer"];
+          var BridalVeilFalls = ["BridalVeilFalls"];
+          var Maples = ["Maples"];
+          var Champoeg = ["Champoeg"];
+          var ElijahBristow = ["ElijahBristow"];
+          var PortlandWomens = ["PortlandWomens"];
+          var Benson = ["Benson"];
+          var Tyron = ["Tyron"];
+          var Molalla = ["Molalla"];
+          var Dabney = ["Dabney"];
+          var RoosterRock = ["RoosterRock"];
+          var DaltonPoint = ["DaltonPoint"];
+          var HistoricalColumba = ["HistoricalColumba"];
+          var MiloMciver = ["MiloMciver"];
+          var Silverfalls = ["Silverfalls"];
+          var Viento = ["Viento"];
+          var GuyWTalbot = ["GuyWTalbot"];
+          var StarvationCreek = ["StarvationCreek"];
+          var LewisandClark = ["LewisandClark"];
+
+
+
+
+          data[0].forEach(function(d) {
+            t.push(new Date(d["t"]));
+            BanksVernonia.push(+d["BanksVernonia"]);
+            BaldPeaks.push(+d["BaldPeaks"]);
+            NorthSantiam.push(+d["NorthSantiam"]);
+            Mayer.push(+d["Mayer"]);
+            BridalVeilFalls.push(+d["BridalVeilFalls"]);
+            Maples.push(+d["Maples"]);
+            Champoeg.push(+d["Champoeg"]);
+            ElijahBristow.push(+d["ElijahBristow"]);
+            PortlandWomens.push(+d["PortlandWomens"]);
+            Benson.push(+d["Benson"]);
+            Tyron.push(+d["Tyron"]);
+            Molalla.push(+d["Molalla"]);
+            Dabney.push(+d["Dabney"]);
+            RoosterRock.push(+d["RoosterRock"]);
+            DaltonPoint.push(+d["DaltonPoint"]);
+            HistoricalColumba.push(+d["HistoricalColumba"]);
+            MiloMciver.push(+d["MiloMciver"]);
+            Silverfalls.push(+d["Silverfalls"]);
+            Viento.push(+d["Viento"]);
+            GuyWTalbot.push(+d["GuyWTalbot"]);
+            StarvationCreek.push(+d["StarvationCreek"]);
+            LewisandClark.push(+d["LewisandClark"]);
+
+
+          });
+
+          var chartvalley = c3.generate({
+            bindto: "#chartvalley",
+            title: {
+              text: 'Visitation to Silver Falls State Park'
+            },
+            data: {
+              x: 't',
+              columns: [t, Silverfalls],
+              type: 'spline',
+            },
+            subchart: {
+              show: true,
+              size: {
+                height: 15
+              },
+              onbrush: function(d) {
+                chart2valley.zoom(chartvalley.zoom());
+              }
+            },
+            axis: {
+              x: {
+                type: 'timeseries',
+                tick: {
+                  format: '%Y'
+                }
+              },
+              y: {
+                label: {
+                  text: '# of Yearly Vists',
+                  position: 'outer-middle'
+                }
+              },
+            },
+            point: {
+              r: 0,
+              focus: {
+                expand: {
+                  r: 2
+                }
+              }
+            },
+            zoom: {
+              // rescale: true,+
+              enabled: true,
+              type: "scroll",
+              onzoom: function(d) {
+                chart2valley.zoom(chartvalley.zoom());
+                // step();
+              }
+            },
+            stanford: {
+              scaleMin: 1,
+              scaleMax: 10000,
+              scaleFormat: 'pow10',
+              padding: {
+                top: 15,
+                right: 0,
+                bottom: 0,
+                left: 0
+              }
+
+            },
+          });
+
+          var chart2valley = c3.generate({
+            bindto: "#chart2valley",
+            title: {
+              text: 'Regional Visitation in the Valley'
+            },
+            data: {
+              x: 't',
+              columns: [t, BanksVernonia,BaldPeaks,NorthSantiam,Mayer,BridalVeilFalls,Maples,Champoeg,ElijahBristow,PortlandWomens,Benson,Tyron,Molalla,Dabney,RoosterRock,DaltonPoint,HistoricalColumba,MiloMciver,Silverfalls,Viento,GuyWTalbot,StarvationCreek,LewisandClark
+              ],
+              type: 'spline',
+            },
+            axis: {
+              x: {
+                type: 'timeseries',
+                tick: {
+                  format: '%Y'
+                }
+              },
+              y: {
+                tick: {
+                  format: ''
+                },
+                label: {
+                  text: '# of Visits',
+                  position: 'outer-middle'
+                }
+              },
+            },
+            point: {
+              r: 0,
+              focus: {
+                expand: {
+                  r: 2
+                }
+              }
+            },
+            zoom: {
+              enabled: {
+                type: "drag"
+              },
+              onzoomend: function(d) {
+                chartvalley.zoom(chart2valley.zoom());
+              }
+            },
+            tooltip: {
+              linked: true
+            },
+          });
+
+        });
 
       }
 
