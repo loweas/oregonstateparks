@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" media="all" href="css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
@@ -25,36 +24,42 @@
       width: 300px;
       color: white;
       padding: 6px 8px;
-      background: transparent ;
+      background: transparent;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      font-family: 'Varela Round';
+    }
+
+    .info {
+      padding: 6px 8px;
+      font: 12px/14px 'Varela Round';
+      background: white;
+      background: rgba(255, 255, 255, 0.8);
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
       border-radius: 5px;
     }
-    .info {
-        padding: 6px 8px;
-        font: 12px/14px 'Varela Round';
-        background: white;
-        background: rgba(255,255,255,0.8);
-        box-shadow: 0 0 15px rgba(0,0,0,0.2);
-        border-radius: 5px;
-    }
+
     .info h4 {
-        font-family: Verdana, Geneva, sans-serif;
-        margin: 0 0 5px;
-        color: #065581;
-        font-size: 14px;
-    }
-    .legend {
-        line-height: 18px;
-        color: #555;
-    }
-    .legend i {
-        width: 18px;
-        height: 18px;
-        float: left;
-        margin-right: 8px;
-        opacity: 0.7;
+      font-family: 'Varela Round';
+      margin: 0 0 5px;
+      color: #065581;
+      font-size: 14px;
     }
 
+    .legend {
+      line-height: 18px;
+      color: #555;
+      font-family: 'Varela Round';
+    }
+
+    .legend i {
+      width: 18px;
+      height: 18px;
+      float: left;
+      margin-right: 8px;
+      opacity: 0.7;
+      font-family: 'Varela Round';
+    }
   </style>
   <!-- Javascript Library -->
 
@@ -84,31 +89,29 @@
     <section class="fullscreen">
       <div class="card-60">
         <figure id="mymap2"></figure>
-       <div class="flex-content" style="background: white">
-         <h3>Table of Contents</h3>
-           <hr>
-             <div class="toc">
-               <ol>
-                 <li>
-                   <a href="#slide=4" title="Go to Learning to see">
-                   <span class="chapter">Vistation in the Mountains</span>
-                   <span class="toc-page">03</span>
-                   </a>
-                 </li>
-                 <li><a href="#slide=5" title="Go to What is Design?"><span class="chapter">Visitation in the Valley</span>
-                   <span class="toc-page">05</span></a>
-                 </li>
-                 <li>
-                   <a href="#slide=6" title="Go to What is Beauty?"><span class="chapter">Visitation in the Coast</span>
-                   <span class="toc-page">06</span></a>
-                 </li>
-                 </ol>
-               </div>
+        <div class="flex-content" style="background: white">
+          <h3>Table of Contents</h3>
+          <hr>
+          <div class="toc">
+            <ol>
+              <li>
+                <a href="#slide=4" title="Go to Learning to see">
+                  <span class="chapter">Vistation in the Mountains</span>
+                  <span class="toc-page">03</span>
+                </a>
+              </li>
+              <li><a href="#slide=5" title="Go to What is Design?"><span class="chapter">Visitation in the Valley</span>
+                  <span class="toc-page">05</span></a>
+              </li>
+              <li>
+                <a href="#slide=6" title="Go to What is Beauty?"><span class="chapter">Visitation in the Coast</span>
+                  <span class="toc-page">06</span></a>
+              </li>
+            </ol>
+          </div>
 
+        </div>
       </div>
-       </div>
-
-
     </section>
     <section class="bg-black">
       <video class="background-video" autoplay muted loop>
@@ -122,128 +125,170 @@
     </section>
     <section class="bg-apple slide-top">
       <div id="mymountain"></div>
-            <div id="chart"></div>
-            <div id="chart2"></div>
-            <div id="info">
-              <h3>Mountain Visits</h4>
-              <p> Chart 1 : Silver Falls <br>
-                 Chart 2 : Click on various parks to deselect or select to view trends</p>
-
-            </div>
-
+      <div id="chart"></div>
+      <div id="chart2"></div>
+      <div id="info">
+        <h3>Mountain Visits</h4>
+          <p> Chart 1 : Smith Rock <br>
+            Chart 2 : Click on various parks to deselect or select to view trends</p>
+      </div>
+    </section>
+    <section class="bg-black">
+      <video class="background-video" autoplay muted loop>
+        <source src="assets/valley.mp4" type="video/mp4">
+      </video>
+      <div class="wrap aligncenter">
+        <h1>
+          <strong>Yearly Visitation Trends at the Valley</strong>
+        </h1>
+      </div>
     </section>
     <section class="bg-apple slide-top">
       <div id="myvalley"></div>
       <div class="wrap">
-            <div id="chartvalley"></div>
-            <div id="chart2valley"></div>
-          </div>
-          <div id="info">
-            <h3>Valley Visits</h4>
-            <p> Chart 1 : Silver Falls <br>
-               Chart 2 : Click on various parks to deselect or select to view trends</p>
+        <div id="chartvalley"></div>
+        <div id="chart2valley"></div>
+      </div>
+      <div id="info">
+        <h3>Valley Visits</h4>
+          <p> Chart 1 : Silver Falls <br>
+            Chart 2 : Click on various parks to deselect or select to view trends</p>
 
-          </div>
+      </div>
+    </section>
+    <section class="bg-black">
+      <video class="background-video" autoplay muted loop>
+        <source src="assets/coast.mp4" type="video/mp4">
+      </video>
+      <div class="wrap aligncenter">
+        <h1>
+          <strong>Yearly Visitation Trends at the Coast</strong>
+        </h1>
+      </div>
     </section>
     <section class="bg-apple slide-top">
       <div id="mycoast"></div>
       <div class="wrap">
-            <div id="chartcoast"></div>
-            <div id="chart2coast"></div>
-  </div>
-  <div id="info">
-    <h3>Coastal Visits</h4>
-    <p> Chart 1 : Beverly Beach. <br>
-       Chart 2 : Click on various parks to deselect or select to view trends</p>
+        <div id="chartcoast"></div>
+        <div id="chart2coast"></div>
+      </div>
+      <div id="info">
+        <h3>Coastal Visits</h4>
+          <p> Chart 1 : Beverly Beach. <br>
+            Chart 2 : Click on various parks to deselect or select to view trends</p>
 
-  </div>
+      </div>
     </section>
   </article>
   <script>
     // make the web slide object.
     var ws = new WebSlides();
 
-
-
     var map2 = L.map("mymap2", {
       zoomControl: false,
       scrollWheelZoom: false
-    }).setView([44.3682, -124.406], 7);
+    }).setView([44.514685, -123.387080], 6.5);
 
 
     L.tileLayer('https://api.mapbox.com/styles/v1/loweas/cjv4ijme33cv51fo88tiywo86/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibG93ZWFzIiwiYSI6ImNqczlhMzJqMjE1dDM0NG12dHBxam1lZjIifQ.Ox8goYypCr_cJCoDPgHTsQ', {
       maxZoom: 19
     }).addTo(map2);
 
-    L.geoJson.ajax('assets/region31.geojson', {
 
+    // 5. dynamically append style classes to this page. This style classes will be used for colorize the markers.
+
+
+      var colors = chroma.scale('Dark2').mode('lch').colors(10);
+      for (i = 1; i < 11; i++) {
+        $('html > head').append($("<style> .marker-icon-" + i.toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
+      }
+
+    L.geoJson.ajax('assets/timeseries.geojson', {
+      pointToLayer: function(feature, latlng) {
+        if (feature.properties.Camping == "1") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-campground marker-icon-3'
+            })
+          });
+        } else if (feature.properties.BeachAccess == "1") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-umbrella-beach marker-icon-5'
+            })
+          });
+        } else if (feature.properties.Hiking == "1") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-hiking marker-icon-1'
+            })
+          });
+        } else if (feature.properties.Fishing == "1") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-fish marker-icon-4'
+            })
+          });
+        } else if (feature.properties.Swimming == "1") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'img/campgroun-solid.svg'
+            })
+          });
+        } else {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'img/campgroun-solid.svg'
+            })
+          });
+        }
+      },
+
+      onEachFeature: function(feature, layer) {
+        layer.bindTooltip(feature.properties.Location + "</br>" + feature.properties.hashtag, {
+          sticky: true,
+          className: "feature-tooltip"
+        });
+      }
+
+    }).addTo(map2);;
+    function style(feature) {
+      return {
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7,
+        fillColor: getColor(feature.properties.density)
+      };
+    }
+
+
+    var regionalcounts = L.geoJson.ajax('assets/region31.geojson', {
       onEachFeature: function(feature, layer) {
         layer.bindTooltip(feature.properties.LEVEL3_NAM + "</br> Number of Parks : " + feature.properties.NUMPOINTS, {
           sticky: true,
           className: "feature-tooltip"
         });
-
       },
       style: function(feature) {
         switch (feature.properties.LEVEL3_NAM) {
           case 'Coastal Range':
             return {
-              color: "#ffae00",
-              opacity: 0.5
+              color: "#ffae00"
             };
           case 'Valley Range':
             return {
-              color: "#00ff21",
-              opacity: 0.5,
+              color: "#00ff21"
             };
-        }
-
-
+          }
       },
+    });
+    regionalcounts.addTo(map2);
 
 
-    }).addTo(map2);
 
 
-    L.geoJson.ajax('assets/timeseries.geojson',
-        {
-
-            onEachFeature: function (feature, layer) {
-                layer.bindTooltip(feature.properties.Location, {
-                    className: 'feature-label',
-                    permanent: false,
-                    direction: 'center'
-                });
-            },
-
-        }).addTo(map2);
-
-        var colors = chroma.scale('Dark2').mode('lch').colors(10);
-        for (i = 1; i < 11; i++) {
-            $('html > head').append($("<style> .marker-icon-" + i.toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
-        }
-
-        L.geoJson.ajax('assets/timeseries.geojson', {
-          pointToLayer: function (feature, latlng) {
-          if (feature.properties.Camping == "1"){
-          return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-campground marker-icon-3' })});
-        }else if (feature.properties.BeachAccess == "1") {
-                    return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-umbrella-beach marker-icon-5'})});
-                } else if (feature.properties.Hiking == "1") {
-                            return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-hiking marker-icon-1'})});
-                        }
-                else if (feature.properties.Fishing == "1") {
-                    return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-fish marker-icon-4'})});
-                } else if (feature.properties.Swimming == "1") {
-                    return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-swim marker-icon-6'})});
-                } else {
-                    return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-tree marker-icon-8'})});
-                }
-            },
-                onEachFeature: function (feature, layer) {
-                    layer.bindTooltip(feature.properties.Location + "</br>"+feature.properties.hashtag, {sticky: true, className: "feature-tooltip"});
-                }
-        }).addTo(map2);
 
 
 
@@ -256,25 +301,12 @@
     }).addTo(myvalley);
 
 
-
-    var colors = chroma.scale('Dark2').mode('lch').colors(10);
-    for (i = 1; i < 11; i++) {
-        $('html > head').append($("<style> .marker-icon-" + i.toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
-    }
-
     // bind a function to the slide change event of web slides
     ws.el.addEventListener('ws:slide-change', function() {
       // capture all the div under the currently displaying section
       crtDiv = $(".current div");
-      if (crtDiv.attr("id") === "mymap2") {
-
+      if (crtDiv.attr("id") === "hello") {
         //starting location latitude and longitude
-        map2.setView([45.514685, -122.987080], 6.5);
-        //Fly to animation  new latitude and longitude
-
-
-
-
 
       } else if (crtDiv.attr("id") === "mymountain") {
         // Checks if the map container size changed and updates the map if so
@@ -585,7 +617,8 @@
             },
             data: {
               x: 't',
-              columns: [t, BanksVernonia,BaldPeaks,NorthSantiam,Mayer,BridalVeilFalls,Maples,Champoeg,ElijahBristow,PortlandWomens,Benson,Tyron,Molalla,Dabney,RoosterRock,DaltonPoint,HistoricalColumba,MiloMciver,Silverfalls,Viento,GuyWTalbot,StarvationCreek,LewisandClark
+              columns: [t, BanksVernonia, BaldPeaks, NorthSantiam, Mayer, BridalVeilFalls, Maples, Champoeg, ElijahBristow, PortlandWomens, Benson, Tyron, Molalla, Dabney, RoosterRock, DaltonPoint, HistoricalColumba, MiloMciver,
+                Silverfalls, Viento, GuyWTalbot, StarvationCreek, LewisandClark
               ],
               type: 'spline',
             },
@@ -761,7 +794,8 @@
             },
             data: {
               x: 't',
-              columns: [t, NahalemBay,Umpqua,WilliamTugman,Washburne,SaddleMountain,SunsetBay,SmeltSand,CapeSebastian,PistolRiver,Tolovana,OswaldWest,BeverlyBeach,Neskowin,HarrisBeach,FortStevens,CapeMeares,FogartyCreek,HectaHead,SouthBeach,GeiselMonument,Bullards,Yachates
+              columns: [t, NahalemBay, Umpqua, WilliamTugman, Washburne, SaddleMountain, SunsetBay, SmeltSand, CapeSebastian, PistolRiver, Tolovana, OswaldWest, BeverlyBeach, Neskowin, HarrisBeach, FortStevens, CapeMeares, FogartyCreek,
+                HectaHead, SouthBeach, GeiselMonument, Bullards, Yachates
               ],
               type: 'spline',
             },

@@ -487,7 +487,7 @@ figure.alignleft {
 
 pre,
 code {
-  font-family: 'Cousine', monospace; }
+  font-family: 'Varela Round'; }
 
 pre {
   font-size: 1.6rem;
@@ -794,7 +794,7 @@ body,
 input,
 select,
 textarea {
-  font-family: 'Roboto', 'San Francisco', helvetica, arial, sans-serif;
+  font-family: 'Varela Round';;
   font-size: 62.5%; }
 
 body,
@@ -1070,7 +1070,7 @@ h3 [class*='bg-'] {
 /* -- Serif -- */
 .text-serif,
 h1 span {
-  font-family: 'Maitree', times, serif; }
+  font-family: 'Varela Round';; }
 
 /* -- h1,h2... Promo/Landings -- */
 .text-landing {
@@ -1244,7 +1244,7 @@ figure[class*='text-pull-'] {
 =========================================== */
 .text-apple,
 .bg-apple {
-  font-family: 'San Francisco', helvetica, arial, sans-serif; }
+   font-family: 'Varela Round'; }
 
 /* Ultra Light */
 @font-face {
