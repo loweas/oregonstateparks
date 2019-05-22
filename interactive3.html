@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>lab 3</title>
+  <title>Smith Rock</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="please add">
@@ -12,294 +12,799 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" media="all" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
   <style>
-  #info {
-position: fixed;
-z-index: 1000;
-bottom: 20px;
-right: 10px;
-width: 768px;
-color: #333333;
-padding: 6px 8px;
-background: rgba(225, 225, 225, 0.5);
-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-border-radius: 5px;
-}
+    #info {
+      position: fixed;
+      z-index: 1000;
+      top: 1px;
+      right: 1px;
+      width: 300px;
+      color: white;
+      padding: 6px 8px;
+      background: transparent ;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
+    .info {
+        padding: 6px 8px;
+        font: 12px/14px 'Varela Round';
+        background: white;
+        background: rgba(255,255,255,0.8);
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        border-radius: 5px;
+    }
+    .info h4 {
+        font-family: Verdana, Geneva, sans-serif;
+        margin: 0 0 5px;
+        color: #065581;
+        font-size: 14px;
+    }
+    .legend {
+        line-height: 18px;
+        color: #555;
+    }
+    .legend i {
+        width: 18px;
+        height: 18px;
+        float: left;
+        margin-right: 8px;
+        opacity: 0.7;
+    }
+
   </style>
   <!-- Javascript Library -->
+
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="js/webslides.min.js"></script>
   <script src="https://unpkg.com/d3@5/dist/d3.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.js"></script>
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+  <script type="text/javascript" src="js/chroma.js"></script>
+
+
 </head>
 
 <body>
   <article id="webslides">
-    <section>
+    <section class="bg-black">
+      <video class="background-video" autoplay muted loop>
+        <source src="assets/OPRD.mp4" type="video/mp4">
+      </video>
+      <div class="wrap aligncenter">
+        <h1>
+          <strong>Oregon State Parks Visitation Trends</strong>
+        </h1>
+      </div>
+    </section>
+    <section class="fullscreen">
+      <div class="card-60">
+        <figure id="mymap2"></figure>
+       <div class="flex-content" style="background: white">
+         <h3>Table of Contents</h3>
+           <hr>
+             <div class="toc">
+               <ol>
+                 <li>
+                   <a href="#slide=4" title="Go to Learning to see">
+                   <span class="chapter">Vistation in the Mountains</span>
+                   <span class="toc-page">03</span>
+                   </a>
+                 </li>
+                 <li><a href="#slide=5" title="Go to What is Design?"><span class="chapter">Visitation in the Valley</span>
+                   <span class="toc-page">05</span></a>
+                 </li>
+                 <li>
+                   <a href="#slide=6" title="Go to What is Beauty?"><span class="chapter">Visitation in the Coast</span>
+                   <span class="toc-page">06</span></a>
+                 </li>
+                 </ol>
+               </div>
+
+      </div>
+       </div>
+
+
+    </section>
+    <section class="bg-black">
       <video class="background-video" autoplay muted loop>
         <source src="assets/smithrock.mp4" type="video/mp4">
       </video>
       <div class="wrap aligncenter">
         <h1>
-          <strong>Smith Rock State Park</strong>
+          <strong>Visitation Trends in the Mountains</strong>
         </h1>
       </div>
     </section>
-    <section class="bg-apple">
-      <div id="mymap2"></div>
-    </section>
-    <!-- the map -->
-    <!-- refer to https://webslides.tv/demos/components#slide=15 -->
-    <!-- refer to https://webslides.tv/demos/components#slide=1 -->
     <section class="bg-apple slide-top">
-      <div id="mymap"></div>
-      <div class="wrap">
-        <div class="content-left">
-          <div id="info">
-           <div id="chart"></div>
-           <div id="chart2"></div>
-        </div>
-        </div>
-      </div>
-    </section>
+      <div id="mymountain"></div>
+            <div id="chart"></div>
+            <div id="chart2"></div>
+            <div id="info">
+              <h3>Mountain Visits</h4>
+              <p> Chart 1 : Silver Falls <br>
+                 Chart 2 : Click on various parks to deselect or select to view trends</p>
 
+            </div>
+
+    </section>
+    <section class="bg-apple slide-top">
+      <div id="myvalley"></div>
+      <div class="wrap">
+            <div id="chartvalley"></div>
+            <div id="chart2valley"></div>
+          </div>
+          <div id="info">
+            <h3>Valley Visits</h4>
+            <p> Chart 1 : Silver Falls <br>
+               Chart 2 : Click on various parks to deselect or select to view trends</p>
+
+          </div>
+    </section>
+    <section class="bg-apple slide-top">
+      <div id="mycoast"></div>
+      <div class="wrap">
+            <div id="chartcoast"></div>
+            <div id="chart2coast"></div>
+  </div>
+  <div id="info">
+    <h3>Coastal Visits</h4>
+    <p> Chart 1 : Beverly Beach. <br>
+       Chart 2 : Click on various parks to deselect or select to view trends</p>
+
+  </div>
+    </section>
   </article>
   <script>
     // make the web slide object.
     var ws = new WebSlides();
-    // decalre the second map object
+
+
+
     var map2 = L.map("mymap2", {
       zoomControl: false,
       scrollWheelZoom: false
-    }).setView([44.3682, -121.1406], 7);
+    }).setView([44.3682, -124.406], 7);
 
 
     L.tileLayer('https://api.mapbox.com/styles/v1/loweas/cjv4ijme33cv51fo88tiywo86/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibG93ZWFzIiwiYSI6ImNqczlhMzJqMjE1dDM0NG12dHBxam1lZjIifQ.Ox8goYypCr_cJCoDPgHTsQ', {
       maxZoom: 19
     }).addTo(map2);
 
-    var map = L.map("mymap", {
+    L.geoJson.ajax('assets/region31.geojson', {
+
+      onEachFeature: function(feature, layer) {
+        layer.bindTooltip(feature.properties.LEVEL3_NAM + "</br> Number of Parks : " + feature.properties.NUMPOINTS, {
+          sticky: true,
+          className: "feature-tooltip"
+        });
+
+      },
+      style: function(feature) {
+        switch (feature.properties.LEVEL3_NAM) {
+          case 'Coastal Range':
+            return {
+              color: "#ffae00",
+              opacity: 0.5
+            };
+          case 'Valley Range':
+            return {
+              color: "#00ff21",
+              opacity: 0.5,
+            };
+        }
+
+
+      },
+
+
+    }).addTo(map2);
+
+
+    L.geoJson.ajax('assets/timeseries.geojson',
+        {
+
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip(feature.properties.Location, {
+                    className: 'feature-label',
+                    permanent: false,
+                    direction: 'center'
+                });
+            },
+
+        }).addTo(map2);
+
+        var colors = chroma.scale('Dark2').mode('lch').colors(10);
+        for (i = 1; i < 11; i++) {
+            $('html > head').append($("<style> .marker-icon-" + i.toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
+        }
+
+        L.geoJson.ajax('assets/timeseries.geojson', {
+          pointToLayer: function (feature, latlng) {
+          if (feature.properties.Camping == "1"){
+          return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-campground marker-icon-3' })});
+        }else if (feature.properties.BeachAccess == "1") {
+                    return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-umbrella-beach marker-icon-5'})});
+                } else if (feature.properties.Hiking == "1") {
+                            return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-hiking marker-icon-1'})});
+                        }
+                else if (feature.properties.Fishing == "1") {
+                    return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-fish marker-icon-4'})});
+                } else if (feature.properties.Swimming == "1") {
+                    return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-swim marker-icon-6'})});
+                } else {
+                    return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-tree marker-icon-8'})});
+                }
+            },
+                onEachFeature: function (feature, layer) {
+                    layer.bindTooltip(feature.properties.Location + "</br>"+feature.properties.hashtag, {sticky: true, className: "feature-tooltip"});
+                }
+        }).addTo(map2);
+
+
+
+    var myvalley = L.map("myvalley", {
       zoomControl: false,
       scrollWheelZoom: false
-    }).setView([44.3682, -121.1406], 7); // fitBounds will fit the map to the boundary of the viewport (monitor)
-
-    // add a basemap for the second map
+    }).setView([44.3682, -121.1406], 7);
     L.tileLayer('https://api.mapbox.com/styles/v1/loweas/cjv4ijme33cv51fo88tiywo86/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibG93ZWFzIiwiYSI6ImNqczlhMzJqMjE1dDM0NG12dHBxam1lZjIifQ.Ox8goYypCr_cJCoDPgHTsQ', {
       maxZoom: 19
-    }).addTo(map);
-
-    // L.marker([45.514685, -122.987080]).addTo(map)
-    // .bindPopup('')
-    // .openPopup();
+    }).addTo(myvalley);
 
 
 
-
+    var colors = chroma.scale('Dark2').mode('lch').colors(10);
+    for (i = 1; i < 11; i++) {
+        $('html > head').append($("<style> .marker-icon-" + i.toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
+    }
 
     // bind a function to the slide change event of web slides
     ws.el.addEventListener('ws:slide-change', function() {
       // capture all the div under the currently displaying section
       crtDiv = $(".current div");
       if (crtDiv.attr("id") === "mymap2") {
-        map2.invalidateSize();
-        //starting location latitude and longitude
-        map2.setView([45.514685, -122.987080], 7);
-        //Fly to animation  new latitude and longitude
-        map2.flyTo([44.366, -121.134], 15, {
-          animate: true,
-          duration: 10
-        });
-      }
-      else if (crtDiv.attr("id") === "mymap") {
-        // Checks if the map container size changed and updates the map if so
-        map.invalidateSize();
 
-        map.setView([44.366, -121.134], 15);
+        //starting location latitude and longitude
+        map2.setView([45.514685, -122.987080], 6.5);
+        //Fly to animation  new latitude and longitude
+
+
+
+
+
+      } else if (crtDiv.attr("id") === "mymountain") {
+        // Checks if the map container size changed and updates the map if so
         Promise.all([
           d3.csv('assets/smithnum.csv')
         ]).then(function(datasets) {
-        var t = ["t"];
-        var Booth = ["Booth"];
-        var Prineville = ["Prineville"];
-        var LakeOwyhee = ["LakeOwyhee"];
-        var HatRock = ["HatRock"];
-        var Ochoco = ["Ochoco"];
-        var FortRock = ["FortRock"];
-        var JosephStewart = ["JosephStewart"];
-        var SmithRock = ["SmithRock"];
-        var Tumalo = ["Tumalo"];
-        var GooseLake = ["GooseLake"];
-        var WhiteRiverFalls = ["WhiteRiverFalls"];
-        var PilotButte = ["PilotButte"];
-        var RedBridge = ["RedBridge"];
-        var Sumpter = ["Sumpter"];
-        var ClydeHolliday = ["ClydeHolliday"];
-        var Minam = ["Minam"];
-        var PeterSkene = ["PeterSkene"];
-        var BattleMountain = ["BattleMountain"];
-        var Lapine = ["Lapine"];
-        var ClineFalls = ["ClineFalls"];
-        var DeshutesRiver = ["DeshutesRiver"];
-        var Collier = ["Collier"];
-        var ValleyofRogue = ["ValleyofRogue"];
-        var EmigrantSprings = ["EmigrantSprings"];
+          var t = ["t"];
+          var Booth = ["Booth"];
+          var Prineville = ["Prineville"];
+          var LakeOwyhee = ["LakeOwyhee"];
+          var HatRock = ["HatRock"];
+          var Ochoco = ["Ochoco"];
+          var FortRock = ["FortRock"];
+          var JosephStewart = ["JosephStewart"];
+          var SmithRock = ["SmithRock"];
+          var Tumalo = ["Tumalo"];
+          var GooseLake = ["GooseLake"];
+          var WhiteRiverFalls = ["WhiteRiverFalls"];
+          var PilotButte = ["PilotButte"];
+          var RedBridge = ["RedBridge"];
+          var Sumpter = ["Sumpter"];
+          var ClydeHolliday = ["ClydeHolliday"];
+          var Minam = ["Minam"];
+          var PeterSkene = ["PeterSkene"];
+          var BattleMountain = ["BattleMountain"];
+          var Lapine = ["Lapine"];
+          var ClineFalls = ["ClineFalls"];
+          var DeshutesRiver = ["DeshutesRiver"];
+          var Collier = ["Collier"];
+          var ValleyofRogue = ["ValleyofRogue"];
+          var EmigrantSprings = ["EmigrantSprings"];
 
 
 
-        datasets[0].forEach(function(d) {
-          t.push(new Date(d["t"]));
-          Booth.push(+d["Booth"]);
-          Prineville.push(+d["Prineville"]);
-          LakeOwyhee.push(+d["LakeOwyhee"]);
-          HatRock.push(+d["HatRock"]);
-          Ochoco.push(+d["Ochoco"]);
-          FortRock.push(+d["FortRock"]);
-          JosephStewart.push(+d["JosephStewart"]);
-          SmithRock.push(+d["SmithRock"]);
-          Tumalo.push(+d["Tumalo"]);
-          GooseLake.push(+d["GooseLake"]);
-          WhiteRiverFalls.push(+d["WhiteRiverFalls"]);
-          PilotButte.push(+d["PilotButte"]);
-          RedBridge.push(+d["RedBridge"]);
-          Sumpter.push(+d["Sumpter"]);
-          ClydeHolliday.push(+d["ClydeHolliday"]);
-          Minam.push(+d["Minam"]);
-          PeterSkene.push(+d["PeterSkene"]);
-          BattleMountain.push(+d["BattleMountain"]);
-          Lapine.push(+d["Lapine"]);
-          ClineFalls.push(+d["ClineFalls"]);
-          DeshutesRiver.push(+d["DeshutesRiver"]);
-          Collier.push(+d["Collier"]);
-          ValleyofRogue.push(+d["ValleyofRogue"]);
-          EmigrantSprings.push(+d["EmigrantSprings"]);
+          datasets[0].forEach(function(d) {
+            t.push(new Date(d["t"]));
+            Booth.push(+d["Booth"]);
+            Prineville.push(+d["Prineville"]);
+            LakeOwyhee.push(+d["LakeOwyhee"]);
+            HatRock.push(+d["HatRock"]);
+            Ochoco.push(+d["Ochoco"]);
+            FortRock.push(+d["FortRock"]);
+            JosephStewart.push(+d["JosephStewart"]);
+            SmithRock.push(+d["SmithRock"]);
+            Tumalo.push(+d["Tumalo"]);
+            GooseLake.push(+d["GooseLake"]);
+            WhiteRiverFalls.push(+d["WhiteRiverFalls"]);
+            PilotButte.push(+d["PilotButte"]);
+            RedBridge.push(+d["RedBridge"]);
+            Sumpter.push(+d["Sumpter"]);
+            ClydeHolliday.push(+d["ClydeHolliday"]);
+            Minam.push(+d["Minam"]);
+            PeterSkene.push(+d["PeterSkene"]);
+            BattleMountain.push(+d["BattleMountain"]);
+            Lapine.push(+d["Lapine"]);
+            ClineFalls.push(+d["ClineFalls"]);
+            DeshutesRiver.push(+d["DeshutesRiver"]);
+            Collier.push(+d["Collier"]);
+            ValleyofRogue.push(+d["ValleyofRogue"]);
+            EmigrantSprings.push(+d["EmigrantSprings"]);
 
-        });
+          });
 
-        var chart = c3.generate({
-          bindto: "#chart",
-          title: {
-            text: 'Visitation to Smith Rock State Park'
-          },
-          data: {
-            x: 't',
-            columns: [t, SmithRock],
-            type: 'spline',
-          },
-          subchart: {
-            show: true,
-            size: {
-              height: 15
+          var chart = c3.generate({
+            bindto: "#chart",
+            title: {
+              text: 'Visitation to Smith Rock State Park'
             },
-            onbrush: function(d) {
-              chart2.zoom(chart.zoom());
-            }
-          },
-          axis: {
-            x: {
-              type: 'timeseries',
-              tick: {
-                format: '%Y'
-              }
+            data: {
+              x: 't',
+              columns: [t, SmithRock],
+              type: 'spline',
             },
-            y: {
-              label: {
-                text: '# of Yearly Vists',
-                position: 'outer-middle'
-              }
-            },
-          },
-          point: {
-            r: 0,
-            focus: {
-              expand: {
-                r: 2
-              }
-            }
-          },
-          zoom: {
-            // rescale: true,+
-            enabled: true,
-            type: "scroll",
-            onzoom: function(d) {
-              chart2.zoom(chart.zoom());
-              // step();
-            }
-          },
-          stanford: {
-            scaleMin: 1,
-            scaleMax: 10000,
-            scaleFormat: 'pow10',
-            padding: {
-              top: 15,
-              right: 0,
-              bottom: 0,
-              left: 0
-            }
-
-          },
-        });
-
-        var chart2 = c3.generate({
-          bindto: "#chart2",
-          title: {
-            text: 'Regional Visitation in the Mountains'
-          },
-          data: {
-            x: 't',
-            columns: [t, Booth, Prineville, LakeOwyhee, HatRock, Ochoco, FortRock, JosephStewart, SmithRock, Tumalo, GooseLake, WhiteRiverFalls, PilotButte, RedBridge, Sumpter, ClydeHolliday, Minam, PeterSkene, BattleMountain, Lapine,
-              ClineFalls, DeshutesRiver, Collier, ValleyofRogue, EmigrantSprings
-            ],
-            type: 'spline',
-          },
-          axis: {
-            x: {
-              type: 'timeseries',
-              tick: {
-                format: '%Y'
-              }
-            },
-            y: {
-              tick: {
-                format: ''
+            subchart: {
+              show: true,
+              size: {
+                height: 15
               },
-              label: {
-                text: '# of Visits',
-                position: 'outer-middle'
+              onbrush: function(d) {
+                chart2.zoom(chart.zoom());
               }
             },
-          },
-          point: {
-            r: 0,
-            focus: {
-              expand: {
-                r: 2
-              }
-            }
-          },
-          zoom: {
-            enabled: {
-              type: "drag"
+            axis: {
+              x: {
+                type: 'timeseries',
+                tick: {
+                  format: '%Y'
+                }
+              },
+              y: {
+                label: {
+                  text: '# of Yearly Vists',
+                  position: 'outer-middle'
+                }
+              },
             },
-            onzoomend: function(d) {
-              chart.zoom(chart2.zoom());
-            }
-          },
-          tooltip: {
-            linked: true
-          },
+            point: {
+              r: 0,
+              focus: {
+                expand: {
+                  r: 2
+                }
+              }
+            },
+            zoom: {
+              // rescale: true,+
+              enabled: true,
+              type: "scroll",
+              onzoom: function(d) {
+                chart2.zoom(chart.zoom());
+                // step();
+              }
+            },
+            stanford: {
+              scaleMin: 1,
+              scaleMax: 10000,
+              scaleFormat: 'pow10',
+              padding: {
+                top: 15,
+                right: 0,
+                bottom: 0,
+                left: 0
+              }
+
+            },
+          });
+
+          var chart2 = c3.generate({
+            bindto: "#chart2",
+            title: {
+              text: 'Regional Visitation in the Mountains'
+            },
+            data: {
+              x: 't',
+              columns: [t, Booth, Prineville, LakeOwyhee, HatRock, Ochoco, FortRock, JosephStewart, SmithRock, Tumalo, GooseLake, WhiteRiverFalls, PilotButte, RedBridge, Sumpter, ClydeHolliday, Minam, PeterSkene, BattleMountain, Lapine,
+                ClineFalls, DeshutesRiver, Collier, ValleyofRogue, EmigrantSprings
+              ],
+              type: 'spline',
+            },
+            axis: {
+              x: {
+                type: 'timeseries',
+                tick: {
+                  format: '%Y'
+                }
+              },
+              y: {
+                tick: {
+                  format: ''
+                },
+                label: {
+                  text: '# of Visits',
+                  position: 'outer-middle'
+                }
+              },
+            },
+            point: {
+              r: 0,
+              focus: {
+                expand: {
+                  r: 2
+                }
+              }
+            },
+            zoom: {
+              enabled: {
+                type: "drag"
+              },
+              onzoomend: function(d) {
+                chart.zoom(chart2.zoom());
+              }
+            },
+            tooltip: {
+              linked: true
+            },
+          });
+
         });
 
-      });
-        chart.resize({
-          height: 250,
-          width: 500
+      } else if (crtDiv.attr("id") === "myvalley") {
+        // Checks if the map container size changed and updates the map if so
+        Promise.all([
+          d3.csv('assets/valley.csv')
+        ]).then(function(data) {
+          var t = ["t"];
+          var BanksVernonia = ["BanksVernonia"];
+          var BaldPeaks = ["BaldPeaks"];
+          var NorthSantiam = ["NorthSantiam"];
+          var Mayer = ["Mayer"];
+          var BridalVeilFalls = ["BridalVeilFalls"];
+          var Maples = ["Maples"];
+          var Champoeg = ["Champoeg"];
+          var ElijahBristow = ["ElijahBristow"];
+          var PortlandWomens = ["PortlandWomens"];
+          var Benson = ["Benson"];
+          var Tyron = ["Tyron"];
+          var Molalla = ["Molalla"];
+          var Dabney = ["Dabney"];
+          var RoosterRock = ["RoosterRock"];
+          var DaltonPoint = ["DaltonPoint"];
+          var HistoricalColumba = ["HistoricalColumba"];
+          var MiloMciver = ["MiloMciver"];
+          var Silverfalls = ["Silverfalls"];
+          var Viento = ["Viento"];
+          var GuyWTalbot = ["GuyWTalbot"];
+          var StarvationCreek = ["StarvationCreek"];
+          var LewisandClark = ["LewisandClark"];
+
+
+
+
+          data[0].forEach(function(d) {
+            t.push(new Date(d["t"]));
+            BanksVernonia.push(+d["BanksVernonia"]);
+            BaldPeaks.push(+d["BaldPeaks"]);
+            NorthSantiam.push(+d["NorthSantiam"]);
+            Mayer.push(+d["Mayer"]);
+            BridalVeilFalls.push(+d["BridalVeilFalls"]);
+            Maples.push(+d["Maples"]);
+            Champoeg.push(+d["Champoeg"]);
+            ElijahBristow.push(+d["ElijahBristow"]);
+            PortlandWomens.push(+d["PortlandWomens"]);
+            Benson.push(+d["Benson"]);
+            Tyron.push(+d["Tyron"]);
+            Molalla.push(+d["Molalla"]);
+            Dabney.push(+d["Dabney"]);
+            RoosterRock.push(+d["RoosterRock"]);
+            DaltonPoint.push(+d["DaltonPoint"]);
+            HistoricalColumba.push(+d["HistoricalColumba"]);
+            MiloMciver.push(+d["MiloMciver"]);
+            Silverfalls.push(+d["Silverfalls"]);
+            Viento.push(+d["Viento"]);
+            GuyWTalbot.push(+d["GuyWTalbot"]);
+            StarvationCreek.push(+d["StarvationCreek"]);
+            LewisandClark.push(+d["LewisandClark"]);
+
+
+          });
+
+          var chartvalley = c3.generate({
+            bindto: "#chartvalley",
+            title: {
+              text: 'Visitation to Silver Falls State Park'
+            },
+            data: {
+              x: 't',
+              columns: [t, Silverfalls],
+              type: 'spline',
+            },
+            subchart: {
+              show: true,
+              size: {
+                height: 15
+              },
+              onbrush: function(d) {
+                chart2valley.zoom(chartvalley.zoom());
+              }
+            },
+            axis: {
+              x: {
+                type: 'timeseries',
+                tick: {
+                  format: '%Y'
+                }
+              },
+              y: {
+                label: {
+                  text: '# of Yearly Vists',
+                  position: 'outer-middle'
+                }
+              },
+            },
+            point: {
+              r: 0,
+              focus: {
+                expand: {
+                  r: 2
+                }
+              }
+            },
+            zoom: {
+              // rescale: true,+
+              enabled: true,
+              type: "scroll",
+              onzoom: function(d) {
+                chart2valley.zoom(chartvalley.zoom());
+                // step();
+              }
+            },
+            stanford: {
+              scaleMin: 1,
+              scaleMax: 10000,
+              scaleFormat: 'pow10',
+              padding: {
+                top: 15,
+                right: 0,
+                bottom: 0,
+                left: 0
+              }
+
+            },
+          });
+
+          var chart2valley = c3.generate({
+            bindto: "#chart2valley",
+            title: {
+              text: 'Regional Visitation in the Valley'
+            },
+            data: {
+              x: 't',
+              columns: [t, BanksVernonia,BaldPeaks,NorthSantiam,Mayer,BridalVeilFalls,Maples,Champoeg,ElijahBristow,PortlandWomens,Benson,Tyron,Molalla,Dabney,RoosterRock,DaltonPoint,HistoricalColumba,MiloMciver,Silverfalls,Viento,GuyWTalbot,StarvationCreek,LewisandClark
+              ],
+              type: 'spline',
+            },
+            axis: {
+              x: {
+                type: 'timeseries',
+                tick: {
+                  format: '%Y'
+                }
+              },
+              y: {
+                tick: {
+                  format: ''
+                },
+                label: {
+                  text: '# of Visits',
+                  position: 'outer-middle'
+                }
+              },
+            },
+            point: {
+              r: 0,
+              focus: {
+                expand: {
+                  r: 2
+                }
+              }
+            },
+            zoom: {
+              enabled: {
+                type: "drag"
+              },
+              onzoomend: function(d) {
+                chartvalley.zoom(chart2valley.zoom());
+              }
+            },
+            tooltip: {
+              linked: true
+            },
+          });
+
         });
-        chart2.resize({
-          height: 250,
-          width: 500
+
+      } else if (crtDiv.attr("id") === "mycoast") {
+        // Checks if the map container size changed and updates the map if so
+
+        Promise.all([
+          d3.csv('assets/coast.csv')
+        ]).then(function(data) {
+          var t = ["t"];
+          var NahalemBay = ["NahalemBay"];
+          var Umpqua = ["Umpqua"];
+          var WilliamTugman = ["WilliamTugman"];
+          var Washburne = ["Washburne"];
+          var SaddleMountain = ["SaddleMountain"];
+          var SunsetBay = ["SunsetBay"];
+          var SmeltSand = ["SmeltSand"];
+          var CapeSebastian = ["CapeSebastian"];
+          var PistolRiver = ["PistolRiver"];
+          var Tolovana = ["Tolovana"];
+          var OswaldWest = ["OswaldWest"];
+          var BeverlyBeach = ["BeverlyBeach"];
+          var Neskowin = ["Neskowin"];
+          var HarrisBeach = ["HarrisBeach"];
+          var FortStevens = ["FortStevens"];
+          var CapeMeares = ["CapeMeares"];
+          var FogartyCreek = ["FogartyCreek"];
+          var HectaHead = ["HectaHead"];
+          var SouthBeach = ["SouthBeach"];
+          var GeiselMonument = ["GeiselMonument"];
+          var Bullards = ["Bullards"];
+          var Yachates = ["Yachates"];
+
+
+
+
+          data[0].forEach(function(d) {
+            t.push(new Date(d["t"]));
+            NahalemBay.push(+d["NahalemBay"]);
+            Umpqua.push(+d["Umpqua"]);
+            WilliamTugman.push(+d["WilliamTugman"]);
+            Washburne.push(+d["Washburne"]);
+            SaddleMountain.push(+d["SaddleMountain"]);
+            SunsetBay.push(+d["SunsetBay"]);
+            SmeltSand.push(+d["SmeltSand"]);
+            CapeSebastian.push(+d["CapeSebastian"]);
+            PistolRiver.push(+d["PistolRiver"]);
+            Tolovana.push(+d["Tolovana"]);
+            OswaldWest.push(+d["OswaldWest"]);
+            BeverlyBeach.push(+d["BeverlyBeach"]);
+            Neskowin.push(+d["Neskowin"]);
+            HarrisBeach.push(+d["HarrisBeach"]);
+            FortStevens.push(+d["FortStevens"]);
+            CapeMeares.push(+d["CapeMeares"]);
+            FogartyCreek.push(+d["FogartyCreek"]);
+            HectaHead.push(+d["HectaHead"]);
+            SouthBeach.push(+d["SouthBeach"]);
+            GeiselMonument.push(+d["GeiselMonument"]);
+            Bullards.push(+d["Bullards"]);
+            Yachates.push(+d["Yachates"]);
+
+
+          });
+
+          var chartcoast = c3.generate({
+            bindto: "#chartcoast",
+            title: {
+              text: 'Visitation to Beverly Beach'
+            },
+            data: {
+              x: 't',
+              columns: [t, BeverlyBeach],
+              type: 'spline',
+            },
+            subchart: {
+              show: true,
+              size: {
+                height: 15
+              },
+              onbrush: function(d) {
+                chart2coast.zoom(chartcoast.zoom());
+              }
+            },
+            axis: {
+              x: {
+                type: 'timeseries',
+                tick: {
+                  format: '%Y'
+                }
+              },
+              y: {
+                label: {
+                  text: '# of Yearly Vists',
+                  position: 'outer-middle'
+                }
+              },
+            },
+            point: {
+              r: 0,
+              focus: {
+                expand: {
+                  r: 2
+                }
+              }
+            },
+            zoom: {
+              // rescale: true,+
+              enabled: true,
+              type: "scroll",
+              onzoom: function(d) {
+                chart2coast.zoom(chartcoast.zoom());
+                // step();
+              }
+            },
+            stanford: {
+              scaleMin: 1,
+              scaleMax: 10000,
+              scaleFormat: 'pow10',
+              padding: {
+                top: 15,
+                right: 0,
+                bottom: 0,
+                left: 0
+              }
+
+            },
+          });
+
+          var chart2coast = c3.generate({
+            bindto: "#chart2coast",
+            title: {
+              text: 'Regional Visitation in the Coast'
+            },
+            data: {
+              x: 't',
+              columns: [t, NahalemBay,Umpqua,WilliamTugman,Washburne,SaddleMountain,SunsetBay,SmeltSand,CapeSebastian,PistolRiver,Tolovana,OswaldWest,BeverlyBeach,Neskowin,HarrisBeach,FortStevens,CapeMeares,FogartyCreek,HectaHead,SouthBeach,GeiselMonument,Bullards,Yachates
+              ],
+              type: 'spline',
+            },
+            axis: {
+              x: {
+                type: 'timeseries',
+                tick: {
+                  format: '%Y'
+                }
+              },
+              y: {
+                tick: {
+                  format: ''
+                },
+                label: {
+                  text: '# of Visits',
+                  position: 'outer-middle'
+                }
+              },
+            },
+            point: {
+              r: 0,
+              focus: {
+                expand: {
+                  r: 2
+                }
+              }
+            },
+            zoom: {
+              enabled: {
+                type: "drag"
+              },
+              onzoomend: function(d) {
+                chartcoast.zoom(chart2coast.zoom());
+              }
+            },
+            tooltip: {
+              linked: true
+            },
+          });
+
         });
+
       }
 
 
