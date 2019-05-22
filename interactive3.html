@@ -14,6 +14,7 @@
   <link rel="stylesheet" type="text/css" media="all" href="css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
   <style>
     #info {
@@ -37,6 +38,12 @@
       background: rgba(255, 255, 255, 0.8);
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
       border-radius: 5px;
+    }
+    h4 {
+      font-family: 'Varela Round';
+      margin: 0 0 5px;
+      color: #065581;
+      font-size: 14px;
     }
 
     .info h4 {
@@ -96,7 +103,7 @@
             <ol>
               <li>
                 <a href="#slide=4" title="Go to Learning to see">
-                  <span class="chapter">Vistation in the Mountains</span>
+                  <span class="chapter">The Mountains</span>
                   <span class="toc-page">03</span>
                 </a>
               </li>
@@ -119,7 +126,7 @@
       </video>
       <div class="wrap aligncenter">
         <h1>
-          <strong>Visitation Trends in the Mountains</strong>
+          <strong>The Mountains</strong>
         </h1>
       </div>
     </section>
@@ -128,7 +135,7 @@
       <div id="chart"></div>
       <div id="chart2"></div>
       <div id="info">
-        <h3>Mountain Visits</h4>
+        <h3>Timeseries</h4>
           <p> Chart 1 : Smith Rock <br>
             Chart 2 : Click on various parks to deselect or select to view trends</p>
       </div>
@@ -166,6 +173,37 @@
         </h1>
       </div>
     </section>
+
+    <section class="fullscreen">
+      <div class="card-40">
+      <figure id="mycoast"></figure>
+      <div class="flex-content" style="background: white">
+        <h5>Coastal Parks : Top 3 most popular Coastal parks with Hashtag links</h5>
+        <h5> 1. Yaquina Bay State Park : Visitation - 1,691,972</h5>
+        <p> There are a few different hashtags use, #yaquinabay, #yaquinabaystatepark, etc. The park has access to the beach and north jetty of Newport, but is part of a scenic road route. Much of the traffic is due to the nature of being able to
+          drive through the park.
+          <a href="https://instawidget.net/v/tag/yaquinabay" id="link-0bb9a942f2bcea98214f86999cc2a0999ec03644ef6d49c9d703e51b70139e33">#yaquinabay</a>
+          <script src="https://instawidget.net/js/instawidget.js?u=0bb9a942f2bcea98214f86999cc2a0999ec03644ef6d49c9d703e51b70139e33&width=300px"></script>
+        </p>
+
+        <h5> 2. Harris Beach State Park : Visitation - 1,637,444</h5>
+        <p> The park boasts the largest island off the Oregon coast. Located close to the border of California and Oregon, it has an active hashtag!</p>
+        <p>
+          <!-- InstaWidget -->
+          <a href="https://instawidget.net/v/tag/harrisbeach" id="link-53b16f0174d0d8ec0ffa9c44fc53ebcb5a674cec7003cb7b240e47376f9bd3ca">#harrisbeach</a>
+          <script src="https://instawidget.net/js/instawidget.js?u=53b16f0174d0d8ec0ffa9c44fc53ebcb5a674cec7003cb7b240e47376f9bd3ca&width=300px"></script>
+          <h5> 3. Sunset Bay State Park</h5>
+          <h5>Visitation : 1,387,544</h5>
+          <p> Not to be confused with other #sunsetbay, Sunset Bay Park has seen dramatic growth. The locational tag is more accurate populartiy on social media. </p>
+          <p>
+            <a href="https://instawidget.net/v/tag/sunsetbaystatepark" id="link-0f0fcc9a13ef02618b09d572af3b4ef9dc8893105f5a23e190518900ff4689f9">#sunsetbaystatepark</a>
+            <script src="https://instawidget.net/js/instawidget.js?u=0f0fcc9a13ef02618b09d572af3b4ef9dc8893105f5a23e190518900ff4689f9&width=300px"></script>
+          </p>
+
+
+      </div>
+      </div>
+      </section>
     <section class="bg-apple slide-top">
       <div id="mycoast"></div>
       <div class="wrap">
@@ -232,13 +270,13 @@
         } else if (feature.properties.Swimming == "1") {
           return L.marker(latlng, {
             icon: L.divIcon({
-              className: 'img/campgroun-solid.svg'
+              className: 'fas fa-swim marker-icon-6'
             })
           });
         } else {
           return L.marker(latlng, {
             icon: L.divIcon({
-              className: 'img/campgroun-solid.svg'
+              className: 'fas fa-tree marker-icon-8'
             })
           });
         }
@@ -289,16 +327,73 @@
 
 
 
-
-
-
-    var myvalley = L.map("myvalley", {
+    var coast = L.map("mycoast", {
       zoomControl: false,
       scrollWheelZoom: false
-    }).setView([44.3682, -121.1406], 7);
+    }).setView([42.5, -123.5], 7);
     L.tileLayer('https://api.mapbox.com/styles/v1/loweas/cjv4ijme33cv51fo88tiywo86/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibG93ZWFzIiwiYSI6ImNqczlhMzJqMjE1dDM0NG12dHBxam1lZjIifQ.Ox8goYypCr_cJCoDPgHTsQ', {
       maxZoom: 19
-    }).addTo(myvalley);
+    }).addTo(coast);
+
+    var parks_coast = L.geoJson.ajax('assets/timeseries.geojson', {
+      pointToLayer: function(feature, latlng) {
+        if (feature.properties.Location == "Yaquina Bay State Recreation Site") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-umbrella-beach fa-2x"></i>',
+              className: 'marker-icon-5'
+            })
+          });
+        } else if (feature.properties.Location == "Harris Beach State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-campground fa-2x"></i>',
+              className: 'marker-icon-2'
+            })
+          });
+        } else if (feature.properties.Location == "Sunset Bay State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-umbrella-beach fa-2x"></i>',
+              className: ' marker-icon-5'
+            })
+          });
+        } else if (feature.properties.Location == "Oswald West State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-hiking fa-2x"></i>',
+              className: 'marker-icon-1'
+            })
+          });
+        } else if (feature.properties.Location == "Fort Stevens State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-campground fa-2x"></i>',
+              className: 'marker-icon-2'
+            })
+          });
+        } else if (feature.properties.Location == "D River State Recreation Site") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-umbrella-beach fa-2x"></i>',
+              className: 'marker-icon-5'
+            })
+          });
+        }
+      },
+      onEachFeature: function(feature, layer) {
+        layer.bindTooltip(feature.properties.Location + "</br>" + feature.properties.hashtag, {
+          sticky: true,
+          className: "feature-tooltip"
+        });
+      }
+    }).addTo(coast);
+
+
+
+
+
+
 
 
     // bind a function to the slide change event of web slides
