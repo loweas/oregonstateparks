@@ -39,6 +39,27 @@
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
       border-radius: 5px;
     }
+    #info1 {
+      position: fixed;
+      z-index: 1000;
+      bottom: 1px;
+      right: 1px;
+      width: 300px;
+      color: white;
+      padding: 6px 8px;
+      background: black;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      font-family: 'Varela Round';
+    }
+
+    .info1 {
+      padding: 6px 8px;
+      font: 12px/14px 'Varela Round';
+      background: white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
     h4 {
       font-family: 'Varela Round';
       margin: 0 0 5px;
@@ -102,17 +123,23 @@
           <div class="toc">
             <ol>
               <li>
-                <a href="#slide=4" title="Go to Learning to see">
-                  <span class="chapter">The Mountains</span>
+                <a href="#slide=3" title="Go to Learning to see">
+                  <span class="chapter">Heat Map</span>
                   <span class="toc-page">03</span>
                 </a>
               </li>
-              <li><a href="#slide=5" title="Go to What is Design?"><span class="chapter">Visitation in the Valley</span>
-                  <span class="toc-page">05</span></a>
+              <li>
+                <a href="#slide=5" title="Go to Learning to see">
+                  <span class="chapter">Coastal State Parks</span>
+                  <span class="toc-page">05</span>
+                </a>
+              </li>
+              <li><a href="#slide=7" title="Go to What is Design?"><span class="chapter">Valley State Parks</span>
+                  <span class="toc-page">07</span></a>
               </li>
               <li>
-                <a href="#slide=6" title="Go to What is Beauty?"><span class="chapter">Visitation in the Coast</span>
-                  <span class="toc-page">06</span></a>
+                <a href="#slide=9" title="Go to What is Beauty?"><span class="chapter">Mountain State Parks</span>
+                  <span class="toc-page">09</span></a>
               </li>
             </ol>
           </div>
@@ -122,31 +149,52 @@
     </section>
     <section class="bg-black">
       <video class="background-video" autoplay muted loop>
-        <source src="assets/smithrock.mp4" type="video/mp4">
+        <source src="assets/output.mp4" type="video/mp4">
+      </video>
+      <div class="wrap aligncenter">
+        <div id="info1">
+          <h3>Timeseries Heat Map</h4>
+            <p> The heat map highlights areas that have experienced positive increase in yearly visits when comparing it to previous year visitation levels.  </p>
+            <p> This also highlights how the coastal parks experience more visitation overall. </p>
+        </div>
+
+      </div>
+    </section>
+    <section class="bg-black">
+      <video class="background-video" autoplay muted loop>
+        <source src="assets/coast.mp4" type="video/mp4">
       </video>
       <div class="wrap aligncenter">
         <h1>
-          <strong>The Mountains</strong>
+          <strong>Coastal State Parks</strong>
         </h1>
       </div>
     </section>
+
+      </div>
+      </div>
+      </section>
     <section class="bg-apple slide-top">
-      <div id="mymountain"></div>
-      <div id="chart"></div>
-      <div id="chart2"></div>
+      <div id="mycoast"></div>
+      <div class="wrap">
+        <div id="chartcoast"></div>
+        <div id="chart2coast"></div>
+      </div>
       <div id="info">
-        <h3>Timeseries</h4>
-          <p> Chart 1 : Smith Rock <br>
+        <h3>Coastal Visits</h4>
+          <p> Chart 1 : Beverly Beach. <br>
             Chart 2 : Click on various parks to deselect or select to view trends</p>
+
       </div>
     </section>
+
     <section class="bg-black">
       <video class="background-video" autoplay muted loop>
         <source src="assets/valley.mp4" type="video/mp4">
       </video>
       <div class="wrap aligncenter">
         <h1>
-          <strong>Yearly Visitation Trends at the Valley</strong>
+          <strong>Valley State Parks</strong>
         </h1>
       </div>
     </section>
@@ -163,58 +211,25 @@
 
       </div>
     </section>
+
     <section class="bg-black">
       <video class="background-video" autoplay muted loop>
-        <source src="assets/coast.mp4" type="video/mp4">
+        <source src="assets/smithrock.mp4" type="video/mp4">
       </video>
       <div class="wrap aligncenter">
         <h1>
-          <strong>Yearly Visitation Trends at the Coast</strong>
+          <strong>Mountain State Parks</strong>
         </h1>
       </div>
     </section>
-
-    <section class="fullscreen">
-      <div class="card-40">
-      <figure id="mycoast"></figure>
-      <div class="flex-content" style="background: white">
-        <h5>Coastal Parks : Top 3 most popular Coastal parks with Hashtag links</h5>
-        <h5> 1. Yaquina Bay State Park : Visitation - 1,691,972</h5>
-        <p> There are a few different hashtags use, #yaquinabay, #yaquinabaystatepark, etc. The park has access to the beach and north jetty of Newport, but is part of a scenic road route. Much of the traffic is due to the nature of being able to
-          drive through the park.
-          <a href="https://instawidget.net/v/tag/yaquinabay" id="link-0bb9a942f2bcea98214f86999cc2a0999ec03644ef6d49c9d703e51b70139e33">#yaquinabay</a>
-          <script src="https://instawidget.net/js/instawidget.js?u=0bb9a942f2bcea98214f86999cc2a0999ec03644ef6d49c9d703e51b70139e33&width=300px"></script>
-        </p>
-
-        <h5> 2. Harris Beach State Park : Visitation - 1,637,444</h5>
-        <p> The park boasts the largest island off the Oregon coast. Located close to the border of California and Oregon, it has an active hashtag!</p>
-        <p>
-          <!-- InstaWidget -->
-          <a href="https://instawidget.net/v/tag/harrisbeach" id="link-53b16f0174d0d8ec0ffa9c44fc53ebcb5a674cec7003cb7b240e47376f9bd3ca">#harrisbeach</a>
-          <script src="https://instawidget.net/js/instawidget.js?u=53b16f0174d0d8ec0ffa9c44fc53ebcb5a674cec7003cb7b240e47376f9bd3ca&width=300px"></script>
-          <h5> 3. Sunset Bay State Park</h5>
-          <h5>Visitation : 1,387,544</h5>
-          <p> Not to be confused with other #sunsetbay, Sunset Bay Park has seen dramatic growth. The locational tag is more accurate populartiy on social media. </p>
-          <p>
-            <a href="https://instawidget.net/v/tag/sunsetbaystatepark" id="link-0f0fcc9a13ef02618b09d572af3b4ef9dc8893105f5a23e190518900ff4689f9">#sunsetbaystatepark</a>
-            <script src="https://instawidget.net/js/instawidget.js?u=0f0fcc9a13ef02618b09d572af3b4ef9dc8893105f5a23e190518900ff4689f9&width=300px"></script>
-          </p>
-
-
-      </div>
-      </div>
-      </section>
     <section class="bg-apple slide-top">
-      <div id="mycoast"></div>
-      <div class="wrap">
-        <div id="chartcoast"></div>
-        <div id="chart2coast"></div>
-      </div>
+      <div id="mymountain"></div>
+      <div id="chart"></div>
+      <div id="chart2"></div>
       <div id="info">
-        <h3>Coastal Visits</h4>
-          <p> Chart 1 : Beverly Beach. <br>
+        <h3>Timeseries</h4>
+          <p> Chart 1 : Smith Rock <br>
             Chart 2 : Click on various parks to deselect or select to view trends</p>
-
       </div>
     </section>
   </article>
@@ -388,6 +403,8 @@
         });
       }
     }).addTo(coast);
+
+
 
 
 
