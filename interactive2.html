@@ -15,7 +15,8 @@
   <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-
+    	<link rel="stylesheet" href="https://dc-js.github.io/dc.js/css/dc.min.css">
+    <link rel="stylesheet" href="css/jqcloud.css">
   <style>
     #info {
       position: fixed;
@@ -97,7 +98,11 @@
   <script src="https://unpkg.com/d3@5/dist/d3.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.js"></script>
+<script src="https://dc-js.github.io/dc.js/js/crossfilter.js"></script>
+<script src="https://dc-js.github.io/dc.js/js/dc.js"></script>
   <script type="text/javascript" src="js/chroma.js"></script>
+    <script src="js/jqcloud.js"></script>
 
 
 </head>
@@ -115,8 +120,9 @@
       </div>
     </section>
     <section class="fullscreen">
+      <div id="mymap2"></div>
       <div class="card-60">
-        <figure id="mymap2"></figure>
+
         <div class="flex-content" style="background: white">
           <h3>Table of Contents</h3>
           <hr>
@@ -232,6 +238,29 @@
             Chart 2 : Click on various parks to deselect or select to view trends</p>
       </div>
     </section>
+    <section class="fullscreen">
+    <div id="mycloud">
+  <div class="card-50 bg-white">
+    <figure id="cloud"></figure>
+    <div class="flex-content">
+      <span class="background" style="background-image:url('img/smith.JPG')"></span>
+      <figure id="chartword"></figure>
+      <footer class="bg-trans-dark">
+      <div class="wrap">
+        <p>
+          <span class="alignleft"> <a href="#" title="Instagram">
+          <img class="whitelogo" src="img/instagram.svg" alt="Instagram">
+          </a></span>
+        <br>
+        <h5>Select a year in bar graph : </h5>
+        <h6>Hashtags weighted off of their frequency in the year. <br> Y-axis Number of posts in the given year. <br> X-axis: Instagram Post within the Year <br> A sub-subset of the top 5% </h6><br><br>
+        </p>
+      </div>
+    </footer>
+    </div>
+  </div>
+</div>
+</section>
   </article>
   <script>
     // make the web slide object.
@@ -955,6 +984,128 @@
 
 
     });
+
+
+    function wordFrequency(txt, freq) {
+
+      var wordArray = txt.split(/[ .?!,*'"”“]/);
+      //var wordArray = txt.split(" ");
+      var newArray = [],
+        filteredArray = [],
+        wordObj;
+      wordArray.forEach(function(word) {
+        wordObj = newArray.filter(function(w) {
+          return w.text === word.toLowerCase();
+        });
+        if (wordObj.length) {
+          wordObj[0].weight += 1;
+        } else {
+          newArray.push({
+            text: word,
+            weight: 1
+          });
+        }
+      });
+
+      var words = ["[]", ",", "[", "]", "", "][", "][][", "][][][", "][][][]["];
+
+      newArray.filter(function(word) {
+        if (!words.includes(word.text) && word.weight > freq) {
+          filteredArray.push(word);
+        }
+      });
+
+      return filteredArray;
+
+    }
+
+
+    colorscheme = chroma.scale('Dark2').colors(10).reverse();
+
+    ws.el.addEventListener('ws:slide-change', function() {
+
+      crtDiv = $(".current div");
+    //Map 1 'flyto' animation location and function
+    if (crtDiv.attr("id") === "mymap2") {
+      map2.invalidateSize();
+    } else if (crtDiv.attr("id") === "mycloud") {
+
+        d3.csv('assets/srl95.csv').then(function(data) {
+          var filter = crossfilter(data);
+
+          var all = filter.groupAll();
+
+          var everything = filter.dimension(function(d) {
+            return d
+          });
+
+
+          var dateDimension = filter.dimension(function(d) {
+
+            return d.Year;
+          });
+          var dateDimensionGroup = dateDimension.group();
+
+
+          var dateChart = dc.barChart('#chartword');
+          dateChart
+            .dimension(dateDimension)
+            .group(dateDimensionGroup)
+            .elasticY(true)
+            .x(d3.scaleOrdinal()) //
+            .xUnits(dc.units.ordinal)
+            .yAxis()
+            .ticks(3); //timeDate object that has the format for the date
+
+          dc.renderAll();
+
+          var texts = "";
+          everything.top(Infinity).filter(function(d) {
+            return texts += (" " + d.tags);
+          });
+
+          var frequencyList = null;
+          frequencyList = wordFrequency(texts, 6);
+
+          $("#cloud").jQCloud(frequencyList, {
+            colors: colorscheme,
+            autoResize: true,
+            delay: 5,
+            shape: 'rectangular',
+            fontSize: {
+              from: 0.1,
+              to: 0.02
+            }
+          });
+
+
+
+          dateChart.on('filtered', function(chartword, filter) {
+
+            var texts = "";
+            everything.top(Infinity).filter(function(d) {
+              return texts += (" " + d.tags);
+            });
+
+            frequencyList = wordFrequency(texts, 4);
+            $('#cloud').jQCloud('destroy');
+            $("#cloud").jQCloud(frequencyList, {
+              colors: colorscheme,
+              autoResize: true,
+              // steps: 20,
+              delay: 5,
+              shape: 'rectangular',
+              fontSize: {
+                from: 0.1,
+                to: 0.02
+              }
+            });
+            dc.renderAll();
+          });
+        });
+      }
+    });
+
   </script>
 </body>
 
