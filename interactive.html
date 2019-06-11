@@ -1,355 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>State Parks</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>State Parks</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--add required stylesheets-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!--leaflet css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
-  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+  <!--add required stylesheets-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.0/leaflet.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.0/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!--add favicon for the web page-->
-    <link rel="shortcut icon" href="img/download.ico" type="image/x-icon">
+  <!--add favicon for the web page-->
+  <link rel="shortcut icon" href="img/download.ico" type="image/x-icon">
 
-    <!--Icons-->
-    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+  <!--Icons-->
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="dist/storymap.2.4.css">
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" type="text/css" href="css/storymap.2.4.css">
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
-    <!--add required libraries-->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
-    <!--jquery-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-
-    <!--boostrap-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!--leaflet.ajax for asynchronously adding geojson data-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-
-    <!--story map plugin-->
-    <script src="dist/storymap.2.4.js"></script>
-
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
-
-    <style>
-    body { margin:0; padding:0; }
-    #map { position:absolute; top:0; bottom:0; width:100%; }
-
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
-    <!--jquery-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-
-    <!--boostrap-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!--leaflet.ajax for asynchronously adding geojson data-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-    <!--story map plugin-->
-    <script src="dist/storymap.2.4.js"></script>
-    <script type="text/javascript" src="js/chroma.js"></script>
+  <!--add required libraries-->
+  <script src="https://unpkg.com/leaflet@1.5.0/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.0/leaflet.js"></script>
+  <!--jquery-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+  <!--story map plugin-->
+  <script src="js/storymap.2.4.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
+  <!--jquery-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 
-  </head>
-  <style>
-  .social {
-      position:fixed;
-      cursor: pointer;
-      font-size:24px;
-      color:darkgray;
-      z-index:1003;
-      top: 1%;
-      left:2px;
-  }
-  .social2 {
-      position:fixed;
-      cursor: pointer;
-      font-size:24px;
-      color:darkgray;
-      z-index:1003;
-      top: 1%;
-      left:30px;
-  }
-  .social:hover {
-      color: darkblue;
-      text-decoration: none;
-  }
+  <!--boostrap-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!--leaflet.ajax for asynchronously adding geojson data-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+  <!--story map plugin-->
+  <script src="dist/storymap.2.4.js"></script>
+  <script type="text/javascript" src="js/chroma.js"></script>
 
 
-  * {
-    box-sizing: border-box;
-  }
 
-  body {
-    margin: 0;
-    font-family: "Varela Round";
-    font-size: 17px;
-  }
 
-  #myVideo {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-  }
+</head>
 
-  .content {
-    position: fixed;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    color: #f1f1f1;
-    width: 100%;
-    padding: 20px;
-  }
 
-  #myBtn {
-    width: 200px;
-    font-size: 18px;
-    padding: 10px;
-    border: none;
-    background: #000;
-    color: #fff;
-    cursor: pointer;
-  }
+<body>
 
-  #myBtn:hover {
-    background: #ddd;
-    color: black;
-  }
-  .info {
-      padding: 6px 8px;
-      font: 14px/16px Verdana, Geneva, sans-serif;
-      background: white;
-      background: rgba(255,255,255,0.8);
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      border-radius: 5px;
-  }
-  .info h4 {
-      font-family: Verdana, Geneva, sans-serif;
-      margin: 0 0 5px;
-      color: #065581;
-  }
-  .legend {
-      line-height: 18px;
-      color: #555;
-  }
-  .legend i {
-      width: 18px;
-      height: 18px;
-      float: left;
-      margin-right: 8px;
-      opacity: 0.7;
-  }
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Oregon State Parks and Social Media</a>
+      <button class="navbar-toggler navbar-toggler-Left" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="index.html#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="index.html#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="interactive.html">Interactive Map</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="WorkingResults.html">Peliminary Results</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="cv.html">CV</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="index.html#contact">Contact</a>
+          </li>
 
-  </style>
-  <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">Oregon State Parks and Social Media</a>
-        <button class="navbar-toggler navbar-toggler-Left" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menu
-          <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="index.html#about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="index.html#projects">Projects</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="interactive.html">Interactive Map</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="WorkingResults.html">Peliminary Results</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="cv.html">CV</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="index.html#contact">Contact</a>
-            </li>
-
-          </ul>
-        </div>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
 
 
-<div id="storymap" class="container-fluid" style="margin-top:10px">>
+  <div id="storymap" class="container-fluid" style="margin-top:10px">>
 
     <div class="row">
-        <div class="col-sm-4 col-sm-4 storymap-story">
-            <section data-scene="scene1" >
-              <h2>Oregon State Parks</h2>
-              <h4>Park Artivities</h4>
-                <p>There are 195 state parks in Oreogn with varies activities avaiable and main attractions.</p>
-                  <p> <i class="fas fa-hiking marker-icon-1"></i> Hiking </p>
-              <p>  <i class="fas fa-campground marker-icon-3"></i>  Campground </p>
-                <p><i class="fas fa-umbrella-beach marker-icon-5"></i>Beach Access</p>
-                <p><i class="fas fa-fish marker-icon-4"></i>Fishing </p>
-              <p>  <i class="fas fa-tree marker-icon-8"></i>Park </p>
+      <div class="col-sm-4 col-sm-4 storymap-story">
+        <section data-scene="scene1">
+          <h2>Oregon State Parks</h2>
+          <h4>Park Artivities</h4>
+          <p>There are 195 state parks in Oreogn with varies activities avaiable and main attractions.</p>
+          <p> <i class="fas fa-hiking marker-icon-1"></i> Hiking </p>
+          <p> <i class="fas fa-campground marker-icon-3"></i> Campground </p>
+          <p><i class="fas fa-umbrella-beach marker-icon-5"></i>Beach Access</p>
+          <p><i class="fas fa-fish marker-icon-4"></i>Fishing </p>
+          <p> <i class="fas fa-tree marker-icon-8"></i>Park </p>
 
-                <h4>Regions</h4>
-                  <p>The parks can be grouped into 3 regions, the Valley, Coastal and Mountain(Eastern Oregon).</p>
-                  <h4>Growth</h4>
-                    <p>Much of the resent growth has been experienced at the coastal parks.</p>
-                    <h4>Hover Over</h4>
-                    <p>Hover over each region to see how many parks are located within.</p>
-                    <p>Hover over each park to see park information and if it has a hashtag.</p>
+          <h4>Regions</h4>
+          <p>The parks can be grouped into 3 regions, the Valley, Coastal and Mountain(Eastern Oregon).</p>
+          <h4>Growth</h4>
+          <p>Much of the resent growth has been experienced at the coastal parks.</p>
+          <h4>Hover Over</h4>
+          <p>Hover over each region to see how many parks are located within.</p>
+          <p>Hover over each park to see park information and if it has a hashtag.</p>
 
 
-              </section>
-            <section data-scene="scene2"><h2>Coastal Parks</h2>
-              <h3>Top 5 most popular Coastal parks with Hashtag links</h3>
-              <h4> 1. Yaquina Bay State Park</h4>
-              <h5>Visitation : 1,691,972</h5>
-            <p> There are a few different hashtags use, #yaquinabay, #yaquinabaystatepark, etc. The park has access to the beach and north jetty of Newport, but is part of a scenic road route. Much of the traffic is due to the nature of being able to drive through the park.
+        </section>
+        <section data-scene="scene2">
+          <h2>Coastal Parks</h2>
+          <h3>Top 5 most popular Coastal parks with Hashtag links</h3>
+          <h4> 1. Yaquina Bay State Park</h4>
+          <h5>Visitation : 1,691,972</h5>
+          <p> There are a few different hashtags use, #yaquinabay, #yaquinabaystatepark, etc. The park has access to the beach and north jetty of Newport, but is part of a scenic road route. Much of the traffic is due to the nature of being able to
+            drive through the park.
             <a href="https://instawidget.net/v/tag/yaquinabay" id="link-0bb9a942f2bcea98214f86999cc2a0999ec03644ef6d49c9d703e51b70139e33">#yaquinabay</a>
-            <script src="https://instawidget.net/js/instawidget.js?u=0bb9a942f2bcea98214f86999cc2a0999ec03644ef6d49c9d703e51b70139e33&width=300px"></script></p>
+            <script src="https://instawidget.net/js/instawidget.js?u=0bb9a942f2bcea98214f86999cc2a0999ec03644ef6d49c9d703e51b70139e33&width=300px"></script>
+          </p>
 
-              <h4> 2.  Harris Beach State Park</h4>
-              <h5>Visitation : 1,637,444</h5>
-<p>  The park boasts the largest island off the Oregon coast. Located close to the border of California and Oregon, it has an active hashtag!</p>
-              <p><!-- InstaWidget -->
-<a href="https://instawidget.net/v/tag/harrisbeach" id="link-53b16f0174d0d8ec0ffa9c44fc53ebcb5a674cec7003cb7b240e47376f9bd3ca">#harrisbeach</a>
-<script src="https://instawidget.net/js/instawidget.js?u=53b16f0174d0d8ec0ffa9c44fc53ebcb5a674cec7003cb7b240e47376f9bd3ca&width=300px"></script>
-<h4> 3. Sunset Bay State Park</h4>
-<h5>Visitation : 1,387,544</h5>
-<p> Not to be confused with other #sunsetbay, Sunset Bay Park has seen dramatic growth. The locational tag is more accurate populartiy on social media. </p>
-<p>
-  <a href="https://instawidget.net/v/tag/sunsetbaystatepark" id="link-0f0fcc9a13ef02618b09d572af3b4ef9dc8893105f5a23e190518900ff4689f9">#sunsetbaystatepark</a>
-  <script src="https://instawidget.net/js/instawidget.js?u=0f0fcc9a13ef02618b09d572af3b4ef9dc8893105f5a23e190518900ff4689f9&width=300px"></script></p>
+          <h4> 2. Harris Beach State Park</h4>
+          <h5>Visitation : 1,637,444</h5>
+          <p> The park boasts the largest island off the Oregon coast. Located close to the border of California and Oregon, it has an active hashtag!</p>
+          <p>
+            <!-- InstaWidget -->
+            <a href="https://instawidget.net/v/tag/harrisbeach" id="link-53b16f0174d0d8ec0ffa9c44fc53ebcb5a674cec7003cb7b240e47376f9bd3ca">#harrisbeach</a>
+            <script src="https://instawidget.net/js/instawidget.js?u=53b16f0174d0d8ec0ffa9c44fc53ebcb5a674cec7003cb7b240e47376f9bd3ca&width=300px"></script>
+            <h4> 3. Sunset Bay State Park</h4>
+            <h5>Visitation : 1,387,544</h5>
+            <p> Not to be confused with other #sunsetbay, Sunset Bay Park has seen dramatic growth. The locational tag is more accurate populartiy on social media. </p>
+            <p>
+              <a href="https://instawidget.net/v/tag/sunsetbaystatepark" id="link-0f0fcc9a13ef02618b09d572af3b4ef9dc8893105f5a23e190518900ff4689f9">#sunsetbaystatepark</a>
+              <script src="https://instawidget.net/js/instawidget.js?u=0f0fcc9a13ef02618b09d572af3b4ef9dc8893105f5a23e190518900ff4689f9&width=300px"></script>
+            </p>
 
-  <h4>4. D River State Park</h4>
-  <h5>Visitation : 1,201,723</h5>
-  <p> Does not have a unique hashtag. It is a park in the heart of Lincoln City. Many Instagram users tend to use location when tagging the park and not a hashtag.</p>
+            <h4>4. D River State Park</h4>
+            <h5>Visitation : 1,201,723</h5>
+            <p> Does not have a unique hashtag. It is a park in the heart of Lincoln City. Many Instagram users tend to use location when tagging the park and not a hashtag.</p>
 
-  <p>  <!-- InstaWidget -->
-  <a href="https://instawidget.net/v/tag/driverstatepark" id="link-df52814abbc310b45187220e7edf9ad277c3d1da7b42e2efa4812176dd259bb4">#driverstatepark</a>
-  <script src="https://instawidget.net/js/instawidget.js?u=df52814abbc310b45187220e7edf9ad277c3d1da7b42e2efa4812176dd259bb4&width=300px"></script>
+            <p>
+              <!-- InstaWidget -->
+              <a href="https://instawidget.net/v/tag/driverstatepark" id="link-df52814abbc310b45187220e7edf9ad277c3d1da7b42e2efa4812176dd259bb4">#driverstatepark</a>
+              <script src="https://instawidget.net/js/instawidget.js?u=df52814abbc310b45187220e7edf9ad277c3d1da7b42e2efa4812176dd259bb4&width=300px"></script>
 
-<h4> 5. Oswald West State Park</h4>
-<h5>Visitation : 1,201,592</h5>
-<p> Stretching along four miles of coastline in dense, temperate rainforest. This park has an active hashtag and beautiful photos.</p>
-             <p><!-- InstaWidget -->
-<a href="https://instawidget.net/v/tag/oswaldweststatepark" id="link-b062f3f96ca910616db87a075c0638519c808d1ef62c8e87136a5e95e837cceb">#oswaldweststatepark</a>
-<script src="https://instawidget.net/js/instawidget.js?u=b062f3f96ca910616db87a075c0638519c808d1ef62c8e87136a5e95e837cceb&width=300px"></script></p>
-
-
-            </section>
-            <section data-scene="scene3"><h2>Valley Parks</h2>
-              <h3>Top 5 most popular valley parks with Hashtag links</h3>
-              <h4> 1. Silver Falls State Park</h4>
-              <h5>Visitation : 1,154,944</h5>
-              <p> An Oregon Jewel, with amazing waterfalls you can hike behind. This hashtag is extremely active.  </p>
-              <p> <!-- InstaWidget -->
-<a href="https://instawidget.net/v/tag/silverfalls" id="link-bafe0b6271d60971d89f2166989a11211ab3d40b4e10dafb6a62057ba745a1e8">#silverfalls</a>
-<script src="https://instawidget.net/js/instawidget.js?u=bafe0b6271d60971d89f2166989a11211ab3d40b4e10dafb6a62057ba745a1e8&width=300px"></script> </p>
-<h4> 2. Crown Point State Park Corridor</h4>
-<h5>Visitation : 584,832</h5>
-<p> Crown Point is famous for two things, the Vista House, and aerial photos of the windy corridor through the gorge. </p>
-<p><!-- InstaWidget -->
-<a href="https://instawidget.net/v/tag/vistahouse" id="link-8c66030d7267539f54f2d9815545d65e05f03e9ac699245dcf8ebf2c5bbb69dd">#vistahouse</a>
-<script src="https://instawidget.net/js/instawidget.js?u=8c66030d7267539f54f2d9815545d65e05f03e9ac699245dcf8ebf2c5bbb69dd&width=300px"></script> </p>
-<h4> 3. Rooster Rock State Park</h4>
-<h5>Visitation : 557,788</h5>
-<p> A popular park that has an optional clothes beach, which has been seeing steady increases in visitation in the last few years. </p>
-<p> <!-- InstaWidget -->
-<a href="https://instawidget.net/v/tag/roosterrockstatepark" id="link-a642a605593bb3ffc0457237b11b51406143c3cd0c3a9e51ab386db1538ff62a">#roosterrockstatepark</a>
-<script src="https://instawidget.net/js/instawidget.js?u=a642a605593bb3ffc0457237b11b51406143c3cd0c3a9e51ab386db1538ff62a&width=300px"></script></p>
-<h4> 4. Champoeg State Heritage Area</h4>
-<h5>Visitation : 521,820</h5>
-<p> Active campground with a combination of history, nature, and recreation. This is the site where Oregon's first provisional government was formed by a historical vote in 1843.  It too has a decent amount of activity on instagram
-</p>
-<p><!-- InstaWidget -->
-<a href="https://instawidget.net/v/tag/champoegstatepark" id="link-f0c6b61e4423145ea659c676e78a30c20ac7302fe99cf24a17523a7a6d4edaba">#champoegstatepark</a>
-<script src="https://instawidget.net/js/instawidget.js?u=f0c6b61e4423145ea659c676e78a30c20ac7302fe99cf24a17523a7a6d4edaba&width=300px"></script></p>
-<h4> 5. Milo McIver State Park </h4>
-<h5>Visitation : 437,288</h5>
-<p> Being only 45 minutes from Portland, this park provides a variety of outdoor activities.</p>
-<p><!-- InstaWidget -->
-<a href="https://instawidget.net/v/tag/milomciver" id="link-66e2d62d1e3f086616d495e6a2e0a85b553d867b1e8f6beb5437997d35e1d2c3">#milomciver</a>
-<script src="https://instawidget.net/js/instawidget.js?u=66e2d62d1e3f086616d495e6a2e0a85b553d867b1e8f6beb5437997d35e1d2c3&width=300px"></script></p>
-
-            </section>
-            <section data-scene="scene4"><h2>Mountain Region Parks (Eastern Oregon)</h2>
-              <h3>Top 5 most popular Moutain Region parks with Hashtag links</h3>
-              <h4> 1. Valley of the Rogue State Park</h4>
-              <h5>Visitation : 1,154,944</h5>
-              <p> Though the Valley of the Rogue sees the highest visitation in any given year, the do not have an popular hashtag. This is more then likely due to location. The Valley of the Rogue is located along I5 and see a lot of traffic from the busy interstate highway. It also has seen little to no growth over the last decade and has remained rather stable for one of the most popular parks in Oregon.</p>
-              <p><!-- InstaWidget -->
-<a href="https://instawidget.net/v/tag/valleyoftherogue" id="link-9690a7b5cc9875dc90e6191a6483b97c919a34d6b1ab926efc6e61d99bbe6beb">#valleyoftherogue</a>
-<script src="https://instawidget.net/js/instawidget.js?u=9690a7b5cc9875dc90e6191a6483b97c919a34d6b1ab926efc6e61d99bbe6beb&width=300px"></script></p>
-<h4> 2. Pilot Butte State Scenic Viewpoint</h4>
-<h5>Visitation : 872,184</h5>
-
-<p> Three different trails to chose from. Once at the top, get ready for a grand panoramic view of the high desert. </p>
-<p><!-- InstaWidget -->
-<a href="https://instawidget.net/v/tag/pilotbuttestatepark" id="link-513bf8f238d49d7e99e8c2ff8f681ba0b152c6c0b9ce6a3bdc8b25a8eaa86166">#pilotbuttestatepark</a>
-<script src="https://instawidget.net/js/instawidget.js?u=513bf8f238d49d7e99e8c2ff8f681ba0b152c6c0b9ce6a3bdc8b25a8eaa86166&width=300px"></script> </p>
-<h4> 3. Smith Rock State Park</h4>
-<h5>Visitation : 776,632</h5>
-<p> Smith Rock has been named one of the 7 wonders of Oregon. It has a variety of outdoor activites including the rock climbing. It also has a very active hashtag. This is the site chosen to look into peliminary results on how hashtags have changed visitation in the last few years.</p>
+              <h4> 5. Oswald West State Park</h4>
+              <h5>Visitation : 1,201,592</h5>
+              <p> Stretching along four miles of coastline in dense, temperate rainforest. This park has an active hashtag and beautiful photos.</p>
+              <p>
+                <!-- InstaWidget -->
+                <a href="https://instawidget.net/v/tag/oswaldweststatepark" id="link-b062f3f96ca910616db87a075c0638519c808d1ef62c8e87136a5e95e837cceb">#oswaldweststatepark</a>
+                <script src="https://instawidget.net/js/instawidget.js?u=b062f3f96ca910616db87a075c0638519c808d1ef62c8e87136a5e95e837cceb&width=300px"></script>
+              </p>
 
 
-            <p><a href="https://instawidget.net/v/tag/smithrockstatepark" id="link-559fbe084ce2c40e4a4e7dde9f3b2cd0965de710ba9440a9805897a519b0564f">#smithrockstatepark</a>
-<script src="https://instawidget.net/js/instawidget.js?u=559fbe084ce2c40e4a4e7dde9f3b2cd0965de710ba9440a9805897a519b0564f&width=300px"></script></p></p>
-<h4> 4. Prineville Reservoir State Park</h4>
-<h5>Visitation : 548,488</h5>
-<p> Located outside of the Bend area, this park provides a great place for watersports.</p>
-<p> </p>
-<p> <!-- InstaWidget -->
-<a href="https://instawidget.net/v/tag/prinevillereservoir" id="link-c304242e56d4142115c47cfae34d5582e9733d2d47ca7b7750d9a67561118dec">#prinevillereservoir</a>
-<script src="https://instawidget.net/js/instawidget.js?u=c304242e56d4142115c47cfae34d5582e9733d2d47ca7b7750d9a67561118dec&width=300px"></script></p>
-<h4> 5. The Cove Palisades State Park</h4>
-<h5>Visitation : 458,960</h5>
-<p> Located outside of the Bend area, this park provides a great place to swim.</p>
-<p>Located in our high desert region, the weather is sunny and warm in the summer months and chilly but generally mild in the winter. The park is situated among towering cliffs that surround beautiful Lake Billy Chinook. </p>
-<p> <!-- InstaWidget -->
-<a href="https://instawidget.net/v/tag/covepalisades" id="link-b4d0721760c6cf502b4000ecc69d25a21d54b8cdb643d70553eeba0d35996c4f">#covepalisades</a>
-<script src="https://instawidget.net/js/instawidget.js?u=b4d0721760c6cf502b4000ecc69d25a21d54b8cdb643d70553eeba0d35996c4f&width=300px"></script></p>
-  </section>
+        </section>
+        <section data-scene="scene3">
+          <h2>Valley Parks</h2>
+          <h3>Top 5 most popular valley parks with Hashtag links</h3>
+          <h4> 1. Silver Falls State Park</h4>
+          <h5>Visitation : 1,154,944</h5>
+          <p> An Oregon Jewel, with amazing waterfalls you can hike behind. This hashtag is extremely active. </p>
+          <p>
+            <!-- InstaWidget -->
+            <a href="https://instawidget.net/v/tag/silverfalls" id="link-bafe0b6271d60971d89f2166989a11211ab3d40b4e10dafb6a62057ba745a1e8">#silverfalls</a>
+            <script src="https://instawidget.net/js/instawidget.js?u=bafe0b6271d60971d89f2166989a11211ab3d40b4e10dafb6a62057ba745a1e8&width=300px"></script>
+          </p>
+          <h4> 2. Crown Point State Park Corridor</h4>
+          <h5>Visitation : 584,832</h5>
+          <p> Crown Point is famous for two things, the Vista House, and aerial photos of the windy corridor through the gorge. </p>
+          <p>
+            <!-- InstaWidget -->
+            <a href="https://instawidget.net/v/tag/vistahouse" id="link-8c66030d7267539f54f2d9815545d65e05f03e9ac699245dcf8ebf2c5bbb69dd">#vistahouse</a>
+            <script src="https://instawidget.net/js/instawidget.js?u=8c66030d7267539f54f2d9815545d65e05f03e9ac699245dcf8ebf2c5bbb69dd&width=300px"></script>
+          </p>
+          <h4> 3. Rooster Rock State Park</h4>
+          <h5>Visitation : 557,788</h5>
+          <p> A popular park that has an optional clothes beach, which has been seeing steady increases in visitation in the last few years. </p>
+          <p>
+            <!-- InstaWidget -->
+            <a href="https://instawidget.net/v/tag/roosterrockstatepark" id="link-a642a605593bb3ffc0457237b11b51406143c3cd0c3a9e51ab386db1538ff62a">#roosterrockstatepark</a>
+            <script src="https://instawidget.net/js/instawidget.js?u=a642a605593bb3ffc0457237b11b51406143c3cd0c3a9e51ab386db1538ff62a&width=300px"></script>
+          </p>
+          <h4> 4. Champoeg State Heritage Area</h4>
+          <h5>Visitation : 521,820</h5>
+          <p> Active campground with a combination of history, nature, and recreation. This is the site where Oregon's first provisional government was formed by a historical vote in 1843. It too has a decent amount of activity on instagram
+          </p>
+          <p>
+            <!-- InstaWidget -->
+            <a href="https://instawidget.net/v/tag/champoegstatepark" id="link-f0c6b61e4423145ea659c676e78a30c20ac7302fe99cf24a17523a7a6d4edaba">#champoegstatepark</a>
+            <script src="https://instawidget.net/js/instawidget.js?u=f0c6b61e4423145ea659c676e78a30c20ac7302fe99cf24a17523a7a6d4edaba&width=300px"></script>
+          </p>
+          <h4> 5. Milo McIver State Park </h4>
+          <h5>Visitation : 437,288</h5>
+          <p> Being only 45 minutes from Portland, this park provides a variety of outdoor activities.</p>
+          <p>
+            <!-- InstaWidget -->
+            <a href="https://instawidget.net/v/tag/milomciver" id="link-66e2d62d1e3f086616d495e6a2e0a85b553d867b1e8f6beb5437997d35e1d2c3">#milomciver</a>
+            <script src="https://instawidget.net/js/instawidget.js?u=66e2d62d1e3f086616d495e6a2e0a85b553d867b1e8f6beb5437997d35e1d2c3&width=300px"></script>
+          </p>
+
+        </section>
+        <section data-scene="scene4">
+          <h2>Mountain Region Parks (Eastern Oregon)</h2>
+          <h3>Top 5 most popular Moutain Region parks with Hashtag links</h3>
+          <h4> 1. Valley of the Rogue State Park</h4>
+          <h5>Visitation : 1,154,944</h5>
+          <p> Though the Valley of the Rogue sees the highest visitation in any given year, the do not have an popular hashtag. This is more then likely due to location. The Valley of the Rogue is located along I5 and see a lot of traffic from the
+            busy interstate highway. It also has seen little to no growth over the last decade and has remained rather stable for one of the most popular parks in Oregon.</p>
+          <p>
+            <!-- InstaWidget -->
+            <a href="https://instawidget.net/v/tag/valleyoftherogue" id="link-9690a7b5cc9875dc90e6191a6483b97c919a34d6b1ab926efc6e61d99bbe6beb">#valleyoftherogue</a>
+            <script src="https://instawidget.net/js/instawidget.js?u=9690a7b5cc9875dc90e6191a6483b97c919a34d6b1ab926efc6e61d99bbe6beb&width=300px"></script>
+          </p>
+          <h4> 2. Pilot Butte State Scenic Viewpoint</h4>
+          <h5>Visitation : 872,184</h5>
+
+          <p> Three different trails to chose from. Once at the top, get ready for a grand panoramic view of the high desert. </p>
+          <p>
+            <!-- InstaWidget -->
+            <a href="https://instawidget.net/v/tag/pilotbuttestatepark" id="link-513bf8f238d49d7e99e8c2ff8f681ba0b152c6c0b9ce6a3bdc8b25a8eaa86166">#pilotbuttestatepark</a>
+            <script src="https://instawidget.net/js/instawidget.js?u=513bf8f238d49d7e99e8c2ff8f681ba0b152c6c0b9ce6a3bdc8b25a8eaa86166&width=300px"></script>
+          </p>
+          <h4> 3. Smith Rock State Park</h4>
+          <h5>Visitation : 776,632</h5>
+          <p> Smith Rock has been named one of the 7 wonders of Oregon. It has a variety of outdoor activites including the rock climbing. It also has a very active hashtag. This is the site chosen to look into peliminary results on how hashtags have
+            changed visitation in the last few years.</p>
 
 
-            <section data-scene="scene5" data-background="assets/output.mp4">
-              <div class="fullscreen text-center">
+          <p><a href="https://instawidget.net/v/tag/smithrockstatepark" id="link-559fbe084ce2c40e4a4e7dde9f3b2cd0965de710ba9440a9805897a519b0564f">#smithrockstatepark</a>
+            <script src="https://instawidget.net/js/instawidget.js?u=559fbe084ce2c40e4a4e7dde9f3b2cd0965de710ba9440a9805897a519b0564f&width=300px"></script>
+          </p>
+          </p>
+          <h4> 4. Prineville Reservoir State Park</h4>
+          <h5>Visitation : 548,488</h5>
+          <p> Located outside of the Bend area, this park provides a great place for watersports.</p>
+          <p> </p>
+          <p>
+            <!-- InstaWidget -->
+            <a href="https://instawidget.net/v/tag/prinevillereservoir" id="link-c304242e56d4142115c47cfae34d5582e9733d2d47ca7b7750d9a67561118dec">#prinevillereservoir</a>
+            <script src="https://instawidget.net/js/instawidget.js?u=c304242e56d4142115c47cfae34d5582e9733d2d47ca7b7750d9a67561118dec&width=300px"></script>
+          </p>
+          <h4> 5. The Cove Palisades State Park</h4>
+          <h5>Visitation : 458,960</h5>
+          <p> Located outside of the Bend area, this park provides a great place to swim.</p>
+          <p>Located in our high desert region, the weather is sunny and warm in the summer months and chilly but generally mild in the winter. The park is situated among towering cliffs that surround beautiful Lake Billy Chinook. </p>
+          <p>
+            <!-- InstaWidget -->
+            <a href="https://instawidget.net/v/tag/covepalisades" id="link-b4d0721760c6cf502b4000ecc69d25a21d54b8cdb643d70553eeba0d35996c4f">#covepalisades</a>
+            <script src="https://instawidget.net/js/instawidget.js?u=b4d0721760c6cf502b4000ecc69d25a21d54b8cdb643d70553eeba0d35996c4f&width=300px"></script>
+          </p>
+        </section>
 
-              <h2></br> </br> </br> </br> </br> </br>Vistation Waves 2002-2017</h2></section>
-              </div>
-        </div>
-        <div class="col-sm-6 col-md-4 storymap-map"></div>
+
+        <section data-scene="scene5" data-background="assets/output.mp4">
+          <div class="fullscreen text-center">
+
+            <h2></br> </br> </br> </br> </br> </br>Vistation Waves 2002-2017</h2>
+        </section>
+      </div>
     </div>
-</div>
+    <div class="col-sm-6 col-md-4 storymap-map"></div>
+  </div>
+  </div>
 
-<script type="text/javascript">
+  <script type="text/javascript">
+    var parks = L.geoJson.ajax('assets/timeseries.geojson', {
 
-var parks = L.geoJson.ajax('assets/timeseries.geojson',
-    {
-
-        onEachFeature: function (feature, layer) {
-            layer.bindTooltip(feature.properties.Location, {
-                className: 'feature-label',
-                permanent: false,
-                direction: 'center'
-            });
-        }
+      onEachFeature: function(feature, layer) {
+        layer.bindTooltip(feature.properties.Location, {
+          className: 'feature-label',
+          permanent: false,
+          direction: 'center'
+        });
+      }
     });
 
 
@@ -357,187 +288,361 @@ var parks = L.geoJson.ajax('assets/timeseries.geojson',
     // 5. dynamically append style classes to this page. This style classes will be used for colorize the markers.
     var colors = chroma.scale('Dark2').mode('lch').colors(10);
     for (i = 1; i < 11; i++) {
-        $('html > head').append($("<style> .marker-icon-" + i.toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
+      $('html > head').append($("<style> .marker-icon-" + i.toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
     }
     var parks_color = L.geoJson.ajax('assets/timeseries.geojson', {
-      pointToLayer: function (feature, latlng) {
-      if (feature.properties.Camping == "1"){
-      return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-campground marker-icon-3' })});
-    }else if (feature.properties.BeachAccess == "1") {
-                return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-umbrella-beach marker-icon-5'})});
-            } else if (feature.properties.Hiking == "1") {
-                        return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-hiking marker-icon-1'})});
-                    }
-            else if (feature.properties.Fishing == "1") {
-                return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-fish marker-icon-4'})});
-            } else if (feature.properties.Swimming == "1") {
-                return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-swim marker-icon-6'})});
-            } else {
-                return L.marker(latlng, {icon: L.divIcon({className: 'fas fa-tree marker-icon-8'})});
-            }
-        },
-            onEachFeature: function (feature, layer) {
-                layer.bindTooltip(feature.properties.Location + "</br>"+feature.properties.hashtag, {sticky: true, className: "feature-tooltip"});
-            }
+      pointToLayer: function(feature, latlng) {
+        if (feature.properties.Camping == "1") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-campground marker-icon-3'
+            })
+          });
+        } else if (feature.properties.BeachAccess == "1") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-umbrella-beach marker-icon-5'
+            })
+          });
+        } else if (feature.properties.Hiking == "1") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-hiking marker-icon-1'
+            })
+          });
+        } else if (feature.properties.Fishing == "1") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-fish marker-icon-4'
+            })
+          });
+        } else if (feature.properties.Swimming == "1") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-swim marker-icon-6'
+            })
+          });
+        } else {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-tree marker-icon-8'
+            })
+          });
+        }
+      },
+      onEachFeature: function(feature, layer) {
+        layer.bindTooltip(feature.properties.Location + "</br>" + feature.properties.hashtag, {
+          sticky: true,
+          className: "feature-tooltip"
+        });
+      }
     });
+
     function style(feature) {
-        return {
-            weight: 2,
-            opacity: 1,
-            color: 'white',
-            dashArray: '3',
-            fillOpacity: 0.7,
-            fillColor: getColor(feature.properties.density)
-        };
+      return {
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7,
+        fillColor: getColor(feature.properties.density)
+      };
     }
 
 
-    var regionalcounts = L.geoJson.ajax('assets/region31.geojson',{
+    var regionalcounts = L.geoJson.ajax('assets/region31.geojson', {
 
-      onEachFeature: function (feature, layer) {
-              layer.bindTooltip(feature.properties.LEVEL3_NAM + "</br> Number of Parks : "+feature.properties.NUMPOINTS , {sticky: true, className: "feature-tooltip"});
-
-          },
-           style: function(feature) {
-             switch (feature.properties.LEVEL3_NAM) {
-               case 'Coastal Range': return {color: "#ffae00"};
-               case 'Valley Range':   return {color: "#00ff21"};
-             }
-
-
-           },
-
-
+      onEachFeature: function(feature, layer) {
+        layer.bindTooltip(feature.properties.LEVEL3_NAM + "</br> Number of Parks : " + feature.properties.NUMPOINTS, {
+          sticky: true,
+          className: "feature-tooltip"
         });
-var legend = L.control({position: 'bottomright'});
+      },
+      style: function(feature) {
+        switch (feature.properties.LEVEL3_NAM) {
+          case 'Coastal Range':
+            return {
+              color: "#ffae00"
+            };
+          case 'Valley Range':
+            return {
+              color: "#00ff21"
+            };
+        }
 
-        legend.onAdd = function (map) {
-        var div = L.DomUtil.create('div', 'info legend');
 
-            div.innerHTML +=
-            '<img src="legend.png" alt="legend" width="134" height="147">';
+      },
 
-        return div;
-        };
 
-        var parks_coast = L.geoJson.ajax('assets/timeseries.geojson', {
-          pointToLayer: function (feature, latlng) {
-          if (feature.properties.Location == "Yaquina Bay State Recreation Site"){
-          return L.marker(latlng, {icon: L.divIcon({ html: '<i class="fas fa-umbrella-beach fa-2x"></i>', className: 'marker-icon-5' })});
-        }else if (feature.properties.Location == "Harris Beach State Park") {
-                    return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-campground fa-2x"></i>', className: 'marker-icon-2'})});
-                } else if (feature.properties.Location == "Sunset Bay State Park") {
-                            return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-umbrella-beach fa-2x"></i>',className: ' marker-icon-5'})});
-                        }
-               else if (feature.properties.Location == "Oswald West State Park") {
-                    return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-hiking fa-2x"></i>',className: 'marker-icon-1'})});
-                } else if (feature.properties.Location == "Fort Stevens State Park") {
-                    return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-campground fa-2x"></i>', className: 'marker-icon-2'})});
-                }
-                else if (feature.properties.Location == "D River State Recreation Site") {
-                    return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-umbrella-beach fa-2x"></i>',className: 'marker-icon-5'})});
-                }
-            },
-                onEachFeature: function (feature, layer) {
-                    layer.bindTooltip(feature.properties.Location + "</br>"+feature.properties.hashtag, {sticky: true, className: "feature-tooltip"});
-                }
+    });
+    var legend = L.control({
+      position: 'bottomright'
+    });
+
+    legend.onAdd = function(map) {
+      var div = L.DomUtil.create('div', 'info legend');
+
+      div.innerHTML +=
+        '<img src="legend.png" alt="legend" width="134" height="147">';
+
+      return div;
+    };
+
+    var parks_coast = L.geoJson.ajax('assets/timeseries.geojson', {
+      pointToLayer: function(feature, latlng) {
+        if (feature.properties.Location == "Yaquina Bay State Recreation Site") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-umbrella-beach fa-2x"></i>',
+              className: 'marker-icon-5'
+            })
+          });
+        } else if (feature.properties.Location == "Harris Beach State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-campground fa-2x"></i>',
+              className: 'marker-icon-2'
+            })
+          });
+        } else if (feature.properties.Location == "Sunset Bay State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-umbrella-beach fa-2x"></i>',
+              className: ' marker-icon-5'
+            })
+          });
+        } else if (feature.properties.Location == "Oswald West State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-hiking fa-2x"></i>',
+              className: 'marker-icon-1'
+            })
+          });
+        } else if (feature.properties.Location == "Fort Stevens State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-campground fa-2x"></i>',
+              className: 'marker-icon-2'
+            })
+          });
+        } else if (feature.properties.Location == "D River State Recreation Site") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-umbrella-beach fa-2x"></i>',
+              className: 'marker-icon-5'
+            })
+          });
+        }
+      },
+      onEachFeature: function(feature, layer) {
+        layer.bindTooltip(feature.properties.Location + "</br>" + feature.properties.hashtag, {
+          sticky: true,
+          className: "feature-tooltip"
         });
+      }
+    });
 
-        var parks_valley = L.geoJson.ajax('assets/timeseries.geojson', {
-          pointToLayer: function (feature, latlng) {
-          if (feature.properties.Location == "Silver Falls State Park"){
-          return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-campground fa-2x"></i>',className: 'marker-icon-2'})});
-        }else if (feature.properties.Location == "Crown Point State Scenic Corridor") {
-                    return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-camera fa-2x"></i>', className: 'marker-icon-3'})});
-                } else if (feature.properties.Location == "Rooster Rock State Park") {
-                            return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-umbrella-beach fa-2x"></i>',className: ' marker-icon-5'})});
-                        }
-               else if (feature.properties.Location == "Champoeg State Heritage Area") {
-                    return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-campground fa-2x"></i>',className: 'marker-icon-2'})});
-                }
-                else if (feature.properties.Location == "Milo McIver State Park") {
-                    return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-hiking fa-2x"></i>',className: 'marker-icon-1'})});
-                }
-            },
-                onEachFeature: function (feature, layer) {
-                    layer.bindTooltip(feature.properties.Location + "</br>"+feature.properties.hashtag, {sticky: true, className: "feature-tooltip"});
-                }
+    var parks_valley = L.geoJson.ajax('assets/timeseries.geojson', {
+      pointToLayer: function(feature, latlng) {
+        if (feature.properties.Location == "Silver Falls State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-campground fa-2x"></i>',
+              className: 'marker-icon-2'
+            })
+          });
+        } else if (feature.properties.Location == "Crown Point State Scenic Corridor") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-camera fa-2x"></i>',
+              className: 'marker-icon-3'
+            })
+          });
+        } else if (feature.properties.Location == "Rooster Rock State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-umbrella-beach fa-2x"></i>',
+              className: ' marker-icon-5'
+            })
+          });
+        } else if (feature.properties.Location == "Champoeg State Heritage Area") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-campground fa-2x"></i>',
+              className: 'marker-icon-2'
+            })
+          });
+        } else if (feature.properties.Location == "Milo McIver State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-hiking fa-2x"></i>',
+              className: 'marker-icon-1'
+            })
+          });
+        }
+      },
+      onEachFeature: function(feature, layer) {
+        layer.bindTooltip(feature.properties.Location + "</br>" + feature.properties.hashtag, {
+          sticky: true,
+          className: "feature-tooltip"
         });
+      }
+    });
 
-        var parks_mountain = L.geoJson.ajax('assets/timeseries.geojson', {
-          pointToLayer: function (feature, latlng) {
-          if (feature.properties.Location == "Valley of the Rogue State Park"){
-          return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-hiking fa-2x"></i>',className: 'marker-icon-1'})});
-        }else if (feature.properties.Location == "Pilot Butte State Scenic Viewpoint") {
-                    return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-camera fa-2x"></i>', className: 'marker-icon-3'})});
-                } else if (feature.properties.Location == "Smith Rock State Park") {
-                            return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-hiking fa-2x"></i>',className: ' marker-icon-1'})});
-                        }
-               else if (feature.properties.Location == "Prineville Reservoir State Park") {
-                    return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-swimmer fa-2x"></i>',className: 'marker-icon-9'})});
-                }
-                else if (feature.properties.Location == "The Cove Palisades State Park") {
-                    return L.marker(latlng, {icon: L.divIcon({html: '<i class="fas fa-campground fa-2x"></i>',className: 'marker-icon-2'})});
-                }
-            },
-                onEachFeature: function (feature, layer) {
-                    layer.bindPopup(feature.properties.Location + "</br>"+feature.properties.hashtag, {sticky: true, className: "feature-tooltip"});
-                }
+    var parks_mountain = L.geoJson.ajax('assets/timeseries.geojson', {
+      pointToLayer: function(feature, latlng) {
+        if (feature.properties.Location == "Valley of the Rogue State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-hiking fa-2x"></i>',
+              className: 'marker-icon-1'
+            })
+          });
+        } else if (feature.properties.Location == "Pilot Butte State Scenic Viewpoint") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-camera fa-2x"></i>',
+              className: 'marker-icon-3'
+            })
+          });
+        } else if (feature.properties.Location == "Smith Rock State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-hiking fa-2x"></i>',
+              className: ' marker-icon-1'
+            })
+          });
+        } else if (feature.properties.Location == "Prineville Reservoir State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-swimmer fa-2x"></i>',
+              className: 'marker-icon-9'
+            })
+          });
+        } else if (feature.properties.Location == "The Cove Palisades State Park") {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<i class="fas fa-campground fa-2x"></i>',
+              className: 'marker-icon-2'
+            })
+          });
+        }
+      },
+      onEachFeature: function(feature, layer) {
+        layer.bindPopup(feature.properties.Location + "</br>" + feature.properties.hashtag, {
+          sticky: true,
+          className: "feature-tooltip"
         });
+      }
+    });
 
-        // legend in HTML
+    // legend in HTML
 
-var coast = '<i  style="background: #ffae00; opacity: 0.5"></i><p><b>Coastal Range</b></p>' + '<i style="background: #00ff21; opacity: 0.5"></i><p><b>Valley Range</b></p> '+ '<i style="background: blue; opacity: 0.5"></i><p><b>Mountain Range</b></p>';
-var coastal = '<i class="fas fa-campground marker-icon-2"></i><p><b>Campground</b></p>' + '<i class="fas fa-hiking marker-icon-1"></i><p><b>Hiking</b></p>' + '<i class="fas fa-umbrella-beach marker-icon-5"></i><p><b>Beach Access</b></p>';
-var valley = '<i class="fas fa-campground marker-icon-2"></i><p><b>Campground</b></p>' + '<i class="fas fa-hiking marker-icon-1"></i><p><b>Hiking</b></p>' + '<i class="fas fa-umbrella-beach marker-icon-5"></i><p><b>Beach Access</b></p>'+ '<i class="fas fa-camera marker-icon-3"></i><p><b>Viewpoint</b></p>' ;
-var mountain = '<i class="fas fa-campground marker-icon-2"></i><p><b>Campground</b></p>' + '<i class="fas fa-hiking marker-icon-1"></i><p><b>Hiking</b></p>' +  '<i class="fas fa-camera marker-icon-3"></i><p><b>Viewpoint</b></p>' + '<i class="fas fa-swimmer marker-icon-9"></i><p><b>Swimming</b></p>';
+    var coast = '<i  style="background: #ffae00; opacity: 0.5"></i><p><b>Coastal Range</b></p>' + '<i style="background: #00ff21; opacity: 0.5"></i><p><b>Valley Range</b></p> ' +
+      '<i style="background: blue; opacity: 0.5"></i><p><b>Mountain Range</b></p>';
+    var coastal = '<i class="fas fa-campground marker-icon-2"></i><p><b>Campground</b></p>' + '<i class="fas fa-hiking marker-icon-1"></i><p><b>Hiking</b></p>' + '<i class="fas fa-umbrella-beach marker-icon-5"></i><p><b>Beach Access</b></p>';
+    var valley = '<i class="fas fa-campground marker-icon-2"></i><p><b>Campground</b></p>' + '<i class="fas fa-hiking marker-icon-1"></i><p><b>Hiking</b></p>' + '<i class="fas fa-umbrella-beach marker-icon-5"></i><p><b>Beach Access</b></p>' +
+      '<i class="fas fa-camera marker-icon-3"></i><p><b>Viewpoint</b></p>';
+    var mountain = '<i class="fas fa-campground marker-icon-2"></i><p><b>Campground</b></p>' + '<i class="fas fa-hiking marker-icon-1"></i><p><b>Hiking</b></p>' + '<i class="fas fa-camera marker-icon-3"></i><p><b>Viewpoint</b></p>' +
+      '<i class="fas fa-swimmer marker-icon-9"></i><p><b>Swimming</b></p>';
 
 
 
 
-var outdoorLayer = L.tileLayer('https://api.mapbox.com/styles/v1/loweas/cjtgc6noh6nyj1fma3jmh6wzf/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibG93ZWFzIiwiYSI6ImNqczlhMzJqMjE1dDM0NG12dHBxam1lZjIifQ.Ox8goYypCr_cJCoDPgHTsQ', {
-             detectRetina: true
-        });
+    var outdoorLayer = L.tileLayer('https://api.mapbox.com/styles/v1/loweas/cjtgc6noh6nyj1fma3jmh6wzf/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibG93ZWFzIiwiYSI6ImNqczlhMzJqMjE1dDM0NG12dHBxam1lZjIifQ.Ox8goYypCr_cJCoDPgHTsQ', {
+      detectRetina: true
+    });
 
-        var layers = {
-            parks:{layer: parks},
-            parks_color: {layer: parks_color},
-            regionalcounts: {layer: regionalcounts, legend: coast},
-            outdoorLayer: {layer: outdoorLayer},
-            parks_coast: {layer: parks_coast, legend: coastal},
-            parks_valley: {layer: parks_valley, legend: valley},
-            parks_mountain:{layer: parks_mountain, legend: mountain}
+    var layers = {
+      parks: {
+        layer: parks
+      },
+      parks_color: {
+        layer: parks_color
+      },
+      regionalcounts: {
+        layer: regionalcounts,
+        legend: coast
+      },
+      outdoorLayer: {
+        layer: outdoorLayer
+      },
+      parks_coast: {
+        layer: parks_coast,
+        legend: coastal
+      },
+      parks_valley: {
+        layer: parks_valley,
+        legend: valley
+      },
+      parks_mountain: {
+        layer: parks_mountain,
+        legend: mountain
+      }
 
-        };
+    };
 
 
 
     var scenes = {
-        scene1: {lat: 44, lng: -123., zoom: 6.5, name: 'All Parks',layers: [layers.outdoorLayer, layers.parks_color, layers.regionalcounts]},
-        scene2: {lat: 44.5, lng: -126.5, zoom: 7.399, name: 'Coastal', layers: [layers.outdoorLayer, layers.parks_coast]},
-        scene3: {lat: 45.23, lng: -122.9, zoom: 9, name: 'Valley', layers: [layers.outdoorLayer, layers.parks_valley]},
-        scene4: {lat: 43.5, lng: -123.5, zoom: 8, name: 'Mountains', layers: [layers.outdoorLayer, layers.parks_mountain]},
-        scene5: {lat: 44, lng: -123.5, zoom: 7, name: 'Video', layers: []}
+      scene1: {
+        lat: 44,
+        lng: -123.,
+        zoom: 6.5,
+        name: 'All Parks',
+        layers: [layers.outdoorLayer, layers.parks_color, layers.regionalcounts]
+      },
+      scene2: {
+        lat: 44.5,
+        lng: -126.5,
+        zoom: 7.399,
+        name: 'Coastal',
+        layers: [layers.outdoorLayer, layers.parks_coast]
+      },
+      scene3: {
+        lat: 45.23,
+        lng: -122.9,
+        zoom: 9,
+        name: 'Valley',
+        layers: [layers.outdoorLayer, layers.parks_valley]
+      },
+      scene4: {
+        lat: 43.5,
+        lng: -123.5,
+        zoom: 8,
+        name: 'Mountains',
+        layers: [layers.outdoorLayer, layers.parks_mountain]
+      },
+      scene5: {
+        lat: 44,
+        lng: -123.5,
+        zoom: 7,
+        name: 'Video',
+        layers: []
+      }
     };
 
 
     $('#storymap').storymap({
-        scenes: scenes,
+      scenes: scenes,
 
-        legend: true, // if you do not want a legend feature, you can simply not define the createLegend function.
-        scalebar: false,
-        loader: false,
-        navwidget: true,
-        createMap: function () {
-            // create a map in the "map" div, set the view to a given place and zoom
-            var map = L.map($(".storymap-map")[0], {zoomControl: false, scrollWheelZoom: false});
+      legend: true, // if you do not want a legend feature, you can simply not define the createLegend function.
+      scalebar: false,
+      loader: false,
+      navwidget: true,
+      createMap: function() {
+        // create a map in the "map" div, set the view to a given place and zoom
+        var map = L.map($(".storymap-map")[0], {
+          zoomControl: false,
+          scrollWheelZoom: false
+        });
 
-            // add an base map, which can be either OSM, mapbox, tilelayer, wmslayer or those designed by yourself.
+        // add an base map, which can be either OSM, mapbox, tilelayer, wmslayer or those designed by yourself.
 
-            return map;
-        }
+        return map;
+      }
     });
-
-</script>
+  </script>
 </body>
+
 </html>

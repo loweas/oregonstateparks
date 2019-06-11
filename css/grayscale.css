@@ -304,3 +304,109 @@ a:focus, a:hover {
 footer {
   padding: 5rem 0;
 }
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+.social {
+  position: fixed;
+  cursor: pointer;
+  font-size: 24px;
+  color: darkgray;
+  z-index: 1003;
+  top: 1%;
+  left: 2px;
+}
+
+.social2 {
+  position: fixed;
+  cursor: pointer;
+  font-size: 24px;
+  color: darkgray;
+  z-index: 1003;
+  top: 1%;
+  left: 30px;
+}
+
+.social:hover {
+  color: darkblue;
+  text-decoration: none;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Varela Round";
+  font-size: 17px;
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: black;
+}
+
+.info {
+  padding: 6px 8px;
+  font: 14px/16px Verdana, Geneva, sans-serif;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.info h4 {
+  font-family: Verdana, Geneva, sans-serif;
+  margin: 0 0 5px;
+  color: #065581;
+}
+
+.legend {
+  line-height: 18px;
+  color: #555;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
